@@ -10,86 +10,82 @@ export function NewsSection() {
   return (
     <section className="bg-paper py-24 sm:py-32" id="actualites">
       <div className="container">
-        <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
-          <div className="max-w-2xl">
-            <Reveal>
-              <span className="eyebrow">Vie de l’ASBL & Médias</span>
-            </Reveal>
-            <Reveal delay={0.1}>
-              <h2 className="mt-4 text-3xl font-extrabold tracking-tight text-ink sm:text-4xl md:text-5xl">
-                Actualités, presse et événements
-              </h2>
-            </Reveal>
-            <Reveal delay={0.2}>
-              <p className="mt-4 text-base text-ink/75 sm:text-lg">
-                Revivez nos interventions, nos tournois solidaires et les reportages consacrés à nos projets.
-              </p>
-            </Reveal>
-          </div>
-          <Reveal delay={0.3}>
-            <Link href="/presse" className="btn btn-outline-ink gap-2 self-start md:self-auto">
-              Tous les articles <ArrowRight size={16} />
-            </Link>
+
+        {/* ── En-tête de section ── */}
+        <div className="max-w-2xl">
+          <Reveal>
+            <h2 className="text-3xl font-extrabold tracking-tight text-ink sm:text-4xl md:text-5xl">
+              Actualités, presse et événements
+            </h2>
           </Reveal>
         </div>
 
-        {/* Grille des articles de presse */}
+        {/* ── Grille des cards ── */}
         <Stagger className="mt-16 grid gap-8 md:grid-cols-2 lg:grid-cols-4">
           {press.map((item) => (
             <StaggerItem key={item.title}>
               <article className="group flex flex-col h-full overflow-hidden rounded-3xl border border-ink/10 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:border-ink">
+
+                {/* Image — sans badge */}
                 <div className="relative aspect-[16/10] w-full overflow-hidden bg-ink/5">
                   <Image
                     src={item.image}
                     alt={item.title}
                     fill
-                    className="object-cover transition-transform duration-500 group-hover:scale-106"
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
                     sizes="(max-width: 768px) 100vw, 25vw"
                   />
-                  {item.source && (
-                    <span className="absolute top-3 right-3 badge badge-primary font-bold text-xs uppercase tracking-wider">
-                      {item.source}
-                    </span>
-                  )}
                 </div>
 
-                <div className="flex flex-1 flex-col p-6">
-                  <time dateTime={item.isoDate} className="text-xs font-semibold text-ink/50 uppercase tracking-wider">
-                    {item.date}
-                  </time>
-                  <h3 className="mt-2 text-lg font-bold text-ink leading-snug group-hover:text-flame transition-colors">
+                {/* Contenu : titre + description + bouton centré */}
+                <div className="flex flex-1 flex-col items-center p-6 text-center">
+                  <h3 className="text-lg font-bold text-ink leading-snug">
                     {item.title}
                   </h3>
                   <p className="mt-3 text-sm text-ink/70 line-clamp-3 leading-relaxed">
                     {item.excerpt}
                   </p>
 
-                  <div className="mt-auto pt-6">
+                  {/* Bouton centré en bas de la card */}
+                  <div className="mt-auto pt-6 w-full flex justify-center">
                     {item.href ? (
                       <a
                         href={item.href}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-flame-deep hover:underline"
+                        className="inline-flex items-center gap-2 rounded-lg bg-ink px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-flame focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-flame"
                       >
-                        Consulter la source <ArrowUpRight size={14} />
+                        En savoir plus <ArrowUpRight size={15} />
                       </a>
                     ) : (
                       <Link
                         href="/presse"
-                        className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-ink/70 hover:text-ink"
+                        className="inline-flex items-center gap-2 rounded-lg bg-ink px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-flame focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-flame"
                       >
-                        Lire les détails <ArrowRight size={14} />
+                        En savoir plus <ArrowRight size={15} />
                       </Link>
                     )}
                   </div>
                 </div>
+
               </article>
             </StaggerItem>
           ))}
         </Stagger>
 
-        {/* Bloc Prochains Événements (structure prête & vérifiée) */}
+        {/* ── Bouton "Tous les articles" centré sous les cards ── */}
+        <Reveal delay={0.2}>
+          <div className="mt-12 flex justify-center">
+            <Link
+              href="/actualites"
+              className="inline-flex items-center gap-2 rounded-xl border-2 border-ink px-8 py-3.5 text-sm font-semibold text-ink transition-colors hover:bg-ink hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-flame"
+            >
+              Tous les articles <ArrowRight size={16} />
+            </Link>
+          </div>
+        </Reveal>
+
+        {/* ── Bloc Prochains Événements ── */}
         <div className="mt-20 rounded-3xl border border-ink/10 bg-white p-8 sm:p-12">
           <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
             <div className="flex items-center gap-4">
@@ -103,7 +99,6 @@ export function NewsSection() {
                 </h3>
               </div>
             </div>
-
             <Link
               href="/nous-contacter?sujet=evenement"
               className="btn btn-ink btn-sm sm:btn-md"
@@ -115,7 +110,7 @@ export function NewsSection() {
           <div className="mt-8 border-t border-ink/10 pt-6">
             {events.length === 0 ? (
               <p className="text-sm text-ink/70 leading-relaxed">
-                Les prochaines dates d’animations, tournois interculturels et sorties de groupe sont en cours de planification. Suivez nos canaux pour les annonces officielles ou contactez directement l’équipe pour organiser une action conjointe.
+                Les prochaines dates d'animations, tournois interculturels et sorties de groupe sont en cours de planification. Suivez nos canaux pour les annonces officielles ou contactez directement l'équipe pour organiser une action conjointe.
               </p>
             ) : (
               <div className="grid gap-4 sm:grid-cols-2">
@@ -130,6 +125,7 @@ export function NewsSection() {
             )}
           </div>
         </div>
+
       </div>
     </section>
   );

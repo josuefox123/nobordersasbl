@@ -27,6 +27,7 @@ export const site = {
 export const navigation = [
   { label: "À propos", href: "/" },
   { label: "Notre projet", href: "/notre-projet" },
+  { label: "Actualités", href: "/actualites" },
   { label: "Presse", href: "/presse" },
   { label: "Nous contacter", href: "/nous-contacter" },
 ] as const;
@@ -272,4 +273,107 @@ export const gallery = [
   { src: "/images/cheval.jpg", alt: "Découverte du cheval" },
   { src: "/images/tour-anvers.jpg", alt: "Balade à vélo à Anvers" },
   { src: "/images/parlement-wallonie.jpg", alt: "Visite du Parlement de Wallonie" },
+];
+
+export type NewsItem = {
+  slug: string;
+  category: string;
+  date: string;
+  isoDate: string;
+  title: string;
+  excerpt: string;
+  image: string;
+};
+
+export const news: NewsItem[] = [
+  {
+    slug: "tournoi-interculturel-2026",
+    category: "Sport",
+    date: "5 octobre 2026",
+    isoDate: "2026-10-05",
+    title: "Tournoi interculturel de football — édition 2026",
+    excerpt:
+      "Plus de 12 équipes issues de 8 nationalités différentes se sont affrontées lors de notre tournoi annuel à Mons. Une fête du sport et du vivre-ensemble inoubliable.",
+    image: "/images/foot-fedasil.jpg",
+  },
+  {
+    slug: "sortie-musee-tervuren",
+    category: "Culture",
+    date: "20 septembre 2026",
+    isoDate: "2026-09-20",
+    title: "Sortie culturelle au Musée de Tervuren",
+    excerpt:
+      "Une vingtaine de membres ont découvert les collections permanentes du musée royal de l'Afrique centrale. Une immersion dans l'histoire commune de nos origines.",
+    image: "/images/musee-tervuren.jpg",
+  },
+  {
+    slug: "velos-bambou-myboo",
+    category: "Mobilité douce",
+    date: "8 septembre 2026",
+    isoDate: "2026-09-08",
+    title: "Lancement de la nouvelle gamme My Boo en Belgique",
+    excerpt:
+      "No Borders ASBL présente les derniers modèles de vélos en bambou My Boo. Écologiques, équitables et fabriqués au Ghana, ils incarnent parfaitement nos valeurs.",
+    image: "/images/lancement-myboo.jpg",
+  },
+  {
+    slug: "balade-velo-bruxelles",
+    category: "Sport",
+    date: "14 août 2026",
+    isoDate: "2026-08-14",
+    title: "Balade à vélo dans Bruxelles — 30 participants",
+    excerpt:
+      "Sous un soleil radieux, une trentaine de membres ont parcouru les pistes cyclables bruxelloises. Une belle occasion de découvrir la capitale autrement.",
+    image: "/images/bxl-tour.jpg",
+  },
+  {
+    slug: "atelier-interculturel-juin",
+    category: "Culture",
+    date: "22 juin 2026",
+    isoDate: "2026-06-22",
+    title: "Atelier interculturel : cuisines du monde",
+    excerpt:
+      "Cuisine sénégalaise, rwandaise, belge et marocaine réunies en une soirée. Cet atelier de partage culinaire a rassemblé plus de 40 personnes de tous horizons.",
+    image: "/images/educ-art.jpg",
+  },
+  {
+    slug: "action-wallonie-propre",
+    category: "Environnement",
+    date: "3 juin 2026",
+    isoDate: "2026-06-03",
+    title: "Action Wallonie Plus Propre — No Borders mobilise",
+    excerpt:
+      "Dans le cadre de l'opération régionale, nos bénévoles ont nettoyé plusieurs quartiers de Mons. Un geste simple mais fort pour notre territoire commun.",
+    image: "/images/wallonie-plus-propre.jpg",
+  },
+  {
+    slug: "visite-parlement-wallon",
+    category: "Citoyenneté",
+    date: "18 mai 2026",
+    isoDate: "2026-05-18",
+    title: "Visite citoyenne du Parlement de Wallonie",
+    excerpt:
+      "Une délégation de membres a visité le Parlement de Wallonie à Namur. Une expérience enrichissante pour mieux comprendre les institutions belges.",
+    image: "/images/parlement-wallonie.jpg",
+  },
+  {
+    slug: "mini-foot-fedasil",
+    category: "Sport",
+    date: "26 avril 2026",
+    isoDate: "2026-04-26",
+    title: "Match amical avec les jeunes du centre Fedasil",
+    excerpt:
+      "Un match de football amical entre nos membres et les jeunes du centre Fedasil de Mouscron. Le sport comme vecteur d'intégration et de solidarité.",
+    image: "/images/mini-foot.jpg",
+  },
+  {
+    slug: "decouverte-champignons",
+    category: "Nature",
+    date: "10 avril 2026",
+    isoDate: "2026-04-10",
+    title: "Sortie nature : à la découverte des champignons",
+    excerpt:
+      "Guidés par un expert mycologue, nos membres ont exploré les forêts aux alentours de Mons. Une sortie dépaysante et conviviale, parfaite pour se reconnecter à la nature.",
+    image: "/images/champignons.jpg",
+  },
 ];
