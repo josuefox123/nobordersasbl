@@ -2,9 +2,9 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { press, events } from "@/lib/content";
+import { press } from "@/lib/content";
 import { Reveal, Stagger, StaggerItem } from "@/components/ui/Reveal";
-import { ArrowRight, ArrowUpRight, CalendarIcon } from "@/components/ui/Icons";
+import { ArrowRight, ArrowUpRight } from "@/components/ui/Icons";
 
 export function NewsSection() {
   return (
@@ -85,46 +85,11 @@ export function NewsSection() {
           </div>
         </Reveal>
 
-        {/* ── Bloc Prochains Événements ── */}
+        {/* ── Bloc Prochains Événements — commenté
         <div className="mt-20 rounded-3xl border border-ink/10 bg-white p-8 sm:p-12">
-          <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
-            <div className="flex items-center gap-4">
-              <div className="grid h-14 w-14 place-items-center rounded-2xl bg-flame-soft text-flame-deep shrink-0">
-                <CalendarIcon size={28} />
-              </div>
-              <div>
-                <span className="eyebrow text-xs">Agenda Associatif</span>
-                <h3 className="text-xl font-bold text-ink sm:text-2xl">
-                  Prochains événements & rendez-vous
-                </h3>
-              </div>
-            </div>
-            <Link
-              href="/nous-contacter?sujet=evenement"
-              className="btn btn-ink btn-sm sm:btn-md"
-            >
-              Proposer une rencontre ou un match
-            </Link>
-          </div>
-
-          <div className="mt-8 border-t border-ink/10 pt-6">
-            {events.length === 0 ? (
-              <p className="text-sm text-ink/70 leading-relaxed">
-                Les prochaines dates d'animations, tournois interculturels et sorties de groupe sont en cours de planification. Suivez nos canaux pour les annonces officielles ou contactez directement l'équipe pour organiser une action conjointe.
-              </p>
-            ) : (
-              <div className="grid gap-4 sm:grid-cols-2">
-                {events.map((evt) => (
-                  <div key={evt.title} className="rounded-xl border border-ink/10 p-4">
-                    <span className="text-xs font-bold text-flame uppercase">{evt.date}</span>
-                    <h4 className="font-bold text-ink">{evt.title}</h4>
-                    <span className="text-xs text-ink/60">{evt.place}</span>
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
+          ...
         </div>
+        */}
 
       </div>
     </section>

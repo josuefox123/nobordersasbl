@@ -43,8 +43,8 @@ export function TestimonialsSection() {
 
         {/* ── En-tête ── */}
         <div className="mb-14 max-w-2xl">
-          <h2 className="text-3xl font-extrabold tracking-tight text-ink sm:text-4xl md:text-5xl">
-            Ils sont passés par No Borders !
+          <h2 className="text-4xl font-extrabold uppercase tracking-tight text-ink sm:text-5xl md:text-6xl">
+            Ils nous font confiance <span className="text-2xl font-bold normal-case tracking-normal text-ink/50 sm:text-3xl">(Témoignages)</span>
           </h2>
         </div>
 

@@ -115,3 +115,15 @@
     transition-duration: 0.01ms !important;
   }
 }
+
+/* ── Animation pluie de logos (PartnersMarquee) ── */
+@keyframes rain-fall {
+  from { transform: translateY(-50%); }
+  to   { transform: translateY(0%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [style*="rain-fall"] {
+    animation: none !important;
+  }
+}

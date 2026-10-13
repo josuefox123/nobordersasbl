@@ -17,9 +17,6 @@ export function CtaSection() {
         <div className="grid gap-12 lg:grid-cols-12 lg:items-center">
           <div className="lg:col-span-8">
             <Reveal>
-              <span className="eyebrow eyebrow-light">Agir Ensemble</span>
-            </Reveal>
-            <Reveal delay={0.1}>
               <h2 className="mt-4 text-3xl font-extrabold tracking-tight sm:text-4xl md:text-5xl lg:text-6xl">
                 Devenez acteur du changement avec <span className="text-flame">No Borders</span>.
               </h2>

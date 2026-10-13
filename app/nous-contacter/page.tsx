@@ -31,8 +31,7 @@ export default function ContactPage() {
       <section className="bg-paper py-16 sm:py-24 border-b border-ink/5">
         <div className="container">
           <div className="max-w-3xl">
-            <span className="eyebrow">Échange & Rencontre</span>
-            <h1 className="mt-4 text-display-lg font-extrabold tracking-tight text-ink">
+            <h1 className="text-display-lg font-extrabold tracking-tight text-ink">
               Nous contacter
             </h1>
             <p className="mt-6 text-lg sm:text-xl text-ink/75 leading-relaxed">
