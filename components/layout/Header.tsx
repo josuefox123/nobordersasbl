@@ -3,10 +3,36 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { AnimatePresence, motion, useMotionValueEvent, useReducedMotion, useScroll, useSpring } from "framer-motion";
+import { createPortal } from "react-dom";
+import {
+  AnimatePresence,
+  motion,
+  useMotionValueEvent,
+  useReducedMotion,
+  useScroll,
+  useSpring,
+} from "framer-motion";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { navigation, site } from "@/lib/content";
-import { ArrowRight, CloseIcon, HeartIcon, MailIcon, MenuIcon, PhoneIcon, SparkIcon, socialIcons } from "@/components/ui/Icons";
+import {
+  ArrowRight,
+  CloseIcon,
+  CopyIcon,
+  MailIcon,
+  MenuIcon,
+  PhoneIcon,
+  SearchIcon,
+  ShoppingBagIcon,
+  SparkIcon,
+  socialIcons,
+} from "@/components/ui/Icons";
+import { LoginDropdown } from "@/components/ui/LoginDropdown";
+import { LocationButton } from "@/components/ui/LocationButton";
+import { WishlistButton } from "@/components/ui/WishlistButton";
+import { CartButton } from "@/components/ui/CartButton";
+import { SearchBar } from "@/components/ui/SearchBar";
+import { NavButton } from "@/components/ui/NavButtons";
+import { AnnouncementBar } from "@/components/ui/AnnouncementBar";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
@@ -17,16 +43,18 @@ export function Header() {
   const progress = useSpring(scrollYProgress, { stiffness: 140, damping: 30, mass: 0.3 });
   const [compact, setCompact] = useState(false);
   const [open, setOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
+  useEffect(() => setMounted(true), []);
   useMotionValueEvent(scrollY, "change", (y) => setCompact(y > 80));
-
-  // Ferme le menu lors d'un changement de page
   useEffect(() => setOpen(false), [pathname]);
 
-  const isActive = (href: string) => (href === "/" ? pathname === "/" : pathname.startsWith(href));
+  const isActive = (href: string) =>
+    href === "/" ? pathname === "/" : pathname.startsWith(href);
 
   return (
     <>
+      {/* Lien d'évitement */}
       <a
         href="#contenu"
         className="sr-only z-[100] rounded-md bg-flame-deep px-4 py-2 font-semibold text-white focus:not-sr-only focus:fixed focus:left-4 focus:top-4"
@@ -34,36 +62,49 @@ export function Header() {
         Aller au contenu
       </a>
 
-      {/* Barre de progression de lecture */}
+      {/* Barre de progression — pointer-events-none pour ne jamais bloquer les clics */}
       <motion.div
         aria-hidden="true"
-        className="fixed inset-x-0 top-0 z-[70] h-[3px] origin-left bg-flame"
+        className="pointer-events-none fixed inset-x-0 top-0 z-[90] h-[3px] origin-left bg-flame"
         style={{ scaleX: reduce ? scrollYProgress : progress }}
       />
 
-      <header className="fixed inset-x-0 top-0 z-50">
-        {/* Niveau 1 : barre noire */}
-        <motion.div
-          initial={false}
-          animate={{ height: compact ? 64 : 84 }}
-          transition={{ duration: 0.5, ease: EASE }}
-          className="relative bg-ink text-white"
+      <header className="fixed inset-x-0 top-0 z-[60]">
+        {/* ── HeaderTop : barre noire ── */}
+        <div
+          className="relative bg-ink text-white transition-[height] duration-500"
+          style={{ height: compact ? "64px" : "84px" }}
         >
           <div className="container flex h-full items-center gap-4">
+
+            {/* Bouton menu hamburger */}
             <button
               type="button"
               onClick={() => setOpen(true)}
               aria-label="Ouvrir le menu"
               aria-expanded={open}
               aria-controls="menu-principal"
-              className="btn btn-ghost btn-square -ml-2 rounded-full text-white hover:bg-white/10"
+              style={{ position: "relative", zIndex: 10 }}
+              className="-ml-2 flex h-10 w-10 shrink-0 items-center justify-center rounded-lg text-white transition-colors hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50"
             >
-              <MenuIcon size={26} />
+              <MenuIcon size={24} />
             </button>
 
-            <Link href="/" className="group flex items-center gap-3" aria-label="No Borders ASBL — accueil">
+            {/* Logo */}
+            <Link
+              href="/"
+              className="group flex items-center gap-3"
+              aria-label="No Borders ASBL — accueil"
+            >
               <span className="relative grid h-11 w-11 place-items-center overflow-hidden rounded-full bg-white p-0.5 transition-transform duration-500 ease-out-expo group-hover:rotate-[20deg]">
-                <Image src="/images/logo.png" alt="" width={44} height={44} className="h-full w-full object-contain" priority />
+                <Image
+                  src="/images/logo.png"
+                  alt=""
+                  width={44}
+                  height={44}
+                  className="h-full w-full object-contain"
+                  priority
+                />
               </span>
               <span className="leading-none">
                 <span className="block text-xl font-extrabold tracking-tight sm:text-2xl">
@@ -75,42 +116,39 @@ export function Header() {
               </span>
             </Link>
 
-            <div className="ml-auto flex items-center gap-1 sm:gap-2">
-              <a
-                href={site.phoneHref}
-                className="hidden items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium text-white/85 transition-colors hover:bg-white/10 hover:text-white lg:inline-flex"
-              >
-                <PhoneIcon size={18} /> {site.phone}
-              </a>
-              <span className="hidden h-8 w-px bg-white/15 lg:block" aria-hidden="true" />
-              <a
-                href={`mailto:${site.email}`}
-                aria-label={`Écrire à ${site.email}`}
-                className="btn btn-ghost btn-square rounded-lg text-white hover:bg-white/10"
-              >
-                <MailIcon size={22} />
-              </a>
-              <Link href="/nous-soutenir" className="btn btn-primary btn-sm ml-1 gap-2 rounded-lg px-4 py-2.5 sm:btn-md">
-                <HeartIcon size={18} />
-                <span className="hidden sm:inline">Nous soutenir</span>
-                <span className="sr-only sm:hidden">Nous soutenir</span>
-              </Link>
+            {/* Actions droite */}
+            <div className="ml-auto flex items-center gap-2" style={{ position: "relative", zIndex: 10 }}>
+              <LoginDropdown />
+              <span className="h-6 w-px bg-white/20" aria-hidden="true" />
+              <LocationButton />
+              <WishlistButton />
+              <CartButton />
+              <span className="hidden h-6 w-px bg-white/20 sm:block" aria-hidden="true" />
+              <div className="hidden w-56 lg:block xl:w-72">
+                <SearchBar />
+              </div>
             </div>
-          </div>
-        </motion.div>
 
-        {/* Niveau 2 : barre de navigation blanche (desktop) */}
+          </div>
+        </div>
+
+        {/* ── Nav desktop ── */}
         <nav
           aria-label="Navigation principale"
-          className={`hidden border-b border-ink/5 bg-white/95 backdrop-blur transition-shadow duration-500 lg:block ${compact ? "shadow-[0_12px_30px_-18px_rgba(0,0,0,0.35)]" : ""}`}
+          className={`hidden border-b border-ink/5 bg-white/95 backdrop-blur transition-shadow duration-500 lg:block ${
+            compact ? "shadow-[0_12px_30px_-18px_rgba(0,0,0,0.35)]" : ""
+          }`}
         >
           <div className="container flex h-14 items-stretch">
             <Link
-              href="/nous-contacter?sujet=benevolat"
+              href="/"
               className="relative -ml-5 mr-6 flex items-center gap-2 bg-flame-deep px-5 font-bold text-white transition-colors hover:bg-ink md:-ml-8 md:px-8 xl:-ml-10 xl:px-10"
             >
-              <SparkIcon size={12} className="absolute left-2 top-2 animate-sparkle text-sun" />
-              Agir avec nous
+              <SparkIcon
+                size={12}
+                className="absolute left-2 top-2 animate-sparkle text-sun"
+              />
+              Accueil
             </Link>
             <ul className="flex items-center gap-1">
               {navigation.map((item) => (
@@ -126,29 +164,58 @@ export function Header() {
               ))}
             </ul>
             <div className="ml-auto flex items-center gap-2">
-              <Link href="/#actualites" className="btn btn-ink btn-sm rounded-lg px-4 py-2.5">
-                Actualités & événements
-              </Link>
+              <NavButton
+                href="/boutique"
+                label="Boutique"
+                icon={<ShoppingBagIcon size={16} />}
+              />
+              <NavButton
+                href="/fourniture"
+                label="Fourniture"
+                icon={<CopyIcon size={16} />}
+              />
             </div>
           </div>
         </nav>
+
+        {/* ── HeaderBottom : bande d'annonces défilante ── */}
+        <AnnouncementBar />
       </header>
 
-      <MobileMenu open={open} onClose={() => setOpen(false)} isActive={isActive} />
+      {/* Menu mobile — rendu dans un portail pour échapper au stacking context du header */}
+      {mounted &&
+        createPortal(
+          <MobileMenu open={open} onClose={() => setOpen(false)} isActive={isActive} />,
+          document.body
+        )}
     </>
   );
 }
 
-function MobileMenu({ open, onClose, isActive }: { open: boolean; onClose: () => void; isActive: (href: string) => boolean }) {
+/* ─────────────────────────────────────────────────────────── */
+/*  Menu mobile                                                */
+/* ─────────────────────────────────────────────────────────── */
+
+function MobileMenu({
+  open,
+  onClose,
+  isActive,
+}: {
+  open: boolean;
+  onClose: () => void;
+  isActive: (href: string) => boolean;
+}) {
   const panelRef = useRef<HTMLDivElement>(null);
   const reduce = useReducedMotion();
+  const [search, setSearch] = useState("");
 
   const onKey = useCallback(
     (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose();
-      // Piège de focus simple
       if (e.key === "Tab" && panelRef.current) {
-        const focusables = panelRef.current.querySelectorAll<HTMLElement>("a, button");
+        const focusables = panelRef.current.querySelectorAll<HTMLElement>(
+          "a, button, input"
+        );
         const first = focusables[0];
         const last = focusables[focusables.length - 1];
         if (e.shiftKey && document.activeElement === first) {
@@ -168,7 +235,10 @@ function MobileMenu({ open, onClose, isActive }: { open: boolean; onClose: () =>
     const previous = document.activeElement as HTMLElement | null;
     document.body.style.overflow = "hidden";
     document.addEventListener("keydown", onKey);
-    const t = window.setTimeout(() => panelRef.current?.querySelector<HTMLElement>("button")?.focus(), 50);
+    const t = window.setTimeout(
+      () => panelRef.current?.querySelector<HTMLElement>("button")?.focus(),
+      50
+    );
     return () => {
       document.body.style.overflow = "";
       document.removeEventListener("keydown", onKey);
@@ -185,83 +255,121 @@ function MobileMenu({ open, onClose, isActive }: { open: boolean; onClose: () =>
   return (
     <AnimatePresence>
       {open && (
-        <div className="fixed inset-0 z-[80]" id="menu-principal">
-          <motion.button
-            type="button"
-            aria-label="Fermer le menu"
-            tabIndex={-1}
-            className="absolute inset-0 h-full w-full cursor-default bg-ink/60 backdrop-blur-sm"
+        <div
+          id="menu-principal"
+          style={{ position: "fixed", inset: 0, zIndex: 9999 }}
+        >
+          {/* Overlay sombre */}
+          <motion.div
+            aria-hidden="true"
+            style={{ position: "absolute", inset: 0 }}
+            className="bg-ink/50 backdrop-blur-sm"
             onClick={onClose}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
+            transition={{ duration: 0.25 }}
           />
+
+          {/* Panneau blanc slide-in depuis la gauche */}
           <motion.div
             ref={panelRef}
             role="dialog"
             aria-modal="true"
             aria-label="Menu"
-            className="grain relative flex h-full w-full max-w-[min(92vw,560px)] flex-col overflow-y-auto bg-ink px-6 pb-8 pt-5 text-white sm:px-10"
+            style={{ position: "absolute", top: 0, bottom: 0, left: 0 }}
+            className="flex w-full max-w-[280px] flex-col overflow-y-auto bg-white shadow-2xl sm:max-w-[320px]"
             initial={reduce ? { opacity: 0 } : { x: "-100%" }}
             animate={reduce ? { opacity: 1 } : { x: 0 }}
             exit={reduce ? { opacity: 0 } : { x: "-100%" }}
-            transition={{ duration: 0.6, ease: EASE }}
+            transition={{ duration: 0.35, ease: EASE }}
           >
-            <div className="flex items-center justify-between">
-              <span className="text-xs font-bold uppercase tracking-[0.3em] text-white/50">Menu</span>
+            {/* ── En-tête sombre ── */}
+            <div className="flex items-center justify-between bg-ink px-5 py-4">
+              <span className="text-sm font-bold uppercase tracking-widest text-white">
+                Menu
+              </span>
               <button
                 type="button"
                 onClick={onClose}
                 aria-label="Fermer le menu"
-                className="btn btn-circle btn-ghost text-white hover:rotate-90 hover:bg-white/10"
+                className="grid h-8 w-8 place-items-center rounded-lg text-white/60 transition-colors hover:bg-white/10 hover:text-white"
               >
-                <CloseIcon size={26} />
+                <CloseIcon size={18} />
               </button>
             </div>
 
-            <ul className="menu mt-10 gap-1 p-0">
-              {links.map((item, i) => (
-                <motion.li
-                  key={item.href}
-                  initial={reduce ? false : { opacity: 0, x: -30 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.6, ease: EASE, delay: 0.15 + i * 0.06 }}
-                >
-                  <Link
-                    href={item.href}
-                    onClick={onClose}
-                    aria-current={isActive(item.href) ? "page" : undefined}
-                    className="group flex items-center justify-between rounded-xl px-2 py-3 text-3xl font-extrabold tracking-tight text-white hover:bg-white/5 focus:bg-white/5 active:!bg-white/10 aria-[current=page]:text-flame sm:text-4xl"
-                  >
-                    {item.label}
-                    <ArrowRight
-                      size={28}
-                      className="-translate-x-3 opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100"
-                    />
-                  </Link>
-                </motion.li>
-              ))}
-            </ul>
-
-            <motion.div
-              className="mt-auto space-y-6 pt-12"
-              initial={reduce ? false : { opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, ease: EASE, delay: 0.5 }}
-            >
-              <Link href="/nous-contacter?sujet=benevolat" onClick={onClose} className="btn btn-primary btn-block btn-lg">
-                Devenir bénévole
+            {/* ── Boutons d'action rapide ── */}
+            <div className="flex flex-col gap-2 border-b border-ink/8 px-4 py-4">
+              <Link
+                href="/boutique"
+                onClick={onClose}
+                className="flex items-center gap-3 rounded-lg bg-ink px-4 py-3 text-sm font-semibold text-white transition-colors hover:bg-ink/80"
+              >
+                <ShoppingBagIcon size={17} />
+                Boutique
               </Link>
-              <div className="grid gap-2 text-white/75">
-                <a href={site.phoneHref} className="inline-flex items-center gap-3 hover:text-white">
-                  <PhoneIcon size={18} /> {site.phone}
-                </a>
-                <a href={`mailto:${site.email}`} className="inline-flex items-center gap-3 hover:text-white">
-                  <MailIcon size={18} /> {site.email}
-                </a>
+              <Link
+                href="/fourniture"
+                onClick={onClose}
+                className="flex items-center gap-3 rounded-lg bg-ink px-4 py-3 text-sm font-semibold text-white transition-colors hover:bg-ink/80"
+              >
+                <CopyIcon size={17} />
+                Fourniture
+              </Link>
+              <Link
+                href="/nous-contacter?sujet=benevolat"
+                onClick={onClose}
+                className="flex items-center gap-3 rounded-lg bg-flame px-4 py-3 text-sm font-semibold text-white transition-colors hover:bg-flame-deep"
+              >
+                <SparkIcon size={14} />
+                Agir avec nous
+              </Link>
+            </div>
+
+            {/* ── Barre de recherche ── */}
+            <div className="border-b border-ink/8 px-4 py-3">
+              <div className="flex items-center gap-2 rounded-lg border border-ink/15 bg-paper px-3 py-2.5">
+                <SearchIcon size={15} className="shrink-0 text-ink/40" />
+                <input
+                  type="search"
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
+                  placeholder="Rechercher un produit…"
+                  aria-label="Rechercher un produit"
+                  className="w-full bg-transparent text-sm text-ink placeholder:text-ink/40 focus:outline-none"
+                />
               </div>
-              <div className="flex gap-2">
+            </div>
+
+            {/* ── Liens de navigation ── */}
+            <nav aria-label="Menu principal" className="flex-1">
+              <ul className="divide-y divide-ink/6">
+                {links.map((item) => (
+                  <li key={item.href}>
+                    <Link
+                      href={item.href}
+                      onClick={onClose}
+                      aria-current={isActive(item.href) ? "page" : undefined}
+                      className="flex items-center justify-between px-5 py-4 text-[0.95rem] font-medium text-ink transition-colors hover:bg-paper aria-[current=page]:font-semibold aria-[current=page]:text-flame"
+                    >
+                      {item.label}
+                      <ArrowRight size={16} className="text-ink/30" />
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+
+            {/* ── Bas du panneau : coordonnées ── */}
+            <div className="border-t border-ink/8 px-5 py-5 text-sm text-ink/50">
+              <a href={site.phoneHref} className="flex items-center gap-2 hover:text-ink">
+                <PhoneIcon size={15} /> {site.phone}
+              </a>
+              <a href={`mailto:${site.email}`} className="mt-2 flex items-center gap-2 hover:text-ink">
+                <MailIcon size={15} /> {site.email}
+              </a>
+              <div className="mt-4 flex gap-2">
                 {site.socials.map((s) => {
                   const Icon = socialIcons[s.label];
                   return (
@@ -271,14 +379,14 @@ function MobileMenu({ open, onClose, isActive }: { open: boolean; onClose: () =>
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label={`${s.label} (nouvel onglet)`}
-                      className="btn btn-circle border-white/20 bg-transparent text-white hover:border-flame hover:bg-flame"
+                      className="grid h-8 w-8 place-items-center rounded-lg border border-ink/15 text-ink/50 transition-colors hover:border-flame hover:bg-flame hover:text-white"
                     >
-                      <Icon size={20} />
+                      <Icon size={16} />
                     </a>
                   );
                 })}
               </div>
-            </motion.div>
+            </div>
           </motion.div>
         </div>
       )}

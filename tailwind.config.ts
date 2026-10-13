@@ -33,6 +33,10 @@ const config: Config = {
           from: { transform: "translateX(0)" },
           to: { transform: "translateX(-50%)" },
         },
+        "marquee-bar": {
+          from: { transform: "translateX(0)" },
+          to: { transform: "translateX(-50%)" },
+        },
         kenburns: {
           from: { transform: "scale(1.12)" },
           to: { transform: "scale(1)" },
@@ -44,6 +48,7 @@ const config: Config = {
       },
       animation: {
         marquee: "marquee 38s linear infinite",
+        "marquee-bar": "marquee-bar 35s linear infinite",
         kenburns: "kenburns 7s cubic-bezier(0.16, 1, 0.3, 1) both",
         sparkle: "sparkle 2.4s ease-in-out infinite",
       },
