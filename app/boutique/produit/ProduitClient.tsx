@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState, type ReactNode } from "react";
+import { useMemo, useState, type ReactNode } from "react";
 import { productCategories, productColors, products } from "@/lib/content";
 import { CheckIcon, HeartIcon, ShoppingBagIcon } from "@/components/ui/Icons";
 
@@ -158,6 +158,17 @@ export function ProduitClient() {
     { id: "specs" as const, label: "Spécifications" },
     { id: "avis" as const, label: `Avis (${product.reviews})` },
   ];
+
+  const similarProducts = useMemo(() => {
+    const sameCat = products.filter(
+      (p) => p.id !== product.id && p.category === product.category
+    );
+    if (sameCat.length >= 4) return sameCat.slice(0, 4);
+    const others = products.filter(
+      (p) => p.id !== product.id && p.category !== product.category
+    );
+    return [...sameCat, ...others].slice(0, 4);
+  }, []);
 
   return (
     <div className="mt-[132px] lg:mt-[188px] pb-24 bg-white min-h-[calc(100vh-132px)] lg:min-h-[calc(100vh-188px)] flex flex-col">
@@ -493,6 +504,101 @@ export function ProduitClient() {
                 </ul>
               </div>
             )}
+          </div>
+        </section>
+
+        {/* ═══════════ Produits similaires ═══════════ */}
+        <section className="mt-16 sm:mt-24 border-t border-ink/10 pt-12 sm:pt-16" aria-labelledby="similar-products-heading">
+          <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-8">
+            <div>
+              <p className="text-xs font-bold uppercase tracking-wider text-[#CF4318]">
+                Découvrez aussi
+              </p>
+              <h2 id="similar-products-heading" className="mt-1 text-2xl font-bold font-heading text-ink sm:text-3xl">
+                Produits similaires
+              </h2>
+              <p className="mt-1.5 text-sm text-ink/60">
+                D&apos;autres articles et équipements qui pourraient vous intéresser.
+              </p>
+            </div>
+            <Link
+              href="/boutique"
+              className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#CF4318] hover:text-[#B03815] transition-colors"
+            >
+              <span>Voir toute la boutique</span>
+              <span aria-hidden="true">→</span>
+            </Link>
+          </div>
+
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {similarProducts.map((p) => (
+              <article
+                key={p.id}
+                className="group flex flex-col overflow-hidden rounded-2xl border border-ink/10 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-ink/30 hover:shadow-lg"
+              >
+                {/* Image */}
+                <Link
+                  href="/boutique/produit"
+                  aria-label={`Voir ${p.name}`}
+                  className="relative block aspect-[4/3] w-full overflow-hidden bg-ink/5"
+                >
+                  <Image
+                    src={p.image}
+                    alt={p.name}
+                    fill
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                  />
+                  {p.isNew && (
+                    <span className="absolute left-3 top-3 rounded-md bg-[#CF4318] px-2.5 py-1 text-xs font-bold text-white shadow-sm">
+                      Nouveauté
+                    </span>
+                  )}
+                  {p.oldPrice && !p.isNew && (
+                    <span className="absolute left-3 top-3 rounded-md bg-[#CF4318] px-2.5 py-1 text-xs font-bold text-white shadow-sm">
+                      -{Math.round(((p.oldPrice - p.price) / p.oldPrice) * 100)}%
+                    </span>
+                  )}
+                </Link>
+
+                {/* Contenu carte */}
+                <div className="flex flex-1 flex-col p-5">
+                  <p className="text-[11px] font-bold uppercase tracking-wider text-ink/50">
+                    {p.category.replace("-", " ")}
+                  </p>
+
+                  <h3 className="mt-1 text-base font-bold leading-snug text-ink group-hover:text-[#CF4318] transition-colors">
+                    <Link href="/boutique/produit">{p.name}</Link>
+                  </h3>
+
+                  <div className="mt-2 flex items-center gap-1.5 text-xs text-ink/50">
+                    <span className="text-amber-400">★★★★★</span>
+                    <span>({p.rating.toFixed(1)})</span>
+                  </div>
+
+                  <div className="mt-4 flex items-center gap-2.5">
+                    <span className="text-lg font-extrabold text-ink">
+                      {fcfa(p.price)}
+                    </span>
+                    {p.oldPrice && (
+                      <span className="text-xs text-ink/40 line-through">
+                        {fcfa(p.oldPrice)}
+                      </span>
+                    )}
+                  </div>
+
+                  <div className="mt-auto pt-5">
+                    <button
+                      type="button"
+                      onClick={() => notify(`« ${p.name} » ajouté au panier !`)}
+                      className="w-full rounded-xl bg-[#CF4318] py-2.5 px-4 text-xs font-bold text-white transition-colors hover:bg-[#B03815] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#CF4318]"
+                    >
+                      Ajouter au panier
+                    </button>
+                  </div>
+                </div>
+              </article>
+            ))}
           </div>
         </section>
       </div>
