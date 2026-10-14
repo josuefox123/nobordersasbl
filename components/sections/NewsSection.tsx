@@ -2,9 +2,9 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { press } from "@/lib/content";
+import { news } from "@/lib/content";
 import { Reveal, Stagger, StaggerItem } from "@/components/ui/Reveal";
-import { ArrowRight, ArrowUpRight } from "@/components/ui/Icons";
+import { ArrowRight } from "@/components/ui/Icons";
 
 export function NewsSection() {
   return (
@@ -22,8 +22,8 @@ export function NewsSection() {
 
         {/* ── Grille des cards ── */}
         <Stagger className="mt-16 grid gap-8 md:grid-cols-2 lg:grid-cols-4">
-          {press.map((item) => (
-            <StaggerItem key={item.title}>
+          {news.slice(0, 4).map((item) => (
+            <StaggerItem key={item.slug}>
               <article className="group flex flex-col h-full overflow-hidden rounded-3xl border border-ink/10 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:border-ink">
 
                 {/* Image — sans badge */}
@@ -48,23 +48,12 @@ export function NewsSection() {
 
                   {/* Bouton centré en bas de la card */}
                   <div className="mt-auto pt-6 w-full flex justify-center">
-                    {item.href ? (
-                      <a
-                        href={item.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 rounded-lg bg-ink px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-flame focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-flame"
-                      >
-                        En savoir plus <ArrowUpRight size={15} />
-                      </a>
-                    ) : (
-                      <Link
-                        href="/presse"
-                        className="inline-flex items-center gap-2 rounded-lg bg-ink px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-flame focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-flame"
-                      >
-                        En savoir plus <ArrowRight size={15} />
-                      </Link>
-                    )}
+                    <Link
+                      href={`/actualites/${item.slug}`}
+                      className="inline-flex items-center gap-2 rounded-lg bg-ink px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-flame focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-flame"
+                    >
+                      En savoir plus <ArrowRight size={15} />
+                    </Link>
                   </div>
                 </div>
 
