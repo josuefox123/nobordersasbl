@@ -63,7 +63,7 @@ export function LoginDropdown() {
           className="overflow-hidden rounded-xl border border-ink/10 bg-white shadow-2xl"
         >
           <Link
-            href="/connexion"
+            href="/login"
             role="menuitem"
             onClick={() => setOpen(false)}
             className="flex items-center gap-3 px-5 py-3.5 text-sm font-medium text-ink transition-colors hover:bg-paper"
@@ -75,7 +75,7 @@ export function LoginDropdown() {
           <div className="mx-4 h-px bg-ink/10" aria-hidden="true" />
 
           <Link
-            href="/inscription"
+            href="/register"
             role="menuitem"
             onClick={() => setOpen(false)}
             className="flex items-center gap-3 px-5 py-3.5 text-sm font-medium text-ink transition-colors hover:bg-paper"

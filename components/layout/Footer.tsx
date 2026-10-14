@@ -38,13 +38,13 @@ export function Footer() {
           {/* Col 1-2 : identité */}
           <div className="lg:col-span-2">
             <Link href="/" className="inline-flex items-center gap-3">
-              <span className="relative grid h-12 w-12 place-items-center overflow-hidden rounded-full bg-white p-1">
-                <Image src="/images/logo.png" alt="" width={44} height={44} className="h-full w-full object-contain" />
-              </span>
-              <div>
-                <span className="text-2xl font-extrabold tracking-tight">NO BORDERS</span>
-                <span className="block text-xs uppercase tracking-[0.25em] text-white/60">Briseur de frontières mentales</span>
-              </div>
+              <Image
+                src="/images/logo/logoFichier 2logo_2.png"
+                alt="No Borders ASBL"
+                width={192}
+                height={64}
+                className="h-12 w-auto object-contain"
+              />
             </Link>
             <p className="mt-5 max-w-sm text-sm leading-relaxed text-white/70">
               {site.description}

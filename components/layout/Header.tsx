@@ -97,24 +97,14 @@ export function Header() {
               className="group flex items-center gap-3"
               aria-label="No Borders ASBL — accueil"
             >
-              <span className="relative grid h-11 w-11 place-items-center overflow-hidden rounded-full bg-white p-0.5 transition-transform duration-500 ease-out-expo group-hover:rotate-[20deg]">
-                <Image
-                  src="/images/logo.png"
-                  alt=""
-                  width={44}
-                  height={44}
-                  className="h-full w-full object-contain"
-                  priority
-                />
-              </span>
-              <span className="leading-none">
-                <span className="block text-xl font-extrabold tracking-tight sm:text-2xl">
-                  NO BORDERS<span className="text-flame">!</span>
-                </span>
-                <span className="hidden text-[0.65rem] font-semibold uppercase tracking-[0.3em] text-white/60 sm:block">
-                  ASBL · Mons
-                </span>
-              </span>
+              <Image
+                src="/images/logo/logoFichier 2logo_2.png"
+                alt="No Borders ASBL"
+                width={192}
+                height={64}
+                className="h-11 w-auto object-contain transition-transform duration-500 ease-out-expo group-hover:scale-105"
+                priority
+              />
             </Link>
 
             {/* Actions droite */}

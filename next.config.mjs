@@ -21,6 +21,14 @@ const nextConfig = {
       },
     ],
   },
+  async rewrites() {
+    return [
+      { source: "/connexion", destination: "/login" },
+      { source: "/inscription", destination: "/register" },
+      { source: "/mot-de-passe-oublie", destination: "/forgot-password" },
+      { source: "/reinitialiser-mot-de-passe", destination: "/reset-password" },
+    ];
+  },
   async redirects() {
     // Anciennes URLs du site Squarespace -> nouvelles pages
     return [
