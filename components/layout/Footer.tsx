@@ -6,7 +6,8 @@ import { ArrowUpRight, HeartIcon, MailIcon, PhoneIcon, PinIcon, socialIcons } fr
 export function Footer() {
   return (
     <footer className="grain relative border-t border-white/10 bg-ink text-white">
-      {/* Bande supérieure : grand appel d'action */}
+
+      {/* Bande supérieure — "Faisons de la diversité une richesse" — commentée
       <div className="border-b border-white/10 py-16 sm:py-20">
         <div className="container flex flex-col items-start justify-between gap-8 lg:flex-row lg:items-center">
           <div>
@@ -15,7 +16,8 @@ export function Footer() {
               Faisons de la diversité <span className="text-flame">une richesse</span>
             </h2>
             <p className="mt-3 max-w-xl text-base text-white/70">
-              Que vous souhaitiez participer à une sortie, proposer un projet ou rejoindre l’équipe bénévole, votre énergie est la bienvenue.
+              Que vous souhaitiez participer à une sortie, proposer un projet ou rejoindre
+              l'équipe bénévole, votre énergie est la bienvenue.
             </p>
           </div>
           <div className="flex flex-wrap gap-4">
@@ -28,6 +30,7 @@ export function Footer() {
           </div>
         </div>
       </div>
+      */}
 
       {/* Grille de liens et informations */}
       <div className="container py-16 sm:py-20">
@@ -84,7 +87,7 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* Col 4 : Initiatives & Partenaires */}
+          {/* Col 4 : Initiatives */}
           <div>
             <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-white/50">Initiatives</h3>
             <ul className="mt-5 space-y-3 text-sm">

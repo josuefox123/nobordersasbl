@@ -51,8 +51,7 @@ export function Hero() {
   return (
     <section
       aria-label="Diaporama No Borders ASBL"
-      className="relative w-full overflow-hidden"
-      style={{ marginTop: "188px" }}
+      className="relative w-full overflow-hidden mt-[132px] lg:mt-[188px]"
     >
       {/*
         Technique correcte pour un slider CSS :

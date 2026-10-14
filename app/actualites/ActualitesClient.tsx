@@ -43,7 +43,7 @@ export function ActualitesClient() {
       </section>
 
       {/* ── Grille des articles ── */}
-      <section className="bg-paper py-20 sm:py-28">
+      <section className="bg-white py-20 sm:py-28">
         <div className="container">
 
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">

@@ -1,55 +1,81 @@
-"use client";
-
 import Image from "next/image";
 import Link from "next/link";
-import { activities } from "@/lib/content";
 import { Reveal, Stagger, StaggerItem } from "@/components/ui/Reveal";
 import { ArrowRight } from "@/components/ui/Icons";
 
+const CATEGORIES = [
+  {
+    tag: "Éco-mobilité",
+    title: "Vélos en Bambou",
+    subtitle: "My Boo · Fabrication artisanale",
+    description:
+      "Des vélos fabriqués à la main au Ghana à partir de bambou naturel. Légers, solides et écologiques, ils allient performance et solidarité Nord-Sud.",
+    image: "/images/lancement-myboo.jpg",
+    href: "/boutique?categorie=velos-bambou",
+  },
+  {
+    tag: "Mobilité inclusive",
+    title: "Hase Bikes",
+    subtitle: "Vélos couchés & adaptés",
+    description:
+      "Des vélos couchés et adaptés pour toutes les morphologies et tous les handicaps. Parce que la mobilité douce est un droit pour chacun.",
+    image: "/images/p-hase-bikes.jpg",
+    href: "/boutique?categorie=hase-bikes",
+  },
+  {
+    tag: "Cardio & Nature",
+    title: "ElliptiGO",
+    subtitle: "Vélo elliptique extérieur",
+    description:
+      "Le vélo elliptique conçu pour l'extérieur. Un entraînement complet et à faible impact articulaire, idéal pour tous les niveaux.",
+    image: "/images/vtt.jpg",
+    href: "/boutique?categorie=elliptigo",
+  },
+  {
+    tag: "Équipement",
+    title: "Accessoires & Pièces",
+    subtitle: "Entretien · Sécurité · Confort",
+    description:
+      "Casques, antivols, lumières, sacoches et pièces détachées sélectionnés pour leur qualité et leur durabilité. Tout pour rouler en sécurité.",
+    image: "/images/organisations-sportives.jpg",
+    href: "/boutique?categorie=accessoires",
+  },
+];
+
 export function ActivitiesSection() {
   return (
-    <section className="bg-paper py-24 sm:py-32" id="activites">
+    <section className="bg-paper py-24 sm:py-32" id="categories">
       <div className="container">
-        <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
-          <div className="max-w-2xl">
-            <Reveal>
-              <span className="eyebrow">Domaines d'action</span>
-            </Reveal>
-            <Reveal delay={0.1}>
-              <h2 className="mt-4 text-3xl font-extrabold tracking-tight text-ink sm:text-4xl md:text-5xl">
-                Nos activités au cœur du territoire
-              </h2>
-            </Reveal>
-            <Reveal delay={0.2}>
-              <p className="mt-4 text-base text-ink/75 sm:text-lg">
-                Du sport à la culture en passant par la mobilité douce, nos projets favorisent l’échange et l’apprentissage mutuel.
-              </p>
-            </Reveal>
-          </div>
-          <Reveal delay={0.3}>
-            <Link href="/notre-projet" className="btn btn-ink gap-2 self-start md:self-auto">
-              Voir tous les objectifs <ArrowRight size={16} />
-            </Link>
+
+        {/* ── En-tête ── */}
+        <div className="max-w-2xl">
+          <Reveal>
+            <h2 className="text-3xl font-extrabold tracking-tight text-ink sm:text-4xl md:text-5xl">
+              Nos activités au cœur du territoire
+            </h2>
           </Reveal>
         </div>
 
-        {/* Grille asymétrique des 4 activités */}
+        {/* ── Grille des 4 catégories ── */}
         <Stagger className="mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-          {activities.map((act, idx) => (
-            <StaggerItem key={act.title}>
-              <div className="group flex flex-col h-full overflow-hidden rounded-3xl border border-ink/10 bg-white shadow-sm transition-all duration-500 hover:-translate-y-1.5 hover:shadow-xl hover:border-flame/40">
-                {/* Photo avec effet de zoom */}
+          {CATEGORIES.map((cat) => (
+            <StaggerItem key={cat.title}>
+              <Link
+                href={cat.href}
+                className="group flex h-full flex-col overflow-hidden rounded-3xl border border-ink/10 bg-white shadow-sm transition-all duration-500 hover:-translate-y-1.5 hover:border-flame/40 hover:shadow-xl"
+              >
+                {/* Image */}
                 <div className="relative aspect-[4/3] w-full overflow-hidden bg-ink/5">
                   <Image
-                    src={act.image}
-                    alt={act.title}
+                    src={cat.image}
+                    alt={cat.title}
                     fill
-                    className="object-cover transition-transform duration-700 ease-out group-hover:scale-108"
+                    className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
                   />
-                  <div className="absolute top-4 left-4">
-                    <span className="badge badge-neutral font-semibold text-xs tracking-wider uppercase px-3 py-1">
-                      {act.tag}
+                  <div className="absolute left-4 top-4">
+                    <span className="rounded-full bg-ink/75 px-3 py-1 text-[0.7rem] font-bold uppercase tracking-wider text-white backdrop-blur-sm">
+                      {cat.tag}
                     </span>
                   </div>
                 </div>
@@ -57,19 +83,32 @@ export function ActivitiesSection() {
                 {/* Contenu */}
                 <div className="flex flex-1 flex-col p-6 sm:p-7">
                   <span className="text-xs font-semibold uppercase tracking-wider text-flame-deep">
-                    {act.subtitle}
+                    {cat.subtitle}
                   </span>
                   <h3 className="mt-2 text-xl font-bold tracking-tight text-ink">
-                    {act.title}
+                    {cat.title}
                   </h3>
-                  <p className="mt-3 text-sm text-ink/70 leading-relaxed">
-                    {act.text}
+                  <p className="mt-3 text-sm leading-relaxed text-ink/70">
+                    {cat.description}
                   </p>
                 </div>
-              </div>
+              </Link>
             </StaggerItem>
           ))}
         </Stagger>
+
+        {/* ── Bouton centré sous les cards ── */}
+        <Reveal delay={0.2}>
+          <div className="mt-12 flex justify-center">
+            <Link
+              href="/boutique"
+              className="inline-flex items-center gap-2 rounded-xl border-2 border-ink px-8 py-3.5 text-sm font-semibold text-ink transition-colors hover:bg-ink hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-flame"
+            >
+              Voir toutes les catégories <ArrowRight size={16} />
+            </Link>
+          </div>
+        </Reveal>
+
       </div>
     </section>
   );

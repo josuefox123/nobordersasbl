@@ -27,6 +27,7 @@ import {
   socialIcons,
 } from "@/components/ui/Icons";
 import { LoginDropdown } from "@/components/ui/LoginDropdown";
+import { LanguageSwitcher } from "@/components/ui/LanguageSwitcher";
 import { LocationButton } from "@/components/ui/LocationButton";
 import { WishlistButton } from "@/components/ui/WishlistButton";
 import { CartButton } from "@/components/ui/CartButton";
@@ -119,6 +120,7 @@ export function Header() {
             {/* Actions droite */}
             <div className="ml-auto flex items-center gap-2" style={{ position: "relative", zIndex: 10 }}>
               <LoginDropdown />
+              <LanguageSwitcher />
               <span className="h-6 w-px bg-white/20" aria-hidden="true" />
               <LocationButton />
               <WishlistButton />
