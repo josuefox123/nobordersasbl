@@ -6,16 +6,22 @@
   html {
     scroll-behavior: smooth;
     -webkit-tap-highlight-color: transparent;
+    /* Empêche tout débordement horizontal sur mobile */
+    overflow-x: hidden;
   }
   body {
     @apply bg-paper text-ink antialiased;
     font-feature-settings: "ss01", "cv11";
+    /* Renforce le confinement horizontal */
+    overflow-x: hidden;
+    max-width: 100%;
   }
   ::selection {
-    @apply bg-flame text-white;
+    background-color: #0875B9;
+    color: #ffffff;
   }
   :focus-visible {
-    outline: 3px solid theme("colors.flame.DEFAULT");
+    outline: 3px solid #0875B9;
     outline-offset: 3px;
   }
 }
@@ -69,6 +75,24 @@
   .link-underline:hover,
   .link-underline[aria-current="page"] {
     background-size: 100% 2px;
+  }
+
+  /* Navigation moderne : liens avec état .active */
+  .nav-menu-link {
+    @apply relative mx-1.5 flex items-center py-2 px-3 text-[0.95rem] font-medium text-ink/75 transition-all duration-200 hover:text-[#0875B9];
+  }
+  .nav-menu-link.active,
+  .nav-menu-link[aria-current="page"] {
+    @apply font-semibold text-[#0875B9];
+  }
+  .nav-menu-link::after {
+    content: "";
+    @apply absolute bottom-0 left-2.5 right-2.5 h-[2.5px] scale-x-0 rounded-full bg-[#0875B9] transition-transform duration-300 ease-out-expo;
+  }
+  .nav-menu-link:hover::after,
+  .nav-menu-link.active::after,
+  .nav-menu-link[aria-current="page"]::after {
+    @apply scale-x-100;
   }
 
   /* Image avec zoom au survol */
@@ -136,12 +160,13 @@ select:-webkit-autofill:focus {
 
 /* ── Animation pluie de logos (PartnersMarquee) ── */
 @keyframes rain-fall {
-  from { transform: translateY(-50%); }
+  from { transform: translateY(-33.333%); }
   to   { transform: translateY(0%); }
 }
 
 @media (prefers-reduced-motion: reduce) {
   [style*="rain-fall"] {
     animation: none !important;
+    transform: translateY(0) !important;
   }
 }

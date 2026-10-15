@@ -61,20 +61,20 @@ export default function ActualiteDetailPage({ params }: Props) {
   const related = news.filter((n) => n.slug !== item.slug).slice(0, 4);
 
   return (
-    <div className="mt-[132px] lg:mt-[188px]">
+    <div className="mt-[84px] lg:mt-[188px]">
       {/* ── Fil d'Ariane + bloc principal ── */}
       <section className="bg-paper py-12 sm:py-16" aria-labelledby="actualite-heading">
         <div className="container">
           <nav aria-label="Fil d'Ariane">
             <ol className="flex flex-wrap items-center gap-2 text-sm text-ink/50">
               <li>
-                <Link href="/" className="transition-colors hover:text-flame">
+                <Link href="/" className="transition-colors hover:text-[#0875B9]">
                   Accueil
                 </Link>
               </li>
               <li aria-hidden="true">/</li>
               <li>
-                <Link href="/actualites" className="transition-colors hover:text-flame">
+                <Link href="/actualites" className="transition-colors hover:text-[#0875B9]">
                   Actualités
                 </Link>
               </li>
@@ -90,7 +90,7 @@ export default function ActualiteDetailPage({ params }: Props) {
               {/* Texte */}
               <div>
                 <div className="flex flex-wrap items-center gap-3 text-xs font-semibold uppercase tracking-[0.2em]">
-                  <span className="text-flame">{item.category}</span>
+                  <span className="text-[#0875B9]">{item.category}</span>
                   <span className="h-3 w-px bg-ink/20" aria-hidden="true" />
                   <time dateTime={item.isoDate} className="inline-flex items-center gap-1.5 text-ink/50">
                     <CalendarIcon size={14} /> {item.date}
@@ -108,7 +108,7 @@ export default function ActualiteDetailPage({ params }: Props) {
                 <Link
                   href="/nous-contacter"
                   id="actualite-nous-contacter"
-                  className="mt-10 inline-flex items-center gap-2.5 rounded-xl bg-ink px-6 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-flame focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-flame"
+                  className="mt-10 inline-flex items-center gap-2.5 rounded-xl bg-[#0875B9] px-6 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-[#065f9a] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0875B9]"
                 >
                   Nous contacter <ArrowRight size={17} />
                 </Link>
@@ -175,7 +175,7 @@ export default function ActualiteDetailPage({ params }: Props) {
           <Stagger className="mt-14 grid gap-8 md:grid-cols-2 lg:grid-cols-4">
             {related.map((r) => (
               <StaggerItem key={r.slug}>
-                <article className="group flex h-full flex-col overflow-hidden rounded-3xl border border-ink/10 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-ink hover:shadow-lg">
+                <article className="group flex h-full flex-col overflow-hidden rounded-3xl border border-ink/10 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
                   {/* Image */}
                   <div className="relative aspect-[16/10] w-full overflow-hidden bg-ink/5">
                     <Image
@@ -196,7 +196,7 @@ export default function ActualiteDetailPage({ params }: Props) {
                     <div className="mt-auto flex w-full justify-center pt-6">
                       <Link
                         href={`/actualites/${r.slug}`}
-                        className="inline-flex items-center gap-2 rounded-lg bg-ink px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-flame focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-flame"
+                        className="inline-flex items-center gap-2 rounded-lg bg-[#0875B9] px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#065f9a] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0875B9]"
                       >
                         En savoir plus <ArrowRight size={15} />
                       </Link>
@@ -233,7 +233,7 @@ export default function ActualiteDetailPage({ params }: Props) {
                   </span>
                   <span className="flex-1 font-semibold text-ink">{f.q}</span>
                   <span
-                    className="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-ink/15 text-ink transition-all duration-300 group-open:rotate-45 group-open:border-flame group-open:bg-flame group-open:text-white"
+                    className="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-ink/15 text-ink transition-all duration-300 group-open:rotate-45 group-open:border-[#0875B9] group-open:bg-[#0875B9] group-open:text-white"
                     aria-hidden="true"
                   >
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
@@ -251,7 +251,7 @@ export default function ActualiteDetailPage({ params }: Props) {
             <Link
               href="/actualites"
               id="actualite-cta"
-              className="inline-flex items-center gap-2.5 rounded-xl bg-flame px-8 py-4 text-sm font-semibold text-white transition-colors hover:bg-flame-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-flame"
+              className="inline-flex items-center gap-2.5 rounded-xl bg-[#0875B9] px-8 py-4 text-sm font-semibold text-white transition-colors hover:bg-[#065f9a] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0875B9]"
             >
               Voir toutes les actualités <ArrowRight size={17} />
             </Link>

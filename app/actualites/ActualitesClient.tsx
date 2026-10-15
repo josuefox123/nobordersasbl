@@ -50,7 +50,7 @@ export function ActualitesClient() {
             {paginated.map((item) => (
               <article
                 key={item.slug}
-                className="group flex h-full flex-col overflow-hidden rounded-3xl border border-ink/10 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-ink hover:shadow-lg"
+                className="group flex h-full flex-col overflow-hidden rounded-3xl border border-ink/10 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
               >
                 {/* Image */}
                 <div className="relative aspect-[16/10] w-full overflow-hidden bg-ink/5">
@@ -76,7 +76,7 @@ export function ActualitesClient() {
                   <div className="mt-auto flex w-full justify-center pt-6">
                     <Link
                       href={`/actualites/${item.slug}`}
-                      className="inline-flex items-center gap-2 rounded-lg bg-ink px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-flame focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-flame"
+                      className="inline-flex items-center gap-2 rounded-lg bg-[#0875B9] px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#065f9a] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0875B9]"
                     >
                       En savoir plus <ArrowRight size={15} />
                     </Link>
@@ -96,7 +96,7 @@ export function ActualitesClient() {
                 onClick={() => goTo(page - 1)}
                 disabled={page === 1}
                 aria-label="Page précédente"
-                className="flex h-10 w-10 items-center justify-center rounded-lg border border-ink/15 text-ink/60 transition-colors hover:border-ink hover:text-ink disabled:cursor-not-allowed disabled:opacity-30"
+                className="flex h-10 w-10 items-center justify-center rounded-lg border border-ink/15 text-ink/60 transition-colors hover:border-[#0875B9] hover:text-[#0875B9] disabled:cursor-not-allowed disabled:opacity-30"
               >
                 <ChevronDownIcon size={16} className="rotate-90" />
               </button>
@@ -109,10 +109,10 @@ export function ActualitesClient() {
                   onClick={() => goTo(p)}
                   aria-current={p === page ? "page" : undefined}
                   aria-label={`Page ${p}`}
-                  className={`flex h-10 w-10 items-center justify-center rounded-lg text-sm font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-flame ${
+                  className={`flex h-10 w-10 items-center justify-center rounded-lg text-sm font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0875B9] ${
                     p === page
-                      ? "bg-ink text-white"
-                      : "border border-ink/15 text-ink/60 hover:border-ink hover:text-ink"
+                      ? "bg-[#0875B9] text-white"
+                      : "border border-ink/15 text-ink/60 hover:border-[#0875B9] hover:text-[#0875B9]"
                   }`}
                 >
                   {p}
@@ -125,7 +125,7 @@ export function ActualitesClient() {
                 onClick={() => goTo(page + 1)}
                 disabled={page === totalPages}
                 aria-label="Page suivante"
-                className="flex h-10 w-10 items-center justify-center rounded-lg border border-ink/15 text-ink/60 transition-colors hover:border-ink hover:text-ink disabled:cursor-not-allowed disabled:opacity-30"
+                className="flex h-10 w-10 items-center justify-center rounded-lg border border-ink/15 text-ink/60 transition-colors hover:border-[#0875B9] hover:text-[#0875B9] disabled:cursor-not-allowed disabled:opacity-30"
               >
                 <ChevronDownIcon size={16} className="-rotate-90" />
               </button>

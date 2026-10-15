@@ -19,7 +19,7 @@ export function AnnouncementBar() {
     <div
       role="region"
       aria-label="Annonces"
-      className="relative h-12 overflow-hidden bg-ink"
+      className="relative h-12 overflow-hidden bg-[#0875B9]"
     >
       <div className="flex h-full animate-marquee-bar items-center whitespace-nowrap will-change-transform">
         {/* Copie 1 */}
@@ -52,8 +52,8 @@ export function AnnouncementBar() {
       </ul>
 
       {/* Dégradés latéraux */}
-      <div aria-hidden="true" className="pointer-events-none absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-ink to-transparent" />
-      <div aria-hidden="true" className="pointer-events-none absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-ink to-transparent" />
+      <div aria-hidden="true" className="pointer-events-none absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-[#0875B9] to-transparent" />
+      <div aria-hidden="true" className="pointer-events-none absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-[#0875B9] to-transparent" />
     </div>
   );
 }

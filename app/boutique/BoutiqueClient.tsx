@@ -248,7 +248,7 @@ export function BoutiqueClient() {
     (searchQuery ? 1 : 0);
 
   return (
-    <div className="mt-[132px] lg:mt-[188px] pb-24 bg-white">
+    <div className="mt-[84px] lg:mt-[188px] pb-24 bg-white">
       {/* ── Toast de notification ajout panier ── */}
       {addedNotice && (
         <div className="fixed bottom-6 right-6 z-[100] flex items-center gap-3 rounded-xl bg-ink px-5 py-3.5 text-sm font-semibold text-white shadow-2xl transition-all animate-bounce">

@@ -95,7 +95,7 @@ export function WishlistClient() {
   };
 
   return (
-    <div className="mt-[132px] lg:mt-[188px] pb-24 bg-white min-h-[calc(100vh-132px)] lg:min-h-[calc(100vh-188px)] flex flex-col">
+    <div className="mt-[84px] lg:mt-[188px] pb-24 bg-white min-h-[calc(100vh-84px)] lg:min-h-[calc(100vh-188px)] flex flex-col">
       {/* ── Notification toast ── */}
       {notice && (
         <div

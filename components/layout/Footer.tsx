@@ -39,7 +39,7 @@ export function Footer() {
           <div className="lg:col-span-2">
             <Link href="/" className="inline-flex items-center gap-3">
               <Image
-                src="/images/logo/logoFichier 2logo_2.png"
+                src="/images/logo/logoFichier 2logo_blanc.png"
                 alt="No Borders ASBL"
                 width={192}
                 height={64}
@@ -59,7 +59,7 @@ export function Footer() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={`${s.label} (nouvel onglet)`}
-                    className="grid h-10 w-10 place-items-center rounded-full border border-white/15 text-white/80 transition-colors hover:border-flame hover:bg-flame hover:text-white"
+                    className="grid h-10 w-10 place-items-center rounded-full border border-white/15 text-white/80 transition-colors hover:border-[#0875B9] hover:bg-[#0875B9] hover:text-white"
                   >
                     <Icon size={18} />
                   </a>
@@ -96,7 +96,7 @@ export function Footer() {
                   href={site.eshop.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 text-white/75 transition-colors hover:text-flame"
+                  className="inline-flex items-center gap-1.5 text-white/75 transition-colors hover:text-white"
                 >
                   Boutique Bamboo <ArrowUpRight size={14} />
                 </a>
@@ -124,20 +124,20 @@ export function Footer() {
             <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-white/50">Contact officiel</h3>
             <ul className="mt-5 space-y-3 text-sm text-white/75">
               <li className="flex items-start gap-2.5">
-                <PinIcon size={16} className="mt-1 text-flame shrink-0" />
+                <PinIcon size={16} className="mt-1 text-[#0875B9] shrink-0" />
                 <span>
                   {site.address.street},<br />
                   {site.address.zip} {site.address.city}, {site.address.country}
                 </span>
               </li>
               <li className="flex items-center gap-2.5">
-                <PhoneIcon size={16} className="text-flame shrink-0" />
+                <PhoneIcon size={16} className="text-[#0875B9] shrink-0" />
                 <a href={site.phoneHref} className="hover:text-white">
                   {site.phone}
                 </a>
               </li>
               <li className="flex items-center gap-2.5">
-                <MailIcon size={16} className="text-flame shrink-0" />
+                <MailIcon size={16} className="text-[#0875B9] shrink-0" />
                 <a href={`mailto:${site.email}`} className="hover:text-white break-all">
                   {site.email}
                 </a>

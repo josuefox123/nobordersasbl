@@ -59,7 +59,7 @@ const activities: Activity[] = [
 
 export default function NosActivitesPage() {
   return (
-    <div className="mt-[132px] lg:mt-[188px]">
+    <div className="mt-[84px] lg:mt-[188px]">
       {/* ── En-tête de page : badge, fil d'Ariane, titre, intro ── */}
       <section className="border-b border-ink/5 bg-paper py-16 sm:py-20" aria-labelledby="activites-heading">
         <div className="container">

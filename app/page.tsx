@@ -7,6 +7,7 @@ import { ActivitiesSection } from "@/components/sections/ActivitiesSection";
 import { ProjectsSection } from "@/components/sections/ProjectsSection";
 import { NewsSection } from "@/components/sections/NewsSection";
 import { ProductSearchSection } from "@/components/sections/ProductSearchSection";
+import { FeaturedProducts } from "@/components/sections/FeaturedProducts";
 import { TestimonialsSection } from "@/components/sections/TestimonialsSection";
 import { CtaSection } from "@/components/sections/CtaSection";
 
@@ -15,15 +16,16 @@ export default function HomePage() {
     <>
       <Hero />
       <AboutPreview />
+      <ActivitiesSection />
+      <MissionSection />
+      <ProductSearchSection />
+      <FeaturedProducts />
       <StatsSection />
       <PartnersMarquee />
       <TestimonialsSection />
       <CtaSection />
-      <ActivitiesSection />
-      {/* <ProjectsSection /> — "Des projets à fort impact social et humain" + axes Intégration, Interculturalité, Mobilité douce, Solidarité Nord-Sud — commenté */}
-      <ProductSearchSection />
-      <MissionSection />
-      {/* <NewsletterSection /> — "Faisons de la diversité une richesse" — commentée */}
+      {/* <ProjectsSection /> — commenté */}
+      {/* <NewsletterSection /> — commentée */}
       <NewsSection />
     </>
   );

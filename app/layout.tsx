@@ -1,14 +1,24 @@
 import type { Metadata } from "next";
-import { Montserrat } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 import { SiteLayout } from "@/components/layout/SiteLayout";
 import { site } from "@/lib/content";
 
-const montserrat = Montserrat({
-  subsets: ["latin"],
+const montserrat = localFont({
+  src: [
+    {
+      path: "./fonts/montserrat-latin.woff2",
+      weight: "300 900",
+      style: "normal",
+    },
+    {
+      path: "./fonts/montserrat-latin-ext.woff2",
+      weight: "300 900",
+      style: "normal",
+    },
+  ],
   variable: "--font-montserrat",
   display: "swap",
-  weight: ["300", "400", "500", "600", "700", "800", "900"],
 });
 
 export const metadata: Metadata = {
@@ -65,7 +75,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="fr" className={montserrat.variable}>
-      <body className="flex min-h-screen flex-col font-sans bg-paper text-ink selection:bg-flame selection:text-white">
+      <body className="flex min-h-screen flex-col font-sans bg-paper text-ink selection:bg-[#0875B9] selection:text-white">
         <SiteLayout>{children}</SiteLayout>
       </body>
     </html>

@@ -2,7 +2,7 @@
 
 import { useState, type FormEvent } from "react";
 import { site } from "@/lib/content";
-import { MailIcon, PhoneIcon, PinIcon, CheckIcon, ArrowRight } from "@/components/ui/Icons";
+import { MailIcon, PhoneIcon, PinIcon, CheckIcon, ArrowRight, SparkIcon } from "@/components/ui/Icons";
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -55,7 +55,7 @@ export default function ContactPage() {
 
               <div className="rounded-3xl border border-ink/10 bg-paper p-8 space-y-6">
                 <div className="flex items-start gap-4">
-                  <div className="grid h-12 w-12 place-items-center rounded-2xl bg-white text-flame shrink-0 shadow-sm">
+                  <div className="grid h-12 w-12 place-items-center rounded-2xl bg-white text-[#0875B9] shrink-0 shadow-sm">
                     <PinIcon size={20} />
                   </div>
                   <div>
@@ -68,38 +68,58 @@ export default function ContactPage() {
                 </div>
 
                 <div className="flex items-start gap-4">
-                  <div className="grid h-12 w-12 place-items-center rounded-2xl bg-white text-flame shrink-0 shadow-sm">
+                  <div className="grid h-12 w-12 place-items-center rounded-2xl bg-white text-[#0875B9] shrink-0 shadow-sm">
                     <PhoneIcon size={20} />
                   </div>
                   <div>
                     <h3 className="font-bold text-ink text-sm">Téléphone</h3>
-                    <a href={site.phoneHref} className="mt-1 block text-sm font-semibold text-ink hover:text-flame">
+                    <a href={site.phoneHref} className="mt-1 block text-sm font-semibold text-ink hover:text-[#0875B9]">
                       {site.phone}
                     </a>
                   </div>
                 </div>
 
                 <div className="flex items-start gap-4">
-                  <div className="grid h-12 w-12 place-items-center rounded-2xl bg-white text-flame shrink-0 shadow-sm">
+                  <div className="grid h-12 w-12 place-items-center rounded-2xl bg-white text-[#0875B9] shrink-0 shadow-sm">
                     <MailIcon size={20} />
                   </div>
                   <div>
                     <h3 className="font-bold text-ink text-sm">Courrier électronique</h3>
-                    <a href={`mailto:${site.email}`} className="mt-1 block text-sm font-semibold text-ink hover:text-flame break-all">
+                    <a href={`mailto:${site.email}`} className="mt-1 block text-sm font-semibold text-ink hover:text-[#0875B9] break-all">
                       {site.email}
                     </a>
                   </div>
                 </div>
               </div>
 
-              <div className="rounded-3xl border border-flame/20 bg-flame-soft p-6">
-                <span className="text-xs font-bold uppercase tracking-wider text-flame-deep">
-                  Identifiants officiels
-                </span>
-                <p className="mt-2 text-xs text-ink/80 leading-relaxed">
-                  Numéro d’entreprise : <strong className="text-ink">{site.company}</strong><br />
-                  Compte bancaire (IBAN) : <strong className="text-ink">{site.iban}</strong>
-                </p>
+              <div className="overflow-hidden rounded-3xl border border-[#0875B9]/15 bg-primary-soft">
+                {/* En-tête de la card */}
+                <div className="flex items-center gap-3 border-b border-[#0875B9]/10 bg-[#0875B9]/[0.07] px-6 py-4">
+                  <div className="grid h-9 w-9 place-items-center rounded-xl bg-[#0875B9] text-white shadow-sm">
+                    <SparkIcon size={18} />
+                  </div>
+                  <span className="text-xs font-bold uppercase tracking-[0.18em] text-[#0875B9]">
+                    Identifiants officiels
+                  </span>
+                </div>
+
+                {/* Lignes d'informations */}
+                <dl className="divide-y divide-[#0875B9]/10 px-6">
+                  <div className="flex items-center justify-between gap-4 py-4">
+                    <dt className="text-xs font-semibold uppercase tracking-wider text-ink/55">
+                      N° d&apos;entreprise
+                    </dt>
+                    <dd className="text-sm font-bold text-ink tabular-nums">{site.company}</dd>
+                  </div>
+                  <div className="flex items-center justify-between gap-4 py-4">
+                    <dt className="text-xs font-semibold uppercase tracking-wider text-ink/55">
+                      IBAN
+                    </dt>
+                    <dd className="text-sm font-bold tracking-wide text-ink tabular-nums">
+                      {site.iban}
+                    </dd>
+                  </div>
+                </dl>
               </div>
             </div>
 

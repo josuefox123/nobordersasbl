@@ -16,10 +16,14 @@ export function AboutPreview() {
             </p>
             <h2
               id="about-preview-heading"
-              className="mt-1 text-display-md font-extrabold uppercase tracking-tight text-ink"
+              className="mt-1 text-3xl font-extrabold tracking-tight text-ink sm:text-4xl"
             >
               Raison d&apos;être
             </h2>
+            <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-ink/70 sm:text-lg">
+              Une ASBL née de la passion du football et de la conviction profonde
+              que la diversité culturelle est une richesse à partager.
+            </p>
           </div>
         </Reveal>
 
@@ -29,7 +33,13 @@ export function AboutPreview() {
           {/* Colonne gauche : texte + bouton */}
           <Reveal delay={0.1}>
             <div>
-              <p className="text-base leading-relaxed text-ink/75 sm:text-lg">
+              <p className="text-[0.7rem] font-bold uppercase tracking-[0.25em] text-[#0875B9]">
+                Notre histoire
+              </p>
+              <h3 className="mt-2 text-2xl font-bold text-ink sm:text-3xl">
+                Du terrain de foot aux projets solidaires
+              </h3>
+              <p className="mt-5 text-base leading-relaxed text-ink/75 sm:text-lg">
                 En 2007, à Mons, un groupe de copains unis par leur passion du
                 football décide de dépasser les frontières culturelles. Aujourd'hui,
                 No Borders ASBL rassemble des dizaines de membres issus de plus de
@@ -43,7 +53,7 @@ export function AboutPreview() {
 
               <Link
                 href="/"
-                className="mt-10 inline-flex items-center gap-2.5 rounded-xl bg-ink px-6 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-flame focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-flame"
+                className="mt-10 inline-flex items-center gap-2.5 rounded-xl bg-[#0875B9] px-6 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-[#065f9a] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0875B9]"
               >
                 Découvrir notre histoire
                 <ArrowRight size={17} />
