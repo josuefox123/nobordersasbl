@@ -11,7 +11,7 @@ interface WishlistButtonProps {
 /**
  * Bouton favoris (cœur) menant vers la page /wishlist.
  */
-export function WishlistButton({ count = 3 }: WishlistButtonProps) {
+export function WishlistButton({ count = 0 }: WishlistButtonProps) {
   return (
     <Link
       href="/wishlist"

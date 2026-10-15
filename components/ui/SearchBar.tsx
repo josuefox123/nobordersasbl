@@ -20,7 +20,7 @@ export function SearchBar() {
       inputRef.current?.focus();
       return;
     }
-    router.push(`/recherche?q=${encodeURIComponent(q)}`);
+    router.push(`/boutique?q=${encodeURIComponent(q)}`);
   }
 
   return (

@@ -61,7 +61,7 @@ export function Hero() {
                 Découvrir nos vélos <ArrowRight size={20} />
               </Link>
               <Link
-                href="/notre-projet"
+                href="/nos-activites"
                 className="btn btn-lg border border-white/30 bg-white/5 text-white backdrop-blur-sm hover:border-white hover:bg-white hover:text-ink"
               >
                 Nos activités
@@ -90,10 +90,10 @@ export function Hero() {
             {/* Image principale avec effet Ken Burns léger */}
             <div className="relative h-full w-full overflow-hidden rounded-[40px]">
               <Image
-                src="/images/cool-helmet-studio-removebg-preview.png"
+                src="/images/hero-bike-main.png"
                 alt="Vélo de route haut de gamme No Borders"
                 fill
-                className="object-cover animate-kenburns"
+                className="object-contain animate-kenburns"
                 priority
               />
             </div>

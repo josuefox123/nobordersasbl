@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import { ProduitClient } from "@/app/boutique/produit/ProduitClient";
 
 export const metadata: Metadata = {
@@ -8,5 +9,9 @@ export const metadata: Metadata = {
 };
 
 export default function ProduitPage() {
-  return <ProduitClient />;
+  return (
+    <Suspense fallback={<div className="container py-24 text-center text-ink/60">Chargement du produit...</div>}>
+      <ProduitClient />
+    </Suspense>
+  );
 }

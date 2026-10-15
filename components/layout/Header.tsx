@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { createPortal } from "react-dom";
 import {
   AnimatePresence,
@@ -186,6 +186,7 @@ function MobileMenu({
   isActive: (href: string) => boolean;
 }) {
   const panelRef = useRef<HTMLDivElement>(null);
+  const router = useRouter();
   const reduce = useReducedMotion();
   const [search, setSearch] = useState("");
 
@@ -304,7 +305,17 @@ function MobileMenu({
             </div>
 
             {/* ── Barre de recherche ── */}
-            <div className="border-b border-ink/8 px-4 py-3">
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                const q = search.trim();
+                if (q) {
+                  onClose();
+                  router.push(`/boutique?q=${encodeURIComponent(q)}`);
+                }
+              }}
+              className="border-b border-ink/8 px-4 py-3"
+            >
               <div className="flex items-center gap-2 rounded-lg bg-paper px-3 py-2.5">
                 <SearchIcon size={15} className="shrink-0 text-ink/40" />
                 <input
@@ -316,7 +327,7 @@ function MobileMenu({
                   className="w-full bg-transparent text-sm text-ink placeholder:text-ink/40 focus:outline-none"
                 />
               </div>
-            </div>
+            </form>
 
             {/* ── Liens de navigation ── */}
             <nav aria-label="Menu principal" className="flex-1">

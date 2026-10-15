@@ -2,30 +2,10 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useMemo, useState, type ReactNode } from "react";
+import { useEffect, useMemo, useState, type ReactNode } from "react";
+import { useSearchParams } from "next/navigation";
 import { productCategories, productColors, products } from "@/lib/content";
 import { CheckIcon, HeartIcon, ShoppingBagIcon } from "@/components/ui/Icons";
-
-/* ─────────────────────────────────────────────────────────── */
-/*  Données de démonstration (mode test : un seul produit)     */
-/* ─────────────────────────────────────────────────────────── */
-
-const product = products.find((p) => p.id === 3) ?? products[0];
-const category = productCategories.find((c) => c.slug === product.category);
-const colors = productColors.filter((c) =>
-  (product.colors as readonly string[]).includes(c.slug)
-);
-const gallery = [
-  product.image,
-  "/images/vente-velo.jpg",
-  "/images/lancement-myboo.jpg",
-  "/images/tour-anvers.jpg",
-  "/images/bxl-tour.jpg",
-];
-const stock = 8;
-
-const description =
-  "Fabriqué à la main au Ghana à partir de bambou naturel, ce VTT allie robustesse, légèreté et absorption naturelle des vibrations. Chaque cadre est unique et soutient des projets éducatifs et solidaires.";
 
 const highlights: { title: string; text: string; icon: ReactNode }[] = [
   {
@@ -136,12 +116,59 @@ function Svg({ children, size = 18 }: { children: ReactNode; size?: number }) {
 }
 
 export function ProduitClient() {
+  const searchParams = useSearchParams();
+  const idParam = searchParams.get("id");
+
+  const product = useMemo(() => {
+    if (idParam) {
+      const found = products.find((p) => p.id === Number(idParam));
+      if (found) return found;
+    }
+    return products.find((p) => p.id === 3) ?? products[0];
+  }, [idParam]);
+
+  const category = useMemo(
+    () => productCategories.find((c) => c.slug === product.category),
+    [product]
+  );
+  const colors = useMemo(
+    () =>
+      productColors.filter((c) =>
+        (product.colors as readonly string[]).includes(c.slug)
+      ),
+    [product]
+  );
+  const gallery = useMemo(
+    () => [
+      product.image,
+      "/images/vente-velo.jpg",
+      "/images/lancement-myboo.jpg",
+      "/images/tour-anvers.jpg",
+      "/images/bxl-tour.jpg",
+    ],
+    [product]
+  );
+  const stock = 8;
+
+  const description = useMemo(
+    () =>
+      product.category === "velos-bambou"
+        ? `Fabriqué à la main au Ghana à partir de bambou naturel, le ${product.name} allie robustesse, légèreté et absorption naturelle des vibrations. Chaque cadre est unique et soutient des projets éducatifs et solidaires.`
+        : `${product.name} sélectionné avec soin par No Borders ASBL auprès de notre partenaire ${product.brand}. Conçu pour allier performance, durabilité et plaisir de conduite au quotidien.`,
+    [product]
+  );
+
   const [activeImage, setActiveImage] = useState(0);
   const [color, setColor] = useState<string>(colors[0]?.slug ?? "");
   const [qty, setQty] = useState(1);
   const [liked, setLiked] = useState(false);
   const [tab, setTab] = useState<"description" | "specs" | "avis">("description");
   const [notice, setNotice] = useState<string | null>(null);
+
+  useEffect(() => {
+    setColor(colors[0]?.slug ?? "");
+    setActiveImage(0);
+  }, [product, colors]);
 
   const discount = product.oldPrice
     ? Math.round(((product.oldPrice - product.price) / product.oldPrice) * 100)
@@ -168,7 +195,7 @@ export function ProduitClient() {
       (p) => p.id !== product.id && p.category !== product.category
     );
     return [...sameCat, ...others].slice(0, 4);
-  }, []);
+  }, [product]);
 
   return (
     <div className="mt-[84px] lg:mt-[188px] pb-24 bg-white min-h-[calc(100vh-84px)] lg:min-h-[calc(100vh-188px)] flex flex-col">

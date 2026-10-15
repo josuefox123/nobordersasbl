@@ -80,6 +80,11 @@ export function Footer() {
                 </li>
               ))}
               <li>
+                <Link href="/boutique" className="text-white/75 transition-colors hover:text-white">
+                  Boutique
+                </Link>
+              </li>
+              <li>
                 <Link href="/nous-soutenir" className="text-white/75 transition-colors hover:text-white">
                   Nous soutenir
                 </Link>
