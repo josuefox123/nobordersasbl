@@ -63,8 +63,8 @@ export const metadata: Metadata = {
     images: ["/images/hero-groupe.jpg"],
   },
   icons: {
-    icon: "/images/logo.png",
-    apple: "/images/logo.png",
+    icon: "/images/logo/logoFichier 2logo_2.png",
+    apple: "/images/logo/logoFichier 2logo_2.png",
   },
 };
 

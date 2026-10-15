@@ -7,11 +7,11 @@ import {
 } from "@/components/ui/Icons";
 
 const MESSAGES = [
-  { icon: <ShoppingBagIcon size={14} />, text: "Livraison gratuite dès 50 € d'achat sur notre boutique en ligne." },
-  { icon: <MapPinIcon size={14} />,      text: "Examen de vue disponible en magasin — sur rendez-vous." },
-  { icon: <CheckIcon size={14} />,       text: "Retour gratuit sous 30 jours, sans condition." },
-  { icon: <SparkIcon size={14} />,       text: "Équipements scolaires et fournitures disponibles toute l'année." },
-  { icon: <HeartIcon size={14} />,       text: "Nos produits éco-responsables : bons pour vous, bons pour la planète." },
+  { icon: <ShoppingBagIcon size={14} />, text: "Boutique solidaire : vélos en bambou artisanaux et accessoires éco-responsables." },
+  { icon: <SparkIcon size={14} />,      text: "Sorties vélo et activités sportives inclusives à Mons et en Wallonie." },
+  { icon: <HeartIcon size={14} />,      text: "Briseur de frontières mentales : inclusion sociale et diversité culturelle depuis 2007." },
+  { icon: <CheckIcon size={14} />,       text: "Vélos adaptés Hase Bikes & ElliptiGO accessibles à toutes et tous." },
+  { icon: <MapPinIcon size={14} />,      text: "Retrait et conseils à Mons · Livraison solidaire partout en Belgique." },
 ];
 
 export function AnnouncementBar() {

@@ -94,7 +94,7 @@ export function Header() {
             {/* Logo */}
             <Link
               href="/"
-              className="hidden items-center gap-3 lg:flex lg:-ml-8 xl:-ml-10 lg:pl-[18px]"
+              className="hidden items-center gap-3 lg:flex shrink-0"
               aria-label="No Borders ASBL — accueil"
             >
               <Image
@@ -116,7 +116,7 @@ export function Header() {
               <WishlistButton />
               <CartButton />
               <span className="hidden h-6 w-px bg-white/20 sm:block" aria-hidden="true" />
-              <div className="hidden w-56 lg:block xl:w-72">
+              <div className="hidden w-48 lg:block xl:w-64">
                 <SearchBar />
               </div>
             </div>
@@ -132,8 +132,8 @@ export function Header() {
           }`}
         >
           <div className="container flex h-14 items-center">
-            {/* Menus alignés directement sous le logo */}
-            <ul className="flex items-center gap-1 lg:-ml-8 xl:-ml-10">
+            {/* Menus alignés avec le logo */}
+            <ul className="flex items-center gap-1 -ml-3">
               {navigation.map((item) => (
                 <li key={item.href}>
                   <Link
