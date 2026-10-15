@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useMemo, useState } from "react";
 import { CheckIcon, ShoppingBagIcon } from "@/components/ui/Icons";
+import { PageHeader } from "@/components/ui/PageHeader";
 
 type CartItem = {
   id: number;
@@ -14,7 +15,6 @@ type CartItem = {
   color: string;
   size: string;
   image: string;
-  discountBadge?: string;
 };
 
 const initialCartItems: CartItem[] = [
@@ -36,7 +36,6 @@ const initialCartItems: CartItem[] = [
     color: "Blanc",
     size: "L",
     image: "/images/ghana-booomers.jpg",
-    discountBadge: "Économisez 17%",
   },
   {
     id: 12,
@@ -128,52 +127,30 @@ export function PanierClient() {
           role="status"
           className="fixed bottom-6 right-6 z-[100] flex items-center gap-3 rounded-xl bg-ink px-5 py-3.5 text-sm font-semibold text-white shadow-2xl animate-fade-in"
         >
-          <span className="grid h-6 w-6 place-items-center rounded-full bg-flame-soft text-flame-deep">
+          <span className="grid h-6 w-6 place-items-center rounded-full bg-[#0875B9]/10 text-[#0875B9]">
             <CheckIcon size={14} />
           </span>
           {notice}
         </div>
       )}
 
-      {/* ── Fil d'Ariane & En-tête (Style Boutique) ── */}
-      <section className="border-b border-ink/5 bg-paper py-8 sm:py-10">
-        <div className="container">
-          <nav aria-label="Fil d'Ariane">
-            <ol className="flex flex-wrap items-center gap-2 text-sm text-ink/50">
-              <li>
-                <Link href="/" className="transition-colors hover:text-flame">
-                  Accueil
-                </Link>
-              </li>
-              <li aria-hidden="true">/</li>
-              <li>
-                <Link href="/boutique" className="transition-colors hover:text-flame">
-                  Boutique
-                </Link>
-              </li>
-              <li aria-hidden="true">/</li>
-              <li aria-current="page" className="line-clamp-1 font-semibold text-ink">
-                Panier
-              </li>
-            </ol>
-          </nav>
-          <div className="mt-4">
-            <h1 className="text-display-md font-extrabold tracking-tight text-ink sm:text-4xl">
-              Mon Panier
-            </h1>
-            <p className="mt-2 text-sm text-ink/70 sm:text-base">
-              Vérifiez vos articles sélectionnés et finalisez votre commande en toute sécurité.
-            </p>
-          </div>
-        </div>
-      </section>
+      {/* ── En-tête avec breadcrumb ── */}
+      <PageHeader
+        crumbs={[
+          { label: "Accueil", href: "/" },
+          { label: "Boutique", href: "/boutique" },
+          { label: "Panier" },
+        ]}
+        title="Mon Panier"
+        description="Vérifiez vos articles sélectionnés et finalisez votre commande en toute sécurité."
+      />
 
       {/* ── Corps principal sur fond blanc jusqu'au footer ── */}
       <section className="flex-1 bg-white py-12 sm:py-16">
         <div className="container">
           {items.length === 0 ? (
             <div className="rounded-2xl border border-dashed border-ink/15 p-12 text-center sm:p-16">
-              <div className="mx-auto grid h-16 w-16 place-items-center rounded-full bg-flame-soft text-flame-deep">
+              <div className="mx-auto grid h-16 w-16 place-items-center rounded-full bg-[#0875B9]/10 text-[#0875B9]">
                 <ShoppingBagIcon size={32} />
               </div>
               <h2 className="mt-4 text-xl font-bold text-ink sm:text-2xl">Votre panier est vide</h2>
@@ -182,7 +159,7 @@ export function PanierClient() {
               </p>
               <Link
                 href="/boutique"
-                className="mt-6 inline-flex items-center gap-2 rounded-xl bg-[#CF4318] px-6 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-[#B03815]"
+                className="mt-6 inline-flex items-center gap-2 rounded-xl bg-[#0875B9] px-6 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-[#065f9a]"
               >
                 Découvrir la boutique →
               </Link>
@@ -225,18 +202,13 @@ export function PanierClient() {
                           <div>
                             <Link
                               href="/boutique/produit"
-                              className="text-sm font-bold text-ink transition-colors hover:text-flame-deep sm:text-base"
+                              className="text-sm font-bold text-ink transition-colors hover:text-[#0875B9] sm:text-base"
                             >
                               {item.name}
                             </Link>
                             <p className="mt-1 text-xs text-ink/60">
                               Couleur : {item.color} · Taille : {item.size}
                             </p>
-                            {item.discountBadge && (
-                              <span className="mt-1.5 inline-block rounded-md bg-flame-soft px-2 py-0.5 text-[10px] font-bold text-flame-deep">
-                                {item.discountBadge}
-                              </span>
-                            )}
                           </div>
                         </div>
 
@@ -290,7 +262,7 @@ export function PanierClient() {
                             onClick={() => removeItem(item.id)}
                             aria-label={`Supprimer ${item.name}`}
                             title="Supprimer l'article"
-                            className="grid h-8 w-8 place-items-center rounded-lg text-ink/40 transition-colors hover:bg-red-50 hover:text-red-600"
+                            className="grid h-8 w-8 place-items-center rounded-lg text-red-600 transition-colors hover:bg-red-50 hover:text-red-700"
                           >
                             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
                               <path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
@@ -306,7 +278,7 @@ export function PanierClient() {
                 <div className="mt-6 flex flex-wrap items-center justify-between gap-4">
                   <Link
                     href="/boutique"
-                    className="inline-flex items-center gap-2 text-sm font-semibold text-ink/75 transition-colors hover:text-flame-deep"
+                    className="inline-flex items-center gap-2 text-sm font-semibold text-ink/75 transition-colors hover:text-[#0875B9]"
                   >
                     <span>←</span> Continuer mes achats
                   </Link>
@@ -332,7 +304,7 @@ export function PanierClient() {
                   {/* Titre & badge compteur */}
                   <div className="flex items-center justify-between border-b border-ink/10 pb-5">
                     <h2 className="text-lg font-bold text-ink">Récapitulatif</h2>
-                    <span className="rounded-full bg-flame-soft px-3 py-1 text-xs font-bold text-flame-deep">
+                    <span className="rounded-full bg-[#0875B9]/10 px-3 py-1 text-xs font-bold text-[#0875B9]">
                       {totalItemsCount} article{totalItemsCount > 1 ? "s" : ""}
                     </span>
                   </div>
@@ -352,7 +324,7 @@ export function PanierClient() {
                       />
                       <button
                         type="submit"
-                        className="rounded-xl bg-[#CF4318] px-4 py-2.5 text-xs font-bold text-white transition-colors hover:bg-[#B03815]"
+                        className="rounded-xl bg-[#0875B9] px-4 py-2.5 text-xs font-bold text-white transition-colors hover:bg-[#065f9a]"
                       >
                         Appliquer
                       </button>
@@ -386,7 +358,7 @@ export function PanierClient() {
                               name="shipping"
                               checked={shippingMethod === "standard"}
                               onChange={() => setShippingMethod("standard")}
-                              className="accent-[#CF4318]"
+                              className="accent-[#0875B9]"
                             />
                             <span className="font-medium text-ink">Standard (3–5 jours)</span>
                           </div>
@@ -400,7 +372,7 @@ export function PanierClient() {
                               name="shipping"
                               checked={shippingMethod === "priority"}
                               onChange={() => setShippingMethod("priority")}
-                              className="accent-[#CF4318]"
+                              className="accent-[#0875B9]"
                             />
                             <span className="font-medium text-ink">Prioritaire (24–48h)</span>
                           </div>
@@ -414,7 +386,7 @@ export function PanierClient() {
                               name="shipping"
                               checked={shippingMethod === "free"}
                               onChange={() => setShippingMethod("free")}
-                              className="accent-[#CF4318]"
+                              className="accent-[#0875B9]"
                             />
                             <span className="font-medium text-ink">Retrait en atelier (Mons)</span>
                           </div>
@@ -452,7 +424,7 @@ export function PanierClient() {
                   <button
                     type="button"
                     onClick={() => notify("Redirection vers la passerelle de paiement sécurisée...")}
-                    className="mt-6 flex w-full items-center justify-center gap-2 rounded-xl bg-[#CF4318] py-3.5 text-sm font-bold text-white transition-colors hover:bg-[#B03815] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#CF4318]"
+                    className="mt-6 flex w-full items-center justify-center gap-2 rounded-xl bg-[#0875B9] py-3.5 text-sm font-bold text-white transition-colors hover:bg-[#065f9a] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0875B9]"
                   >
                     Passer la commande →
                   </button>

@@ -2,7 +2,7 @@
 
 import { useState, type FormEvent } from "react";
 import { site } from "@/lib/content";
-import { MailIcon, PhoneIcon, PinIcon, CheckIcon, ArrowRight } from "@/components/ui/Icons";
+import { MailIcon, PhoneIcon, PinIcon, CheckIcon, ArrowRight, SparkIcon } from "@/components/ui/Icons";
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -27,35 +27,44 @@ export default function ContactPage() {
   )}`;
 
   return (
-    <div className="pt-28 sm:pt-36">
-      <section className="bg-paper py-16 sm:py-24 border-b border-ink/5">
-        <div className="container">
-          <div className="max-w-3xl">
-            <h1 className="text-display-lg font-extrabold tracking-tight text-ink">
-              Nous contacter
-            </h1>
-            <p className="mt-6 text-lg sm:text-xl text-ink/75 leading-relaxed">
-              Une question sur nos activités, une envie de rejoindre l’équipe bénévole ou un projet commun à proposer ? Nous sommes à votre écoute.
-            </p>
-          </div>
-        </div>
-      </section>
+    <div className="mt-[84px] lg:mt-[188px]">
 
-      <section className="py-20 sm:py-28 bg-white">
+      {/* ── Breadcrumb avec image ── */}
+      <PageHeader
+        crumbs={[
+          { label: "Accueil", href: "/" },
+          { label: "Nous contacter" },
+        ]}
+        title="Nous contacter"
+        description="Une question sur nos activités, une envie de rejoindre l'équipe bénévole ou un projet commun à proposer ? Nous sommes à votre écoute."
+      />
+
+      {/* ── Contenu principal ── */}
+      <section className="bg-paper py-20 sm:py-28">
         <div className="container">
-          <div className="grid gap-16 lg:grid-cols-12">
-            {/* Colonne Coordonnées */}
-            <div className="lg:col-span-5 space-y-8">
-              <div>
-                <h2 className="text-2xl font-bold text-ink">Coordonnées officielles</h2>
-                <p className="mt-2 text-sm text-ink/70">
-                  No Borders ASBL est basée à Mons et opère sur toute la région wallonne.
-                </p>
-              </div>
+          <div className="mx-auto max-w-5xl">
+          <div className="grid gap-8 lg:grid-cols-12">
+
+            {/* ── Colonne gauche : infos de contact ── */}
+            <div className="flex flex-col gap-4 lg:col-span-4">
+              {INFO_ITEMS.map((item) => {
+                const Icon = item.icon;
+                return (
+                  <div
+                    key={item.label}
+                    className="flex items-start gap-4 rounded-2xl bg-white p-6 shadow-sm border border-ink/8"
+                  >
+                    {/* Icône colorée */}
+                    <div
+                      className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl"
+                      style={{ backgroundColor: item.bg }}
+                    >
+                      <Icon size={20} style={{ color: item.color }} />
+                    </div>
 
               <div className="rounded-3xl border border-ink/10 bg-paper p-8 space-y-6">
                 <div className="flex items-start gap-4">
-                  <div className="grid h-12 w-12 place-items-center rounded-2xl bg-white text-flame shrink-0 shadow-sm">
+                  <div className="grid h-12 w-12 place-items-center rounded-2xl bg-white text-[#0875B9] shrink-0 shadow-sm">
                     <PinIcon size={20} />
                   </div>
                   <div>
@@ -68,150 +77,161 @@ export default function ContactPage() {
                 </div>
 
                 <div className="flex items-start gap-4">
-                  <div className="grid h-12 w-12 place-items-center rounded-2xl bg-white text-flame shrink-0 shadow-sm">
+                  <div className="grid h-12 w-12 place-items-center rounded-2xl bg-white text-[#0875B9] shrink-0 shadow-sm">
                     <PhoneIcon size={20} />
                   </div>
                   <div>
                     <h3 className="font-bold text-ink text-sm">Téléphone</h3>
-                    <a href={site.phoneHref} className="mt-1 block text-sm font-semibold text-ink hover:text-flame">
+                    <a href={site.phoneHref} className="mt-1 block text-sm font-semibold text-ink hover:text-[#0875B9]">
                       {site.phone}
                     </a>
                   </div>
                 </div>
 
                 <div className="flex items-start gap-4">
-                  <div className="grid h-12 w-12 place-items-center rounded-2xl bg-white text-flame shrink-0 shadow-sm">
+                  <div className="grid h-12 w-12 place-items-center rounded-2xl bg-white text-[#0875B9] shrink-0 shadow-sm">
                     <MailIcon size={20} />
                   </div>
                   <div>
                     <h3 className="font-bold text-ink text-sm">Courrier électronique</h3>
-                    <a href={`mailto:${site.email}`} className="mt-1 block text-sm font-semibold text-ink hover:text-flame break-all">
+                    <a href={`mailto:${site.email}`} className="mt-1 block text-sm font-semibold text-ink hover:text-[#0875B9] break-all">
                       {site.email}
                     </a>
                   </div>
                 </div>
               </div>
 
-              <div className="rounded-3xl border border-flame/20 bg-flame-soft p-6">
-                <span className="text-xs font-bold uppercase tracking-wider text-flame-deep">
-                  Identifiants officiels
-                </span>
-                <p className="mt-2 text-xs text-ink/80 leading-relaxed">
-                  Numéro d’entreprise : <strong className="text-ink">{site.company}</strong><br />
-                  Compte bancaire (IBAN) : <strong className="text-ink">{site.iban}</strong>
-                </p>
+              <div className="overflow-hidden rounded-3xl border border-[#0875B9]/15 bg-primary-soft">
+                {/* En-tête de la card */}
+                <div className="flex items-center gap-3 border-b border-[#0875B9]/10 bg-[#0875B9]/[0.07] px-6 py-4">
+                  <div className="grid h-9 w-9 place-items-center rounded-xl bg-[#0875B9] text-white shadow-sm">
+                    <SparkIcon size={18} />
+                  </div>
+                  <span className="text-xs font-bold uppercase tracking-[0.18em] text-[#0875B9]">
+                    Identifiants officiels
+                  </span>
+                </div>
+
+                {/* Lignes d'informations */}
+                <dl className="divide-y divide-[#0875B9]/10 px-6">
+                  <div className="flex items-center justify-between gap-4 py-4">
+                    <dt className="text-xs font-semibold uppercase tracking-wider text-ink/55">
+                      N° d&apos;entreprise
+                    </dt>
+                    <dd className="text-sm font-bold text-ink tabular-nums">{site.company}</dd>
+                  </div>
+                  <div className="flex items-center justify-between gap-4 py-4">
+                    <dt className="text-xs font-semibold uppercase tracking-wider text-ink/55">
+                      IBAN
+                    </dt>
+                    <dd className="text-sm font-bold tracking-wide text-ink tabular-nums">
+                      {site.iban}
+                    </dd>
+                  </div>
+                </dl>
               </div>
             </div>
 
-            {/* Colonne Formulaire */}
-            <div className="lg:col-span-7">
-              <div className="rounded-3xl border border-ink/10 bg-paper p-8 sm:p-12 shadow-sm">
-                <h2 className="text-2xl font-bold text-ink">Envoyez-nous un message</h2>
-                <p className="mt-2 text-sm text-ink/70">
-                  Remplissez ce formulaire pour nous décrire votre demande.
+            {/* ── Colonne droite : formulaire ── */}
+            <div className="lg:col-span-8">
+              <div className="rounded-2xl bg-white p-8 shadow-sm border border-ink/8 sm:p-10">
+
+                <h2 className="text-2xl font-extrabold uppercase tracking-wide text-ink">
+                  Nous contacter
+                </h2>
+                <p className="mt-1 text-sm text-ink/55">
+                  Remplissez le formulaire ci-dessous, nous vous répondrons rapidement.
                 </p>
 
                 {submitted ? (
-                  <div className="mt-8 rounded-2xl bg-emerald-50 border border-emerald-200 p-6 text-emerald-900">
+                  <div className="mt-8 rounded-xl bg-emerald-50 border border-emerald-200 p-6 text-emerald-900">
                     <div className="flex items-center gap-3">
                       <div className="grid h-8 w-8 place-items-center rounded-full bg-emerald-600 text-white">
                         <CheckIcon size={18} />
                       </div>
-                      <h3 className="font-bold text-base">Message prêt à l'envoi !</h3>
+                      <h3 className="font-bold">Message prêt à l&apos;envoi !</h3>
                     </div>
-                    <p className="mt-3 text-sm text-emerald-800 leading-relaxed">
-                      Merci <strong>{formData.name}</strong>. Cliquez ci-dessous pour transmettre directement votre message via votre messagerie à notre équipe :
+                    <p className="mt-3 text-sm text-emerald-800">
+                      Merci <strong>{formData.name}</strong>. Cliquez ci-dessous pour envoyer :
                     </p>
-                    <div className="mt-5 flex gap-4">
-                      <a
-                        href={mailtoLink}
-                        className="btn btn-primary btn-sm gap-2"
-                      >
-                        Ouvrir ma boîte mail <ArrowRight size={16} />
+                    <div className="mt-4 flex gap-3">
+                      <a href={mailtoLink} className="btn btn-primary btn-sm gap-2">
+                        Ouvrir ma boîte mail <ArrowRight size={15} />
                       </a>
-                      <button
-                        type="button"
-                        onClick={() => setSubmitted(false)}
-                        className="btn btn-ghost btn-sm"
-                      >
-                        Modifier le message
+                      <button type="button" onClick={() => setSubmitted(false)} className="btn btn-ghost btn-sm">
+                        Modifier
                       </button>
                     </div>
                   </div>
                 ) : (
-                  <form onSubmit={handleSubmit} className="mt-8 space-y-6">
-                    <div className="grid gap-6 sm:grid-cols-2">
-                      <div className="form-control">
-                        <label htmlFor="name" className="label text-xs font-bold uppercase tracking-wider text-ink/70">
-                          Nom et prénom *
-                        </label>
+                  <form onSubmit={handleSubmit} className="mt-7 space-y-4">
+
+                    {/* Nom + Email sur la même ligne */}
+                    <div className="grid gap-4 sm:grid-cols-2">
+                      <div>
                         <input
                           id="name"
                           type="text"
                           required
                           value={formData.name}
                           onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                          placeholder="Ex: Marie Dupont"
-                          className="input rounded-xl bg-white"
+                          placeholder="Votre nom"
+                          className="w-full rounded-lg border border-ink/15 bg-paper px-4 py-3.5 text-sm text-ink placeholder:text-ink/35 focus:border-[#0875B9] focus:outline-none focus:ring-2 focus:ring-[#0875B9]/20"
                         />
                       </div>
-
-                      <div className="form-control">
-                        <label htmlFor="email" className="label text-xs font-bold uppercase tracking-wider text-ink/70">
-                          Adresse e-mail *
-                        </label>
+                      <div>
                         <input
                           id="email"
                           type="email"
                           required
                           value={formData.email}
                           onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                          placeholder="Ex: marie@exemple.be"
-                          className="input rounded-xl bg-white"
+                          placeholder="Votre adresse e-mail"
+                          className="w-full rounded-lg border border-ink/15 bg-paper px-4 py-3.5 text-sm text-ink placeholder:text-ink/35 focus:border-[#0875B9] focus:outline-none focus:ring-2 focus:ring-[#0875B9]/20"
                         />
                       </div>
                     </div>
 
-                    <div className="form-control">
-                      <label htmlFor="subject" className="label text-xs font-bold uppercase tracking-wider text-ink/70">
-                        Objet de votre message *
-                      </label>
-                      <select
-                        id="subject"
-                        value={formData.subject}
-                        onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
-                        className="select rounded-xl bg-white"
-                      >
-                        <option value="benevolat">Rejoindre l'équipe / Bénévolat</option>
-                        <option value="partenariat">Proposer un partenariat ou sponsoring</option>
-                        <option value="don">Informations sur les dons et soutien</option>
-                        <option value="evenement">Proposer un match ou une sortie culturelle</option>
-                        <option value="autre">Autre demande</option>
-                      </select>
-                    </div>
+                    {/* Sujet */}
+                    <select
+                      id="subject"
+                      value={formData.subject}
+                      onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
+                      className="w-full rounded-lg border border-ink/15 bg-paper px-4 py-3.5 text-sm text-ink focus:border-[#0875B9] focus:outline-none focus:ring-2 focus:ring-[#0875B9]/20"
+                    >
+                      <option value="benevolat">Rejoindre l&apos;équipe / Bénévolat</option>
+                      <option value="partenariat">Proposer un partenariat</option>
+                      <option value="don">Informations sur les dons</option>
+                      <option value="evenement">Proposer un événement</option>
+                      <option value="autre">Autre demande</option>
+                    </select>
 
-                    <div className="form-control">
-                      <label htmlFor="message" className="label text-xs font-bold uppercase tracking-wider text-ink/70">
-                        Votre message *
-                      </label>
-                      <textarea
-                        id="message"
-                        required
-                        rows={5}
-                        value={formData.message}
-                        onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                        placeholder="Expliquez-nous votre projet ou votre demande..."
-                        className="textarea rounded-xl bg-white"
-                      />
-                    </div>
+                    {/* Message */}
+                    <textarea
+                      id="message"
+                      required
+                      rows={6}
+                      value={formData.message}
+                      onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                      placeholder="Votre message..."
+                      className="w-full rounded-lg border border-ink/15 bg-paper px-4 py-3.5 text-sm text-ink placeholder:text-ink/35 focus:border-[#0875B9] focus:outline-none focus:ring-2 focus:ring-[#0875B9]/20"
+                    />
 
-                    <button type="submit" className="btn btn-primary btn-lg w-full gap-2">
-                      Valider mon message <ArrowRight size={18} />
+                    {/* Bouton submit pleine largeur */}
+                    <button
+                      type="submit"
+                      className="w-full rounded-lg py-4 text-sm font-bold uppercase tracking-widest text-white transition-opacity hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0875B9]"
+                      style={{ backgroundColor: "#0875B9" }}
+                    >
+                      Envoyer le message
                     </button>
+
                   </form>
                 )}
               </div>
             </div>
+
+          </div>
           </div>
         </div>
       </section>

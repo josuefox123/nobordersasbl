@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowRight, CalendarIcon } from "@/components/ui/Icons";
+import { PageHeader } from "@/components/ui/PageHeader";
 import { Reveal, Stagger, StaggerItem } from "@/components/ui/Reveal";
 import { gallery, news } from "@/lib/content";
 
@@ -61,20 +62,20 @@ export default function ActualiteDetailPage({ params }: Props) {
   const related = news.filter((n) => n.slug !== item.slug).slice(0, 4);
 
   return (
-    <div className="mt-[132px] lg:mt-[188px]">
+    <div className="mt-[84px] lg:mt-[188px]">
       {/* ── Fil d'Ariane + bloc principal ── */}
       <section className="bg-paper py-12 sm:py-16" aria-labelledby="actualite-heading">
         <div className="container">
           <nav aria-label="Fil d'Ariane">
             <ol className="flex flex-wrap items-center gap-2 text-sm text-ink/50">
               <li>
-                <Link href="/" className="transition-colors hover:text-flame">
+                <Link href="/" className="transition-colors hover:text-[#0875B9]">
                   Accueil
                 </Link>
               </li>
               <li aria-hidden="true">/</li>
               <li>
-                <Link href="/actualites" className="transition-colors hover:text-flame">
+                <Link href="/actualites" className="transition-colors hover:text-[#0875B9]">
                   Actualités
                 </Link>
               </li>
@@ -90,7 +91,7 @@ export default function ActualiteDetailPage({ params }: Props) {
               {/* Texte */}
               <div>
                 <div className="flex flex-wrap items-center gap-3 text-xs font-semibold uppercase tracking-[0.2em]">
-                  <span className="text-flame">{item.category}</span>
+                  <span className="text-[#0875B9]">{item.category}</span>
                   <span className="h-3 w-px bg-ink/20" aria-hidden="true" />
                   <time dateTime={item.isoDate} className="inline-flex items-center gap-1.5 text-ink/50">
                     <CalendarIcon size={14} /> {item.date}
@@ -108,7 +109,7 @@ export default function ActualiteDetailPage({ params }: Props) {
                 <Link
                   href="/nous-contacter"
                   id="actualite-nous-contacter"
-                  className="mt-10 inline-flex items-center gap-2.5 rounded-xl bg-ink px-6 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-flame focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-flame"
+                  className="mt-10 inline-flex items-center gap-2.5 rounded-xl bg-[#0875B9] px-6 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-[#065f9a] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0875B9]"
                 >
                   Nous contacter <ArrowRight size={17} />
                 </Link>
@@ -151,11 +152,18 @@ export default function ActualiteDetailPage({ params }: Props) {
             >
               Retour sur l’événement
             </h2>
-            {fakeBody.map((p) => (
+            {[fakeIntro, ...fakeBody].map((p) => (
               <p key={p.slice(0, 20)} className="mt-5 text-base leading-relaxed text-ink/75 sm:text-lg">
                 {p}
               </p>
             ))}
+            <Link
+              href="/nous-contacter"
+              id="actualite-nous-contacter"
+              className="mt-10 inline-flex items-center gap-2.5 rounded-xl bg-[#0875B9] px-6 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-[#065f9a] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0875B9]"
+            >
+              Nous contacter <ArrowRight size={17} />
+            </Link>
           </Reveal>
         </div>
       </section>

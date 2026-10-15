@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { CheckIcon, HeartIcon, ShoppingBagIcon } from "@/components/ui/Icons";
+import { PageHeader } from "@/components/ui/PageHeader";
 
 type WishlistItem = {
   id: number;
@@ -14,10 +15,6 @@ type WishlistItem = {
   rating: number;
   reviews: number;
   image: string;
-  badge?: {
-    text: string;
-    type: "discount" | "soldout" | "new";
-  };
   inStock: boolean;
 };
 
@@ -31,7 +28,6 @@ const initialWishlist: WishlistItem[] = [
     rating: 4.5,
     reviews: 14,
     image: "/images/vente-velo.jpg",
-    badge: { text: "-20%", type: "discount" },
     inStock: true,
   },
   {
@@ -43,17 +39,6 @@ const initialWishlist: WishlistItem[] = [
     reviews: 36,
     image: "/images/lancement-myboo.jpg",
     inStock: true,
-  },
-  {
-    id: 8,
-    name: "Casque recyclé Ecobirdy",
-    category: "Équipement · Sécurité",
-    price: 58000,
-    rating: 5.0,
-    reviews: 48,
-    image: "/images/ghana-booomers.jpg",
-    badge: { text: "Épuisé", type: "soldout" },
-    inStock: false,
   },
 ];
 
@@ -102,45 +87,23 @@ export function WishlistClient() {
           role="status"
           className="fixed bottom-6 right-6 z-[100] flex items-center gap-3 rounded-xl bg-ink px-5 py-3.5 text-sm font-semibold text-white shadow-2xl animate-fade-in"
         >
-          <span className="grid h-6 w-6 place-items-center rounded-full bg-flame-soft text-flame-deep">
+          <span className="grid h-6 w-6 place-items-center rounded-full bg-[#0875B9]/10 text-[#0875B9]">
             <CheckIcon size={14} />
           </span>
           {notice}
         </div>
       )}
 
-      {/* ── Fil d'Ariane & En-tête (Style Boutique / Actualités sur bg-paper) ── */}
-      <section className="border-b border-ink/5 bg-paper py-8 sm:py-10">
-        <div className="container">
-          <nav aria-label="Fil d'Ariane">
-            <ol className="flex flex-wrap items-center gap-2 text-sm text-ink/50">
-              <li>
-                <Link href="/" className="transition-colors hover:text-flame">
-                  Accueil
-                </Link>
-              </li>
-              <li aria-hidden="true">/</li>
-              <li>
-                <Link href="/boutique" className="transition-colors hover:text-flame">
-                  Boutique
-                </Link>
-              </li>
-              <li aria-hidden="true">/</li>
-              <li aria-current="page" className="line-clamp-1 font-semibold text-ink">
-                Liste de souhaits
-              </li>
-            </ol>
-          </nav>
-          <div className="mt-4">
-            <h1 className="text-display-md font-extrabold tracking-tight text-ink sm:text-4xl">
-              Mes Favoris & Espace Membre
-            </h1>
-            <p className="mt-2 text-sm text-ink/70 sm:text-base">
-              Retrouvez tous vos articles coups de cœur et gérez vos préférences d&apos;achat en toute simplicité.
-            </p>
-          </div>
-        </div>
-      </section>
+      {/* ── En-tête avec breadcrumb ── */}
+      <PageHeader
+        crumbs={[
+          { label: "Accueil", href: "/" },
+          { label: "Boutique", href: "/boutique" },
+          { label: "Favoris" },
+        ]}
+        title="Mes Favoris & Espace Membre"
+        description="Retrouvez tous vos articles coups de cœur et gérez vos préférences d'achat en toute simplicité."
+      />
 
       {/* ── Corps principal sur fond blanc jusqu'au footer ── */}
       <section className="flex-1 bg-white py-12 sm:py-16">
@@ -189,7 +152,7 @@ export function WishlistClient() {
                       </div>
                     </div>
                     <div>
-                      <div className="text-lg font-extrabold text-[#CF4318]">{items.length}</div>
+                      <div className="text-lg font-extrabold text-[#0875B9]">{items.length}</div>
                       <div className="text-[10px] font-bold uppercase tracking-wider text-ink/50">
                         Favoris
                       </div>
@@ -210,7 +173,7 @@ export function WishlistClient() {
                     onClick={() => setActiveTab("orders")}
                     className={`flex w-full items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium transition-colors ${
                       activeTab === "orders"
-                        ? "bg-[#FBE3D9] text-[#CF4318] font-bold"
+                        ? "bg-[#E1F0FA] text-[#0875B9] font-bold"
                         : "text-ink/75 hover:bg-paper hover:text-ink"
                     }`}
                   >
@@ -225,14 +188,14 @@ export function WishlistClient() {
                     onClick={() => setActiveTab("favorites")}
                     className={`flex w-full items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium transition-colors ${
                       activeTab === "favorites"
-                        ? "bg-[#FBE3D9] text-[#CF4318] font-bold"
+                        ? "bg-[#E1F0FA] text-[#0875B9] font-bold"
                         : "text-ink/75 hover:bg-paper hover:text-ink"
                     }`}
                   >
                     <HeartIcon size={16} className={activeTab === "favorites" ? "fill-current" : ""} />
                     <span>Favoris</span>
                     {items.length > 0 && (
-                      <span className="ml-auto rounded-full bg-[#CF4318] px-2 py-0.5 text-[11px] font-bold text-white">
+                      <span className="ml-auto rounded-full bg-[#0875B9] px-2 py-0.5 text-[11px] font-bold text-white">
                         {items.length}
                       </span>
                     )}
@@ -243,7 +206,7 @@ export function WishlistClient() {
                     onClick={() => setActiveTab("payments")}
                     className={`flex w-full items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium transition-colors ${
                       activeTab === "payments"
-                        ? "bg-[#FBE3D9] text-[#CF4318] font-bold"
+                        ? "bg-[#E1F0FA] text-[#0875B9] font-bold"
                         : "text-ink/75 hover:bg-paper hover:text-ink"
                     }`}
                   >
@@ -258,7 +221,7 @@ export function WishlistClient() {
                     onClick={() => setActiveTab("feedback")}
                     className={`flex w-full items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium transition-colors ${
                       activeTab === "feedback"
-                        ? "bg-[#FBE3D9] text-[#CF4318] font-bold"
+                        ? "bg-[#E1F0FA] text-[#0875B9] font-bold"
                         : "text-ink/75 hover:bg-paper hover:text-ink"
                     }`}
                   >
@@ -273,7 +236,7 @@ export function WishlistClient() {
                     onClick={() => setActiveTab("locations")}
                     className={`flex w-full items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium transition-colors ${
                       activeTab === "locations"
-                        ? "bg-[#FBE3D9] text-[#CF4318] font-bold"
+                        ? "bg-[#E1F0FA] text-[#0875B9] font-bold"
                         : "text-ink/75 hover:bg-paper hover:text-ink"
                     }`}
                   >
@@ -289,7 +252,7 @@ export function WishlistClient() {
                     onClick={() => setActiveTab("preferences")}
                     className={`flex w-full items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium transition-colors ${
                       activeTab === "preferences"
-                        ? "bg-[#FBE3D9] text-[#CF4318] font-bold"
+                        ? "bg-[#E1F0FA] text-[#0875B9] font-bold"
                         : "text-ink/75 hover:bg-paper hover:text-ink"
                     }`}
                   >
@@ -307,7 +270,7 @@ export function WishlistClient() {
                     onClick={() => setActiveTab("support")}
                     className={`flex w-full items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium transition-colors ${
                       activeTab === "support"
-                        ? "bg-[#FBE3D9] text-[#CF4318] font-bold"
+                        ? "bg-[#E1F0FA] text-[#0875B9] font-bold"
                         : "text-ink/75 hover:bg-paper hover:text-ink"
                     }`}
                   >
@@ -320,7 +283,7 @@ export function WishlistClient() {
                   <button
                     type="button"
                     onClick={() => notify("Vous êtes actuellement connecté.")}
-                    className="flex w-full items-center gap-3 rounded-xl px-4 py-3 text-sm font-semibold text-[#CF4318] transition-colors hover:bg-rose-50"
+                    className="flex w-full items-center gap-3 rounded-xl px-4 py-3 text-sm font-semibold text-[#E51C45] transition-colors hover:bg-[#E51C45]/10"
                   >
                     <svg className="h-4 w-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
@@ -353,7 +316,7 @@ export function WishlistClient() {
                       <button
                         type="button"
                         onClick={handleMoveAllToCart}
-                        className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#CF4318] px-5 py-3 text-sm font-semibold text-white shadow-sm transition-all hover:bg-[#B03815] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#CF4318]"
+                        className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#0875B9] px-5 py-3 text-sm font-semibold text-white shadow-sm transition-all hover:bg-[#065f9a] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0875B9]"
                       >
                         <ShoppingBagIcon size={18} />
                         <span>Tout ajouter au panier</span>
@@ -364,7 +327,7 @@ export function WishlistClient() {
                   {/* Grille des produits enregistrés */}
                   {items.length === 0 ? (
                     <div className="mt-8 rounded-2xl border border-dashed border-ink/15 p-12 text-center sm:p-16">
-                      <div className="mx-auto grid h-16 w-16 place-items-center rounded-full bg-flame-soft text-flame-deep">
+                      <div className="mx-auto grid h-16 w-16 place-items-center rounded-full bg-[#0875B9]/10 text-[#0875B9]">
                         <HeartIcon size={32} />
                       </div>
                       <h3 className="mt-4 text-xl font-bold text-ink">Aucun favori enregistré</h3>
@@ -373,7 +336,7 @@ export function WishlistClient() {
                       </p>
                       <Link
                         href="/boutique"
-                        className="mt-6 inline-flex items-center gap-2 rounded-xl bg-[#CF4318] px-6 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-[#B03815]"
+                        className="mt-6 inline-flex items-center gap-2 rounded-xl bg-[#0875B9] px-6 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-[#065f9a]"
                       >
                         Explorer les produits →
                       </Link>
@@ -383,7 +346,7 @@ export function WishlistClient() {
                       {items.map((item) => (
                         <article
                           key={item.id}
-                          className="group flex flex-col overflow-hidden rounded-2xl border border-ink/10 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-ink/30 hover:shadow-lg"
+                          className="group flex flex-col overflow-hidden rounded-2xl border border-ink/10 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-[#0875B9] hover:shadow-lg"
                         >
                           {/* Image du produit avec badge */}
                           <div className="relative aspect-[4/3] w-full overflow-hidden bg-ink/5">
@@ -396,21 +359,6 @@ export function WishlistClient() {
                                 sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                               />
                             </Link>
-
-                            {/* Badges en haut à gauche */}
-                            {item.badge && (
-                              <div className="absolute left-3 top-3 z-10">
-                                {item.badge.type === "discount" ? (
-                                  <span className="rounded-md bg-[#CF4318] px-2.5 py-1 text-xs font-bold text-white shadow-sm">
-                                    {item.badge.text}
-                                  </span>
-                                ) : (
-                                  <span className="rounded-md bg-neutral-700/90 px-2.5 py-1 text-xs font-bold text-white backdrop-blur-sm shadow-sm">
-                                    {item.badge.text}
-                                  </span>
-                                )}
-                              </div>
-                            )}
                           </div>
 
                           {/* Contenu de la carte (Strictement identique à BoutiqueClient) */}
@@ -421,7 +369,7 @@ export function WishlistClient() {
                             </p>
 
                             {/* Titre */}
-                            <h3 className="mt-1 text-base font-bold leading-snug text-ink group-hover:text-[#CF4318] transition-colors">
+                            <h3 className="mt-1 text-base font-bold leading-snug text-ink group-hover:text-[#0875B9] transition-colors">
                               <Link href="/boutique/produit">{item.name}</Link>
                             </h3>
 
@@ -445,23 +393,13 @@ export function WishlistClient() {
 
                             {/* Boutons d'action en bas : Ajouter au panier + Supprimer (✕) */}
                             <div className="mt-auto pt-5 flex items-center gap-2">
-                              {item.inStock ? (
-                                <button
-                                  type="button"
-                                  onClick={() => handleAddToCart(item)}
-                                  className="flex-1 rounded-xl bg-[#CF4318] py-2.5 px-3 text-xs font-bold text-white transition-colors hover:bg-[#B03815] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#CF4318]"
-                                >
-                                  Ajouter au panier
-                                </button>
-                              ) : (
-                                <button
-                                  type="button"
-                                  onClick={() => notify(`Nous vous préviendrons dès le retour en stock de « ${item.name} ».`)}
-                                  className="flex-1 rounded-xl border border-ink/15 bg-paper/60 py-2.5 px-3 text-xs font-bold text-ink/70 transition-colors hover:bg-paper hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink/20"
-                                >
-                                  Me prévenir
-                                </button>
-                              )}
+                              <button
+                                type="button"
+                                onClick={() => handleAddToCart(item)}
+                                className="flex-1 rounded-xl bg-[#0875B9] py-2.5 px-3 text-xs font-bold text-white transition-colors hover:bg-[#065f9a] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0875B9]"
+                              >
+                                Ajouter au panier
+                              </button>
 
                               {/* Bouton de suppression du favori */}
                               <button
@@ -469,7 +407,7 @@ export function WishlistClient() {
                                 onClick={() => removeItem(item.id)}
                                 aria-label={`Supprimer ${item.name} des favoris`}
                                 title="Retirer des favoris"
-                                className="grid h-9 w-9 shrink-0 place-items-center rounded-xl border border-rose-200 bg-rose-50/50 text-rose-500 transition-colors hover:border-rose-300 hover:bg-rose-100/70 hover:text-rose-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose-400"
+                                className="grid h-9 w-9 shrink-0 place-items-center rounded-xl border border-[#0875B9]/20 bg-[#0875B9]/5 text-[#0875B9] transition-colors hover:border-[#0875B9]/40 hover:bg-[#0875B9]/10 hover:text-[#065f9a] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0875B9]"
                               >
                                 <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M6 18L18 6M6 6l12 12" />
@@ -541,10 +479,10 @@ export function WishlistClient() {
                   <p className="mt-1 text-sm text-ink/60">Gérez vos cartes bancaires et comptes sécurisés.</p>
 
                   <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
-                    <div className="rounded-xl border-2 border-[#CF4318] bg-[#FBE3D9]/20 p-5">
+                    <div className="rounded-xl border-2 border-[#0875B9] bg-[#E1F0FA]/20 p-5">
                       <div className="flex items-center justify-between">
                         <span className="text-sm font-bold text-ink">Visa Classic</span>
-                        <span className="rounded-md bg-[#CF4318] px-2 py-0.5 text-[10px] font-bold text-white">Par défaut</span>
+                        <span className="rounded-md bg-[#0875B9] px-2 py-0.5 text-[10px] font-bold text-white">Par défaut</span>
                       </div>
                       <div className="mt-4 text-base font-mono font-bold text-ink">•••• •••• •••• 4242</div>
                       <div className="mt-2 text-xs text-ink/60">Expire le 08/28</div>
@@ -627,7 +565,7 @@ export function WishlistClient() {
                         <div className="font-semibold text-ink text-sm">Notifications par email</div>
                         <div className="text-xs text-ink/60">Recevoir le suivi de vos colis et alertes de stock</div>
                       </div>
-                      <input type="checkbox" defaultChecked className="h-4 w-4 accent-[#CF4318]" />
+                      <input type="checkbox" defaultChecked className="h-4 w-4 accent-[#0875B9]" />
                     </label>
 
                     <label className="flex items-center justify-between rounded-xl border border-ink/10 p-4">
@@ -635,7 +573,7 @@ export function WishlistClient() {
                         <div className="font-semibold text-ink text-sm">Offres & Nouveautés solidaires</div>
                         <div className="text-xs text-ink/60">Être informé(e) des nouvelles collections d&apos;artisanat</div>
                       </div>
-                      <input type="checkbox" defaultChecked className="h-4 w-4 accent-[#CF4318]" />
+                      <input type="checkbox" defaultChecked className="h-4 w-4 accent-[#0875B9]" />
                     </label>
                   </div>
                 </div>
@@ -651,7 +589,7 @@ export function WishlistClient() {
                     <div className="rounded-xl border border-ink/10 p-5">
                       <div className="text-sm font-bold text-ink">Contact par téléphone</div>
                       <p className="mt-1 text-xs text-ink/60">Du lundi au vendredi de 9h à 18h</p>
-                      <a href="tel:+32496969125" className="mt-3 inline-block text-sm font-bold text-[#CF4318] hover:underline">
+                      <a href="tel:+32496969125" className="mt-3 inline-block text-sm font-bold text-[#0875B9] hover:underline">
                         +32 (0)496 96 91 25
                       </a>
                     </div>
@@ -659,7 +597,7 @@ export function WishlistClient() {
                     <div className="rounded-xl border border-ink/10 p-5">
                       <div className="text-sm font-bold text-ink">Contact par email</div>
                       <p className="mt-1 text-xs text-ink/60">Réponse sous 24 heures ouvrées</p>
-                      <a href="mailto:gmunyanziza@yahoo.fr" className="mt-3 inline-block text-sm font-bold text-[#CF4318] hover:underline">
+                      <a href="mailto:gmunyanziza@yahoo.fr" className="mt-3 inline-block text-sm font-bold text-[#0875B9] hover:underline">
                         gmunyanziza@yahoo.fr
                       </a>
                     </div>
