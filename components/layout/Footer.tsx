@@ -158,7 +158,11 @@ export function Footer() {
           <p>
             © {new Date().getFullYear()} No Borders ASBL · Entreprise n° {site.company} · IBAN : {site.iban}
           </p>
-          <div className="flex gap-4">
+          <div className="flex items-center gap-4">
+            <Link href="/politique-de-confidentialite" className="hover:text-white transition-colors underline-offset-2 hover:underline">
+              Politique de confidentialité
+            </Link>
+            <span>·</span>
             <span>Mons, Belgique</span>
           </div>
         </div>

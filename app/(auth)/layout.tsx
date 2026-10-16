@@ -5,9 +5,13 @@ import type { ReactNode } from "react";
 
 export default function AuthLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
-  const isLoginPage = pathname === "/login" || pathname === "/connexion";
+  const isCleanAuthPage =
+    pathname === "/login" ||
+    pathname === "/connexion" ||
+    pathname === "/register" ||
+    pathname === "/inscription";
 
-  if (isLoginPage) {
+  if (isCleanAuthPage) {
     return <>{children}</>;
   }
 
