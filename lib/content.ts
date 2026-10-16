@@ -25,7 +25,8 @@ export const site = {
 } as const;
 
 export const navigation = [
-  { label: "À propos", href: "/" },
+  { label: "Accueil", href: "/" },
+  { label: "À propos", href: "/a-propos" },
   { label: "Notre projet", href: "/notre-projet" },
   { label: "Nos activités", href: "/nos-activites" },
   { label: "Actualités", href: "/actualites" },
@@ -474,20 +475,20 @@ export type Product = {
 };
 
 export const products: Product[] = [
-  { id: 1, name: "My Boo Kumasi — Route", category: "velos-bambou", sub: "route", brand: "My Boo", colors: ["bambou", "noir"], price: 1630000, rating: 4.8, reviews: 36, isNew: true, image: "/images/lancement-myboo.jpg" },
-  { id: 2, name: "My Boo Bolga — Ville", category: "velos-bambou", sub: "ville", brand: "My Boo", colors: ["bambou", "vert"], price: 1240000, rating: 4.6, reviews: 24, image: "/images/vente-velo.jpg" },
-  { id: 3, name: "My Boo Volta — VTT", category: "velos-bambou", sub: "vtt", brand: "My Boo", colors: ["bambou", "noir"], price: 1500000, oldPrice: 1760000, rating: 4.7, reviews: 18, image: "/images/vtt.jpg" },
-  { id: 4, name: "Hase Pino — Tandem", category: "hase-bikes", sub: "tandems", brand: "Hase Bikes", colors: ["gris", "rouge"], price: 3600000, rating: 4.9, reviews: 12, image: "/images/p-hase-bikes.jpg" },
-  { id: 5, name: "Hase Trigo — Tricycle", category: "hase-bikes", sub: "tricycles", brand: "Hase Bikes", colors: ["bleu", "gris"], price: 2800000, oldPrice: 3075000, rating: 4.8, reviews: 9, image: "/images/p-hase-bikes.jpg" },
-  { id: 6, name: "ElliptiGO 8C", category: "elliptigo", brand: "ElliptiGO", colors: ["noir", "orange"], price: 1965000, rating: 4.7, reviews: 21, isNew: true, image: "/images/tour-anvers.jpg" },
-  { id: 7, name: "ElliptiGO Arc", category: "elliptigo", brand: "ElliptiGO", colors: ["noir", "blanc"], price: 1310000, oldPrice: 1505000, rating: 4.5, reviews: 15, image: "/images/bxl-tour.jpg" },
-  { id: 8, name: "Casque recyclé Ecobirdy", category: "equipement", sub: "casques", brand: "Ecobirdy", colors: ["blanc", "vert", "jaune"], price: 58000, rating: 4.4, reviews: 48, image: "/images/ghana-booomers.jpg" },
-  { id: 9, name: "Maillot No Borders", category: "equipement", sub: "vetements", brand: "No Borders", colors: ["noir", "orange"], price: 29500, rating: 4.6, reviews: 31, isNew: true, image: "/images/organisations-sportives.jpg" },
-  { id: 10, name: "Antivol en U renforcé", category: "accessoires", sub: "antivols", brand: "Concept Performance", colors: ["noir", "jaune"], price: 32000, rating: 4.3, reviews: 27, image: "/images/bxl-tour.jpg" },
-  { id: 11, name: "Kit éclairage LED USB", category: "accessoires", sub: "eclairage", brand: "Concept Performance", colors: ["noir"], price: 23000, oldPrice: 29500, rating: 4.5, reviews: 39, image: "/images/tour-anvers.jpg" },
-  { id: 12, name: "Sacoche imperméable 20 L", category: "accessoires", sub: "sacoches", brand: "No Borders", colors: ["noir", "rouge", "bleu"], price: 45000, rating: 4.2, reviews: 14, image: "/images/vente-velo.jpg" },
-  { id: 13, name: "Pneus 700×32 (la paire)", category: "pieces", sub: "pneus", brand: "Concept Performance", colors: ["noir"], price: 38500, rating: 4.4, reviews: 22, image: "/images/vtt.jpg" },
-  { id: 14, name: "Plaquettes de frein à disque", category: "pieces", sub: "freins", brand: "Training Plus", colors: ["gris"], price: 12500, oldPrice: 16500, rating: 4.1, reviews: 11, image: "/images/vtt.jpg" },
-  { id: 15, name: "Kit de réparation nomade", category: "entretien", brand: "Training Plus", colors: ["noir", "rouge"], price: 19000, rating: 4.6, reviews: 33, image: "/images/press-myboo.jpg" },
-  { id: 16, name: "Pompe à pied avec manomètre", category: "entretien", brand: "Training Plus", colors: ["noir", "gris"], price: 25500, rating: 4.3, reviews: 19, image: "/images/lancement-myboo.jpg" },
+  { id: 1, name: "My Boo Kumasi — Route", category: "velos-bambou", sub: "route", brand: "My Boo", colors: ["bambou", "noir"], price: 1630, rating: 4.8, reviews: 36, isNew: true, image: "/images/lancement-myboo.jpg" },
+  { id: 2, name: "My Boo Bolga — Ville", category: "velos-bambou", sub: "ville", brand: "My Boo", colors: ["bambou", "vert"], price: 1240, rating: 4.6, reviews: 24, image: "/images/vente-velo.jpg" },
+  { id: 3, name: "My Boo Volta — VTT", category: "velos-bambou", sub: "vtt", brand: "My Boo", colors: ["bambou", "noir"], price: 1500, oldPrice: 1760, rating: 4.7, reviews: 18, image: "/images/vtt.jpg" },
+  { id: 4, name: "Hase Pino — Tandem", category: "hase-bikes", sub: "tandems", brand: "Hase Bikes", colors: ["gris", "rouge"], price: 3600, rating: 4.9, reviews: 12, image: "/images/p-hase-bikes.jpg" },
+  { id: 5, name: "Hase Trigo — Tricycle", category: "hase-bikes", sub: "tricycles", brand: "Hase Bikes", colors: ["bleu", "gris"], price: 2800, oldPrice: 3075, rating: 4.8, reviews: 9, image: "/images/p-hase-bikes.jpg" },
+  { id: 6, name: "ElliptiGO 8C", category: "elliptigo", brand: "ElliptiGO", colors: ["noir", "orange"], price: 1965, rating: 4.7, reviews: 21, isNew: true, image: "/images/tour-anvers.jpg" },
+  { id: 7, name: "ElliptiGO Arc", category: "elliptigo", brand: "ElliptiGO", colors: ["noir", "blanc"], price: 1310, oldPrice: 1505, rating: 4.5, reviews: 15, image: "/images/bxl-tour.jpg" },
+  { id: 8, name: "Casque recyclé Ecobirdy", category: "equipement", sub: "casques", brand: "Ecobirdy", colors: ["blanc", "vert", "jaune"], price: 58, rating: 4.4, reviews: 48, image: "/images/ghana-booomers.jpg" },
+  { id: 9, name: "Maillot No Borders", category: "equipement", sub: "vetements", brand: "No Borders", colors: ["noir", "orange"], price: 29.5, rating: 4.6, reviews: 31, isNew: true, image: "/images/organisations-sportives.jpg" },
+  { id: 10, name: "Antivol en U renforcé", category: "accessoires", sub: "antivols", brand: "Concept Performance", colors: ["noir", "jaune"], price: 32, rating: 4.3, reviews: 27, image: "/images/bxl-tour.jpg" },
+  { id: 11, name: "Kit éclairage LED USB", category: "accessoires", sub: "eclairage", brand: "Concept Performance", colors: ["noir"], price: 23, oldPrice: 29.5, rating: 4.5, reviews: 39, image: "/images/tour-anvers.jpg" },
+  { id: 12, name: "Sacoche imperméable 20 L", category: "accessoires", sub: "sacoches", brand: "No Borders", colors: ["noir", "rouge", "bleu"], price: 45, rating: 4.2, reviews: 14, image: "/images/vente-velo.jpg" },
+  { id: 13, name: "Pneus 700×32 (la paire)", category: "pieces", sub: "pneus", brand: "Concept Performance", colors: ["noir"], price: 38.5, rating: 4.4, reviews: 22, image: "/images/vtt.jpg" },
+  { id: 14, name: "Plaquettes de frein à disque", category: "pieces", sub: "freins", brand: "Training Plus", colors: ["gris"], price: 12.5, oldPrice: 16.5, rating: 4.1, reviews: 11, image: "/images/vtt.jpg" },
+  { id: 15, name: "Kit de réparation nomade", category: "entretien", brand: "Training Plus", colors: ["noir", "rouge"], price: 19, rating: 4.6, reviews: 33, image: "/images/press-myboo.jpg" },
+  { id: 16, name: "Pompe à pied avec manomètre", category: "entretien", brand: "Training Plus", colors: ["noir", "gris"], price: 25.5, rating: 4.3, reviews: 19, image: "/images/lancement-myboo.jpg" },
 ];

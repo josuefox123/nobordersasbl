@@ -1,7 +1,9 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
+import { ArrowRight } from "@/components/ui/Icons";
 
 const SLIDES = [
   {
@@ -40,7 +42,7 @@ export function Hero() {
     return () => {
       if (timerRef.current) clearInterval(timerRef.current);
     };
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   function goTo(index: number) {
@@ -50,33 +52,17 @@ export function Hero() {
 
   return (
     <section
-      aria-label="Diaporama No Borders ASBL"
-      className="relative w-full overflow-hidden mt-[132px] lg:mt-[188px]"
+      aria-label="Accueil No Borders ASBL"
+      className="relative w-full overflow-hidden mt-[84px] lg:mt-[188px] min-h-[360px] lg:h-[clamp(390px,48vh,470px)] flex flex-col justify-center"
     >
-      {/*
-        Technique correcte pour un slider CSS :
-        - Wrapper = overflow:hidden (sur la section parente)
-        - Piste = flex, largeur = 100% * nombre de slides
-        - Chaque slide = 100vw (largeur fixe de la fenêtre)
-        - translateX = -(index * 100vw)
-      */}
-      <div
-        className="flex transition-transform duration-700 ease-in-out will-change-transform"
-        style={{
-          width: `${SLIDES.length * 100}vw`,
-          transform: `translateX(-${current * 100}vw)`,
-        }}
-        aria-live="polite"
-        aria-atomic="true"
-      >
+      {/* ── Slideshow d'arrière-plan ── */}
+      <div className="absolute inset-0 overflow-hidden">
         {SLIDES.map((slide, i) => (
           <div
             key={slide.src}
-            className="relative shrink-0"
-            style={{
-              width: "100vw",
-              height: "clamp(320px, 55vw, 680px)",
-            }}
+            className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
+              i === current ? "opacity-100 z-0" : "opacity-0 -z-10 pointer-events-none"
+            }`}
             aria-hidden={i !== current}
           >
             <Image
@@ -91,9 +77,59 @@ export function Hero() {
         ))}
       </div>
 
-      {/* Dots de navigation */}
+      {/* ── Overlays dégradés pour contraste et lisibilité ── */}
       <div
-        className="absolute bottom-5 left-1/2 flex -translate-x-1/2 items-center gap-3"
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 z-[1] bg-gradient-to-r from-black/85 via-black/60 to-black/35"
+      />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 z-[1] bg-gradient-to-t from-black/75 via-transparent to-black/25"
+      />
+
+      {/* ── Contenu texte & boutons ── */}
+      <div className="container relative z-10 py-5 sm:py-6">
+        <div className="max-w-2xl space-y-3 sm:space-y-3.5">
+
+          {/* Titre */}
+          <h1 className="text-2xl font-extrabold leading-[1.15] tracking-tight text-white sm:text-3xl md:text-4xl lg:text-[2.5rem]">
+            Découvrez l&apos;Excellence du{" "}
+            <span className="relative inline-block text-white">
+              Sport
+              <span className="absolute -bottom-1 left-0 h-1.5 w-full rounded-full bg-[#0875B9]" />
+            </span>{" "}
+            et de la Mobilité
+          </h1>
+
+          {/* Description */}
+          <p className="max-w-xl text-sm leading-relaxed text-white/85 sm:text-base">
+            No Borders ASBL allie engagement social et passion du cyclisme.
+            Participez à nos activités sportives inclusives et découvrez notre
+            boutique solidaire de vélos haut de gamme.
+          </p>
+
+          {/* Boutons d'action */}
+          <div className="flex flex-wrap items-center gap-3 pt-1">
+            <Link
+              href="/boutique"
+              className="btn px-6 py-2.5 sm:py-3 text-sm sm:text-[0.95rem] gap-2 border-0 bg-[#0875B9] text-white shadow-xl shadow-black/30 ring-1 ring-white/20 hover:bg-[#065f9a]"
+            >
+              Découvrir nos vélos <ArrowRight size={18} />
+            </Link>
+            <Link
+              href="/nos-activites"
+              className="btn px-6 py-2.5 sm:py-3 text-sm sm:text-[0.95rem] border border-white/40 bg-white/10 text-white backdrop-blur-md hover:border-white hover:bg-white hover:text-ink"
+            >
+              Nos activités
+            </Link>
+          </div>
+
+        </div>
+      </div>
+
+      {/* ── Dots de navigation (Desktop) ── */}
+      <div
+        className="absolute bottom-6 right-8 z-20 hidden items-center gap-2.5 sm:flex"
         role="tablist"
         aria-label="Navigation du diaporama"
       >
@@ -103,22 +139,37 @@ export function Hero() {
             type="button"
             role="tab"
             aria-selected={i === current}
-            aria-label={`Aller à la slide ${i + 1}`}
+            aria-label={`Aller à la diapositive ${i + 1}`}
             onClick={() => goTo(i)}
-            className={`rounded-full border-2 border-white transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white ${
+            className={`rounded-full transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white ${
               i === current
-                ? "h-3 w-8 bg-white"
-                : "h-3 w-3 bg-white/40 hover:bg-white/70"
+                ? "h-2.5 w-8 bg-[#0875B9] ring-2 ring-white"
+                : "h-2.5 w-2.5 bg-white/50 hover:bg-white/80"
             }`}
           />
         ))}
       </div>
 
-      {/* Dégradé bas pour lisibilité des dots */}
+      {/* ── Dots de navigation (Mobile) ── */}
       <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-black/50 to-transparent"
-      />
+        className="absolute bottom-4 left-1/2 -translate-x-1/2 z-20 flex sm:hidden items-center gap-2"
+        role="tablist"
+        aria-label="Navigation du diaporama"
+      >
+        {SLIDES.map((_, i) => (
+          <button
+            key={i}
+            type="button"
+            role="tab"
+            aria-selected={i === current}
+            aria-label={`Diapositive ${i + 1}`}
+            onClick={() => goTo(i)}
+            className={`rounded-full transition-all duration-300 ${
+              i === current ? "h-2 w-6 bg-[#0875B9]" : "h-2 w-2 bg-white/50"
+            }`}
+          />
+        ))}
+      </div>
     </section>
   );
 }

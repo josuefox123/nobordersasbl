@@ -1,15 +1,24 @@
 import type { Metadata } from "next";
-import { Montserrat } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
-import { Header } from "@/components/layout/Header";
-import { Footer } from "@/components/layout/Footer";
+import { SiteLayout } from "@/components/layout/SiteLayout";
 import { site } from "@/lib/content";
 
-const montserrat = Montserrat({
-  subsets: ["latin"],
+const montserrat = localFont({
+  src: [
+    {
+      path: "./fonts/montserrat-latin.woff2",
+      weight: "300 900",
+      style: "normal",
+    },
+    {
+      path: "./fonts/montserrat-latin-ext.woff2",
+      weight: "300 900",
+      style: "normal",
+    },
+  ],
   variable: "--font-montserrat",
   display: "swap",
-  weight: ["300", "400", "500", "600", "700", "800", "900"],
 });
 
 export const metadata: Metadata = {
@@ -54,8 +63,8 @@ export const metadata: Metadata = {
     images: ["/images/hero-groupe.jpg"],
   },
   icons: {
-    icon: "/images/logo.png",
-    apple: "/images/logo.png",
+    icon: "/images/logo/logoFichier 2logo_2.png",
+    apple: "/images/logo/logoFichier 2logo_2.png",
   },
 };
 
@@ -66,12 +75,8 @@ export default function RootLayout({
 }) {
   return (
     <html lang="fr" className={montserrat.variable}>
-      <body className="flex min-h-screen flex-col font-sans bg-paper text-ink selection:bg-flame selection:text-white">
-        <Header />
-        <main id="contenu" className="flex-1">
-          {children}
-        </main>
-        <Footer />
+      <body className="flex min-h-screen flex-col font-sans bg-paper text-ink selection:bg-[#0875B9] selection:text-white">
+        <SiteLayout>{children}</SiteLayout>
       </body>
     </html>
   );

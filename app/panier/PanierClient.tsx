@@ -21,7 +21,7 @@ const initialCartItems: CartItem[] = [
   {
     id: 9,
     name: "Maillot No Borders",
-    price: 29500,
+    price: 29.5,
     qty: 1,
     color: "Noir / Orange",
     size: "M",
@@ -30,8 +30,8 @@ const initialCartItems: CartItem[] = [
   {
     id: 8,
     name: "Casque recyclé Ecobirdy",
-    price: 58000,
-    oldPrice: 70000,
+    price: 58,
+    oldPrice: 70,
     qty: 2,
     color: "Blanc",
     size: "L",
@@ -40,7 +40,7 @@ const initialCartItems: CartItem[] = [
   {
     id: 12,
     name: "Sacoche imperméable 20 L",
-    price: 45000,
+    price: 45,
     qty: 1,
     color: "Noir",
     size: "Unique",
@@ -120,7 +120,7 @@ export function PanierClient() {
   }, [items.length, subtotal, discountAmount, shippingCost, taxAmount]);
 
   return (
-    <div className="mt-[132px] lg:mt-[188px] pb-24 bg-white min-h-[calc(100vh-132px)] lg:min-h-[calc(100vh-188px)] flex flex-col">
+    <div className="mt-[84px] lg:mt-[188px] pb-24 bg-white min-h-[calc(100vh-84px)] lg:min-h-[calc(100vh-188px)] flex flex-col">
       {/* ── Notification toast ── */}
       {notice && (
         <div

@@ -2,7 +2,8 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import {
   productBrands,
   productCategories,
@@ -25,6 +26,10 @@ import { PageHeader } from "@/components/ui/PageHeader";
 /* ─────────────────────────────────────────────────────────── */
 
 export function BoutiqueClient() {
+  const searchParams = useSearchParams();
+  const qParam = searchParams.get("q");
+  const catParam = searchParams.get("categorie") || searchParams.get("category");
+
   // Filtres
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [selectedSub, setSelectedSub] = useState<string | null>(null);
@@ -33,8 +38,8 @@ export function BoutiqueClient() {
     "hase-bikes": true,
   });
 
-  const [maxPrice, setMaxPrice] = useState<number>(4000000);
-  const [tempMaxPrice, setTempMaxPrice] = useState<number>(4000000);
+  const [maxPrice, setMaxPrice] = useState<number>(4000);
+  const [tempMaxPrice, setTempMaxPrice] = useState<number>(4000);
 
   const [selectedColors, setSelectedColors] = useState<string[]>([]);
   const [tempColors, setTempColors] = useState<string[]>([]);
@@ -54,6 +59,42 @@ export function BoutiqueClient() {
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState<boolean>(false);
   const [addedNotice, setAddedNotice] = useState<string | null>(null);
+
+  // Synchronisation avec les paramètres d'URL (recherche et catégories)
+  useEffect(() => {
+    if (qParam) {
+      setSearchQuery(qParam);
+      setSearchInput(qParam);
+    }
+    if (catParam) {
+      if (catParam === "velos-de-ville") {
+        setSelectedCategory("velos-bambou");
+        setSelectedSub("ville");
+      } else if (catParam === "vtt") {
+        setSelectedCategory("velos-bambou");
+        setSelectedSub("vtt");
+      } else if (catParam === "velos-elliptiques") {
+        setSelectedCategory("elliptigo");
+      } else if (catParam === "velos-tandem") {
+        setSelectedCategory("hase-bikes");
+        setSelectedSub("tandems");
+      } else {
+        const directMatch = productCategories.find((c) => c.slug === catParam);
+        if (directMatch) {
+          setSelectedCategory(directMatch.slug);
+        } else {
+          for (const c of productCategories) {
+            const sub = c.subs.find((s) => s.slug === catParam);
+            if (sub) {
+              setSelectedCategory(c.slug);
+              setSelectedSub(sub.slug);
+              break;
+            }
+          }
+        }
+      }
+    }
+  }, [qParam, catParam]);
 
   // Toggle accordéon catégories
   const toggleCategoryExpand = (slug: string) => {
@@ -112,20 +153,20 @@ export function BoutiqueClient() {
   const handlePricePresetChange = (preset: string) => {
     setPricePreset(preset);
     if (preset === "all") {
-      setMaxPrice(4000000);
-      setTempMaxPrice(4000000);
-    } else if (preset === "under-50k") {
-      setMaxPrice(50000);
-      setTempMaxPrice(50000);
-    } else if (preset === "50k-500k") {
-      setMaxPrice(500000);
-      setTempMaxPrice(500000);
-    } else if (preset === "500k-2m") {
-      setMaxPrice(2000000);
-      setTempMaxPrice(2000000);
-    } else if (preset === "over-2m") {
-      setMaxPrice(4000000);
-      setTempMaxPrice(4000000);
+      setMaxPrice(4000);
+      setTempMaxPrice(4000);
+    } else if (preset === "under-50") {
+      setMaxPrice(50);
+      setTempMaxPrice(50);
+    } else if (preset === "50-500") {
+      setMaxPrice(500);
+      setTempMaxPrice(500);
+    } else if (preset === "500-2000") {
+      setMaxPrice(2000);
+      setTempMaxPrice(2000);
+    } else if (preset === "over-2000") {
+      setMaxPrice(4000);
+      setTempMaxPrice(4000);
     }
     setCurrentPage(1);
   };
@@ -134,8 +175,8 @@ export function BoutiqueClient() {
   const resetAllFilters = () => {
     setSelectedCategory(null);
     setSelectedSub(null);
-    setMaxPrice(4000000);
-    setTempMaxPrice(4000000);
+    setMaxPrice(4000);
+    setTempMaxPrice(4000);
     setSelectedColors([]);
     setTempColors([]);
     setSelectedBrands([]);
@@ -163,9 +204,10 @@ export function BoutiqueClient() {
 
       // Prix max
       if (p.price > maxPrice) return false;
-      if (pricePreset === "50k-500k" && p.price < 50000) return false;
-      if (pricePreset === "500k-2m" && p.price < 500000) return false;
-      if (pricePreset === "over-2m" && p.price < 2000000) return false;
+      if (pricePreset === "under-50" && p.price > 50) return false;
+      if (pricePreset === "50-500" && (p.price < 50 || p.price > 500)) return false;
+      if (pricePreset === "500-2000" && (p.price < 500 || p.price > 2000)) return false;
+      if (pricePreset === "over-2000" && p.price <= 2000) return false;
 
       // Couleurs
       if (
@@ -243,13 +285,13 @@ export function BoutiqueClient() {
   const activeFiltersCount =
     (selectedCategory ? 1 : 0) +
     (selectedSub ? 1 : 0) +
-    (maxPrice < 6000 ? 1 : 0) +
+    (maxPrice < 4000 ? 1 : 0) +
     selectedColors.length +
     selectedBrands.length +
     (searchQuery ? 1 : 0);
 
   return (
-    <div className="mt-[132px] lg:mt-[188px] pb-24 bg-white">
+    <div className="mt-[84px] lg:mt-[188px] pb-24 bg-white">
       {/* ── Toast de notification ajout panier ── */}
       {addedNotice && (
         <div className="fixed bottom-6 right-6 z-[100] flex items-center gap-3 rounded-xl bg-ink px-5 py-3.5 text-sm font-semibold text-white shadow-2xl transition-all animate-bounce">
@@ -395,17 +437,17 @@ export function BoutiqueClient() {
 
                 <div className="space-y-4">
                   <div className="flex items-center justify-between text-xs font-semibold text-ink/70">
-                    <span>0 FCFA</span>
+                    <span>0 €</span>
                     <span className="rounded-md bg-paper px-2 py-1 text-ink font-bold">
-                      jusqu&apos;à {tempMaxPrice.toLocaleString("fr-FR")} FCFA
+                      jusqu&apos;à {tempMaxPrice.toLocaleString("fr-BE")} €
                     </span>
                   </div>
 
                   <input
                     type="range"
                     min="0"
-                    max="4000000"
-                    step="25000"
+                    max="4000"
+                    step="50"
                     value={tempMaxPrice}
                     onChange={(e) => setTempMaxPrice(Number(e.target.value))}
                     className="h-2 w-full cursor-pointer appearance-none rounded-lg bg-ink/10 accent-[#CF4318]"
@@ -415,8 +457,8 @@ export function BoutiqueClient() {
                     <button
                       type="button"
                       onClick={() => {
-                        setMaxPrice(4000000);
-                        setTempMaxPrice(4000000);
+                        setMaxPrice(4000);
+                        setTempMaxPrice(4000);
                         setCurrentPage(1);
                       }}
                       className="text-xs text-ink/50 hover:text-ink underline"
@@ -627,10 +669,10 @@ export function BoutiqueClient() {
                     className="w-full rounded-lg border border-ink/15 bg-white py-2 px-3 text-xs text-ink focus:border-ink focus:outline-none"
                   >
                     <option value="all">Tous les prix</option>
-                    <option value="under-50k">Moins de 50 000 FCFA</option>
-                    <option value="50k-500k">50 000 à 500 000 FCFA</option>
-                    <option value="500k-2m">500 000 à 2 000 000 FCFA</option>
-                    <option value="over-2m">Plus de 2 000 000 FCFA</option>
+                    <option value="under-50">Moins de 50 €</option>
+                    <option value="50-500">50 € à 500 €</option>
+                    <option value="500-2000">500 € à 2 000 €</option>
+                    <option value="over-2000">Plus de 2 000 €</option>
                   </select>
                 </div>
 
@@ -825,7 +867,7 @@ export function BoutiqueClient() {
                     className="group flex flex-col overflow-hidden rounded-2xl border border-ink/10 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-ink/30 hover:shadow-lg"
                   >
                     {/* Image du produit */}
-                    <Link href="/boutique/produit" aria-label={`Voir ${p.name}`} className="relative block aspect-[4/3] w-full overflow-hidden bg-ink/5">
+                    <Link href={`/boutique/produit?id=${p.id}`} aria-label={`Voir ${p.name}`} className="relative block aspect-[4/3] w-full overflow-hidden bg-ink/5">
                       <Image
                         src={p.image}
                         alt={p.name}
@@ -844,7 +886,7 @@ export function BoutiqueClient() {
 
                       {/* Titre */}
                       <h3 className="mt-1 text-base font-bold leading-snug text-ink group-hover:text-[#CF4318] transition-colors">
-                        <Link href="/boutique/produit">{p.name}</Link>
+                        <Link href={`/boutique/produit?id=${p.id}`}>{p.name}</Link>
                       </h3>
 
                       {/* Avis étoiles */}
@@ -888,7 +930,7 @@ export function BoutiqueClient() {
                     className="group flex flex-col overflow-hidden rounded-2xl border border-ink/10 bg-white shadow-sm transition-all duration-300 hover:border-ink/30 sm:flex-row"
                   >
                     {/* Image */}
-                    <Link href="/boutique/produit" aria-label={`Voir ${p.name}`} className="relative block aspect-[16/10] w-full shrink-0 overflow-hidden bg-ink/5 sm:w-56 sm:aspect-auto">
+                    <Link href={`/boutique/produit?id=${p.id}`} aria-label={`Voir ${p.name}`} className="relative block aspect-[16/10] w-full shrink-0 overflow-hidden bg-ink/5 sm:w-56 sm:aspect-auto">
                       <Image
                         src={p.image}
                         alt={p.name}
@@ -910,7 +952,7 @@ export function BoutiqueClient() {
                       </div>
 
                       <h3 className="mt-1 text-lg font-bold text-ink group-hover:text-[#CF4318]">
-                        <Link href="/boutique/produit">{p.name}</Link>
+                        <Link href={`/boutique/produit?id=${p.id}`}>{p.name}</Link>
                       </h3>
                       <p className="mt-2 text-xs leading-relaxed text-ink/70">
                         Produit officiel disponible auprès de No Borders ASBL ou de notre partenaire {p.brand}.

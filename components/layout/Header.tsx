@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { createPortal } from "react-dom";
 import {
   AnimatePresence,
@@ -13,18 +13,13 @@ import {
   useSpring,
 } from "framer-motion";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { navigation, site } from "@/lib/content";
+import { navigation } from "@/lib/content";
 import {
   ArrowRight,
   CloseIcon,
-  CopyIcon,
-  MailIcon,
   MenuIcon,
-  PhoneIcon,
   SearchIcon,
-  ShoppingBagIcon,
-  SparkIcon,
-  socialIcons,
+  StoreIcon,
 } from "@/components/ui/Icons";
 import { LoginDropdown } from "@/components/ui/LoginDropdown";
 import { LanguageSwitcher } from "@/components/ui/LanguageSwitcher";
@@ -50,8 +45,13 @@ export function Header() {
   useMotionValueEvent(scrollY, "change", (y) => setCompact(y > 80));
   useEffect(() => setOpen(false), [pathname]);
 
-  const isActive = (href: string) =>
-    href === "/" ? pathname === "/" : pathname.startsWith(href);
+  const isActive = (href: string) => {
+    if (!pathname) return false;
+    if (href === "/") {
+      return pathname === "/";
+    }
+    return pathname === href || pathname.startsWith(`${href}/`);
+  };
 
   return (
     <>
@@ -66,19 +66,19 @@ export function Header() {
       {/* Barre de progression — pointer-events-none pour ne jamais bloquer les clics */}
       <motion.div
         aria-hidden="true"
-        className="pointer-events-none fixed inset-x-0 top-0 z-[90] h-[3px] origin-left bg-flame"
+        className="pointer-events-none fixed inset-x-0 top-0 z-[90] h-[3px] origin-left bg-white"
         style={{ scaleX: reduce ? scrollYProgress : progress }}
       />
 
       <header className="fixed inset-x-0 top-0 z-[60]">
-        {/* ── HeaderTop : barre noire ── */}
+        {/* ── HeaderTop : barre bleue ── */}
         <div
-          className="relative bg-ink text-white transition-[height] duration-500"
+          className="relative bg-[#0875B9] text-white transition-[height] duration-500"
           style={{ height: compact ? "64px" : "84px" }}
         >
           <div className="container flex h-full items-center gap-4">
 
-            {/* Bouton menu hamburger */}
+            {/* Bouton menu hamburger — mobile uniquement */}
             <button
               type="button"
               onClick={() => setOpen(true)}
@@ -86,7 +86,7 @@ export function Header() {
               aria-expanded={open}
               aria-controls="menu-principal"
               style={{ position: "relative", zIndex: 10 }}
-              className="-ml-2 flex h-10 w-10 shrink-0 items-center justify-center rounded-lg text-white transition-colors hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50"
+              className="-ml-2 flex h-10 w-10 shrink-0 items-center justify-center rounded-lg text-white transition-colors hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50 lg:hidden"
             >
               <MenuIcon size={24} />
             </button>
@@ -94,31 +94,21 @@ export function Header() {
             {/* Logo */}
             <Link
               href="/"
-              className="group flex items-center gap-3"
+              className="hidden items-center gap-3 lg:flex shrink-0"
               aria-label="No Borders ASBL — accueil"
             >
-              <span className="relative grid h-11 w-11 place-items-center overflow-hidden rounded-full bg-white p-0.5 transition-transform duration-500 ease-out-expo group-hover:rotate-[20deg]">
-                <Image
-                  src="/images/logo.png"
-                  alt=""
-                  width={44}
-                  height={44}
-                  className="h-full w-full object-contain"
-                  priority
-                />
-              </span>
-              <span className="leading-none">
-                <span className="block text-xl font-extrabold tracking-tight sm:text-2xl">
-                  NO BORDERS<span className="text-flame">!</span>
-                </span>
-                <span className="hidden text-[0.65rem] font-semibold uppercase tracking-[0.3em] text-white/60 sm:block">
-                  ASBL · Mons
-                </span>
-              </span>
+              <Image
+                src="/images/logo/logoFichier 2logo_blanc.png"
+                alt="No Borders ASBL"
+                width={192}
+                height={64}
+                className="h-14 w-auto object-contain"
+                priority
+              />
             </Link>
 
             {/* Actions droite */}
-            <div className="ml-auto flex items-center gap-2" style={{ position: "relative", zIndex: 10 }}>
+            <div className="ml-auto flex min-w-0 shrink items-center gap-1.5 sm:gap-2" style={{ position: "relative", zIndex: 10 }}>
               <LoginDropdown />
               <LanguageSwitcher />
               <span className="h-6 w-px bg-white/20" aria-hidden="true" />
@@ -126,7 +116,7 @@ export function Header() {
               <WishlistButton />
               <CartButton />
               <span className="hidden h-6 w-px bg-white/20 sm:block" aria-hidden="true" />
-              <div className="hidden w-56 lg:block xl:w-72">
+              <div className="hidden w-48 lg:block xl:w-64">
                 <SearchBar />
               </div>
             </div>
@@ -141,24 +131,15 @@ export function Header() {
             compact ? "shadow-[0_12px_30px_-18px_rgba(0,0,0,0.35)]" : ""
           }`}
         >
-          <div className="container flex h-14 items-stretch">
-            <Link
-              href="/"
-              className="relative -ml-5 mr-6 flex items-center gap-2 bg-flame-deep px-5 font-bold text-white transition-colors hover:bg-ink md:-ml-8 md:px-8 xl:-ml-10 xl:px-10"
-            >
-              <SparkIcon
-                size={12}
-                className="absolute left-2 top-2 animate-sparkle text-sun"
-              />
-              Accueil
-            </Link>
-            <ul className="flex items-center gap-1">
+          <div className="container flex h-14 items-center">
+            {/* Menus alignés avec le logo */}
+            <ul className="flex items-center gap-1 -ml-3">
               {navigation.map((item) => (
                 <li key={item.href}>
                   <Link
                     href={item.href}
                     aria-current={isActive(item.href) ? "page" : undefined}
-                    className="link-underline mx-3 py-1 text-[0.95rem] font-medium text-ink/80 transition-colors hover:text-ink aria-[current=page]:font-semibold aria-[current=page]:text-ink"
+                    className={`nav-menu-link ${isActive(item.href) ? "active" : ""}`}
                   >
                     {item.label}
                   </Link>
@@ -169,19 +150,16 @@ export function Header() {
               <NavButton
                 href="/boutique"
                 label="Boutique"
-                icon={<ShoppingBagIcon size={16} />}
-              />
-              <NavButton
-                href="/fourniture"
-                label="Fourniture"
-                icon={<CopyIcon size={16} />}
+                icon={<StoreIcon size={16} />}
               />
             </div>
           </div>
         </nav>
 
-        {/* ── HeaderBottom : bande d'annonces défilante ── */}
-        <AnnouncementBar />
+        {/* ── HeaderBottom : bande d'annonces défilante (desktop) ── */}
+        <div className="hidden lg:block">
+          <AnnouncementBar />
+        </div>
       </header>
 
       {/* Menu mobile — rendu dans un portail pour échapper au stacking context du header */}
@@ -208,6 +186,7 @@ function MobileMenu({
   isActive: (href: string) => boolean;
 }) {
   const panelRef = useRef<HTMLDivElement>(null);
+  const router = useRouter();
   const reduce = useReducedMotion();
   const [search, setSearch] = useState("");
 
@@ -286,11 +265,23 @@ function MobileMenu({
             exit={reduce ? { opacity: 0 } : { x: "-100%" }}
             transition={{ duration: 0.35, ease: EASE }}
           >
-            {/* ── En-tête sombre ── */}
-            <div className="flex items-center justify-between bg-ink px-5 py-4">
-              <span className="text-sm font-bold uppercase tracking-widest text-white">
-                Menu
-              </span>
+            {/* ── En-tête bleu ── */}
+            <div className="flex items-center justify-between bg-[#0875B9] px-5 py-4">
+              <Link
+                href="/"
+                onClick={onClose}
+                aria-label="No Borders ASBL — accueil"
+                className="flex items-center"
+              >
+                <Image
+                  src="/images/logo/logoFichier 2logo_blanc.png"
+                  alt="No Borders ASBL"
+                  width={192}
+                  height={64}
+                  className="h-10 w-auto object-contain"
+                  priority
+                />
+              </Link>
               <button
                 type="button"
                 onClick={onClose}
@@ -301,37 +292,31 @@ function MobileMenu({
               </button>
             </div>
 
-            {/* ── Boutons d'action rapide ── */}
-            <div className="flex flex-col gap-2 border-b border-ink/8 px-4 py-4">
+            {/* ── Bouton Boutique ── */}
+            <div className="border-b border-ink/8 px-4 py-4">
               <Link
                 href="/boutique"
                 onClick={onClose}
-                className="flex items-center gap-3 rounded-lg bg-ink px-4 py-3 text-sm font-semibold text-white transition-colors hover:bg-ink/80"
+                className="flex items-center gap-3 rounded-lg bg-[#0875B9] px-4 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#065f9a]"
               >
-                <ShoppingBagIcon size={17} />
+                <StoreIcon size={18} />
                 Boutique
-              </Link>
-              <Link
-                href="/fourniture"
-                onClick={onClose}
-                className="flex items-center gap-3 rounded-lg bg-ink px-4 py-3 text-sm font-semibold text-white transition-colors hover:bg-ink/80"
-              >
-                <CopyIcon size={17} />
-                Fourniture
-              </Link>
-              <Link
-                href="/nous-contacter?sujet=benevolat"
-                onClick={onClose}
-                className="flex items-center gap-3 rounded-lg bg-flame px-4 py-3 text-sm font-semibold text-white transition-colors hover:bg-flame-deep"
-              >
-                <SparkIcon size={14} />
-                Agir avec nous
               </Link>
             </div>
 
             {/* ── Barre de recherche ── */}
-            <div className="border-b border-ink/8 px-4 py-3">
-              <div className="flex items-center gap-2 rounded-lg border border-ink/15 bg-paper px-3 py-2.5">
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                const q = search.trim();
+                if (q) {
+                  onClose();
+                  router.push(`/boutique?q=${encodeURIComponent(q)}`);
+                }
+              }}
+              className="border-b border-ink/8 px-4 py-3"
+            >
+              <div className="flex items-center gap-2 rounded-lg bg-paper px-3 py-2.5">
                 <SearchIcon size={15} className="shrink-0 text-ink/40" />
                 <input
                   type="search"
@@ -342,53 +327,36 @@ function MobileMenu({
                   className="w-full bg-transparent text-sm text-ink placeholder:text-ink/40 focus:outline-none"
                 />
               </div>
-            </div>
+            </form>
 
             {/* ── Liens de navigation ── */}
             <nav aria-label="Menu principal" className="flex-1">
               <ul className="divide-y divide-ink/6">
-                {links.map((item) => (
-                  <li key={item.href}>
-                    <Link
-                      href={item.href}
-                      onClick={onClose}
-                      aria-current={isActive(item.href) ? "page" : undefined}
-                      className="flex items-center justify-between px-5 py-4 text-[0.95rem] font-medium text-ink transition-colors hover:bg-paper aria-[current=page]:font-semibold aria-[current=page]:text-flame"
-                    >
-                      {item.label}
-                      <ArrowRight size={16} className="text-ink/30" />
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </nav>
-
-            {/* ── Bas du panneau : coordonnées ── */}
-            <div className="border-t border-ink/8 px-5 py-5 text-sm text-ink/50">
-              <a href={site.phoneHref} className="flex items-center gap-2 hover:text-ink">
-                <PhoneIcon size={15} /> {site.phone}
-              </a>
-              <a href={`mailto:${site.email}`} className="mt-2 flex items-center gap-2 hover:text-ink">
-                <MailIcon size={15} /> {site.email}
-              </a>
-              <div className="mt-4 flex gap-2">
-                {site.socials.map((s) => {
-                  const Icon = socialIcons[s.label];
+                {links.map((item) => {
+                  const active = isActive(item.href);
                   return (
-                    <a
-                      key={s.label}
-                      href={s.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label={`${s.label} (nouvel onglet)`}
-                      className="grid h-8 w-8 place-items-center rounded-lg border border-ink/15 text-ink/50 transition-colors hover:border-flame hover:bg-flame hover:text-white"
-                    >
-                      <Icon size={16} />
-                    </a>
+                    <li key={item.href}>
+                      <Link
+                        href={item.href}
+                        onClick={onClose}
+                        aria-current={active ? "page" : undefined}
+                        className={`flex items-center justify-between px-5 py-3.5 text-[0.95rem] font-medium transition-all ${
+                          active
+                            ? "border-l-4 border-[#0875B9] bg-[#0875B9]/10 font-semibold text-[#0875B9]"
+                            : "text-ink hover:bg-paper hover:text-[#0875B9]"
+                        }`}
+                      >
+                        {item.label}
+                        <ArrowRight
+                          size={16}
+                          className={active ? "text-[#0875B9]" : "text-ink/30"}
+                        />
+                      </Link>
+                    </li>
                   );
                 })}
-              </div>
-            </div>
+              </ul>
+            </nav>
           </motion.div>
         </div>
       )}

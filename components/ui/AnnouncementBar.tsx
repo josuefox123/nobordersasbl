@@ -7,11 +7,11 @@ import {
 } from "@/components/ui/Icons";
 
 const MESSAGES = [
-  { icon: <ShoppingBagIcon size={14} />, text: "Livraison gratuite dès 50 € d'achat sur notre boutique en ligne." },
-  { icon: <MapPinIcon size={14} />,      text: "Examen de vue disponible en magasin — sur rendez-vous." },
-  { icon: <CheckIcon size={14} />,       text: "Retour gratuit sous 30 jours, sans condition." },
-  { icon: <SparkIcon size={14} />,       text: "Équipements scolaires et fournitures disponibles toute l'année." },
-  { icon: <HeartIcon size={14} />,       text: "Nos produits éco-responsables : bons pour vous, bons pour la planète." },
+  { icon: <ShoppingBagIcon size={14} />, text: "Boutique solidaire : vélos en bambou artisanaux et accessoires éco-responsables." },
+  { icon: <SparkIcon size={14} />,      text: "Sorties vélo et activités sportives inclusives à Mons et en Wallonie." },
+  { icon: <HeartIcon size={14} />,      text: "Briseur de frontières mentales : inclusion sociale et diversité culturelle depuis 2007." },
+  { icon: <CheckIcon size={14} />,       text: "Vélos adaptés Hase Bikes & ElliptiGO accessibles à toutes et tous." },
+  { icon: <MapPinIcon size={14} />,      text: "Retrait et conseils à Mons · Livraison solidaire partout en Belgique." },
 ];
 
 export function AnnouncementBar() {
@@ -19,7 +19,7 @@ export function AnnouncementBar() {
     <div
       role="region"
       aria-label="Annonces"
-      className="relative h-12 overflow-hidden bg-ink"
+      className="relative h-12 overflow-hidden bg-[#0875B9]"
     >
       <div className="flex h-full animate-marquee-bar items-center whitespace-nowrap will-change-transform">
         {/* Copie 1 */}
@@ -52,8 +52,8 @@ export function AnnouncementBar() {
       </ul>
 
       {/* Dégradés latéraux */}
-      <div aria-hidden="true" className="pointer-events-none absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-ink to-transparent" />
-      <div aria-hidden="true" className="pointer-events-none absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-ink to-transparent" />
+      <div aria-hidden="true" className="pointer-events-none absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-[#0875B9] to-transparent" />
+      <div aria-hidden="true" className="pointer-events-none absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-[#0875B9] to-transparent" />
     </div>
   );
 }

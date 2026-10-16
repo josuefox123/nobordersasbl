@@ -23,8 +23,8 @@ const initialWishlist: WishlistItem[] = [
     id: 12,
     name: "Sacoche imperméable 20 L",
     category: "Accessoires · Sacoches",
-    price: 45000,
-    oldPrice: 56000,
+    price: 45,
+    oldPrice: 56,
     rating: 4.5,
     reviews: 14,
     image: "/images/vente-velo.jpg",
@@ -34,11 +34,22 @@ const initialWishlist: WishlistItem[] = [
     id: 1,
     name: "My Boo Kumasi — Route",
     category: "Vélos en bambou",
-    price: 1630000,
+    price: 1630,
     rating: 4.8,
     reviews: 36,
     image: "/images/lancement-myboo.jpg",
     inStock: true,
+  },
+  {
+    id: 8,
+    name: "Casque recyclé Ecobirdy",
+    category: "Équipement · Sécurité",
+    price: 58000,
+    rating: 5.0,
+    reviews: 48,
+    image: "/images/ghana-booomers.jpg",
+    badge: { text: "Épuisé", type: "soldout" },
+    inStock: false,
   },
 ];
 
@@ -80,7 +91,7 @@ export function WishlistClient() {
   };
 
   return (
-    <div className="mt-[132px] lg:mt-[188px] pb-24 bg-white min-h-[calc(100vh-132px)] lg:min-h-[calc(100vh-188px)] flex flex-col">
+    <div className="mt-[84px] lg:mt-[188px] pb-24 bg-white min-h-[calc(100vh-84px)] lg:min-h-[calc(100vh-188px)] flex flex-col">
       {/* ── Notification toast ── */}
       {notice && (
         <div
