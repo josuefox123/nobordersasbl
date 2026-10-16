@@ -1,7 +1,10 @@
+"use client";
+
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Reveal, Stagger, StaggerItem } from "@/components/ui/Reveal";
-import { ArrowRight } from "@/components/ui/Icons";
+import { Reveal } from "@/components/ui/Reveal";
+import { ArrowRight, ChevronLeftIcon, ChevronRightIcon } from "@/components/ui/Icons";
 
 const PRODUCTS = [
   {
@@ -87,6 +90,93 @@ const PRODUCTS = [
 ];
 
 export function FeaturedProducts() {
+  const total = PRODUCTS.length;
+  const [displayIndex, setDisplayIndex] = useState(0);
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const touchStartX = useRef<number | null>(null);
+
+  // Duplication pour défilement circulaire fluide
+  const loopItems = [...PRODUCTS, ...PRODUCTS];
+
+  useEffect(() => {
+    const scroller = scrollRef.current;
+    if (!scroller) return;
+    const children = Array.from(scroller.children) as HTMLElement[];
+    const target = children[displayIndex];
+    if (!target) return;
+
+    if (displayIndex === total) {
+      scroller.scrollTo({ left: target.offsetLeft, behavior: "smooth" });
+      const t = window.setTimeout(() => {
+        const first = children[0];
+        if (first) scroller.scrollTo({ left: first.offsetLeft, behavior: "auto" });
+        setDisplayIndex(0);
+      }, 550);
+      return () => window.clearTimeout(t);
+    }
+
+    scroller.scrollTo({ left: target.offsetLeft, behavior: "smooth" });
+  }, [displayIndex, total]);
+
+  useEffect(() => {
+    const handleResize = () => {
+      const scroller = scrollRef.current;
+      if (!scroller) return;
+      const children = Array.from(scroller.children) as HTMLElement[];
+      const target = children[displayIndex];
+      if (target) {
+        scroller.scrollTo({ left: target.offsetLeft, behavior: "auto" });
+      }
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, [displayIndex]);
+
+  const handleNext = () => {
+    setDisplayIndex((i) => i + 1);
+  };
+
+  const handlePrev = () => {
+    const scroller = scrollRef.current;
+    if (!scroller) return;
+    const children = Array.from(scroller.children) as HTMLElement[];
+
+    if (displayIndex === 0) {
+      const dup = children[total];
+      if (dup) {
+        scroller.scrollTo({ left: dup.offsetLeft, behavior: "auto" });
+      }
+      requestAnimationFrame(() => {
+        setDisplayIndex(total - 1);
+      });
+    } else {
+      setDisplayIndex((i) => i - 1);
+    }
+  };
+
+  const goTo = (i: number) => {
+    setDisplayIndex(i);
+  };
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartX.current === null) return;
+    const diff = touchStartX.current - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 40) {
+      if (diff > 0) {
+        handleNext();
+      } else {
+        handlePrev();
+      }
+    }
+    touchStartX.current = null;
+  };
+
+  const activeDot = displayIndex % total;
+
   return (
     <section className="bg-white py-24 sm:py-32" id="produits-phares">
       <div className="container">
@@ -103,63 +193,132 @@ export function FeaturedProducts() {
           </div>
         </Reveal>
 
-        <Stagger className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {PRODUCTS.map((p) => (
-            <StaggerItem key={p.id}>
-              <article className="group flex h-full flex-col overflow-hidden rounded-2xl border border-ink/10 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-ink/30 hover:shadow-lg">
+        {/* ── Carrousel 4 par 4 (Desktop: 4, Tablette: 2, Mobile: 1) ── */}
+        <div className="relative">
+          {/* Flèche gauche desktop */}
+          <button
+            type="button"
+            onClick={handlePrev}
+            aria-label="Produit précédent"
+            className="hidden sm:flex absolute -left-5 top-1/2 -translate-y-1/2 z-10 h-12 w-12 items-center justify-center rounded-full bg-white border border-ink/10 text-ink shadow-lg transition-all hover:bg-[#0875B9] hover:text-white hover:border-[#0875B9] hover:scale-105"
+          >
+            <ChevronLeftIcon size={20} />
+          </button>
 
-                <Link
-                  href={p.href}
-                  aria-label={`Voir ${p.name}`}
-                  className="relative block aspect-[4/3] w-full overflow-hidden bg-ink/5"
-                >
-                  <Image
-                    src={p.image}
-                    alt={p.name}
-                    fill
-                    className="object-cover transition-transform duration-500 group-hover:scale-105"
-                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                  />
-                </Link>
+          {/* Track du carrousel */}
+          <div
+            ref={scrollRef}
+            onTouchStart={handleTouchStart}
+            onTouchEnd={handleTouchEnd}
+            className="flex snap-x snap-mandatory overflow-x-hidden scroll-smooth py-3 -mx-3 px-3 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+          >
+            {loopItems.map((p, i) => (
+              <div
+                key={`${p.name}-${i}`}
+                className="w-full shrink-0 snap-start px-3 sm:w-1/2 lg:w-1/4"
+              >
+                <article className="group flex h-full flex-col overflow-hidden rounded-2xl border border-ink/10 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-ink/30 hover:shadow-lg">
+                  <Link
+                    href={p.href}
+                    aria-label={`Voir ${p.name}`}
+                    className="relative block aspect-[4/3] w-full overflow-hidden bg-ink/5"
+                  >
+                    <Image
+                      src={p.image}
+                      alt={p.name}
+                      fill
+                      className="object-cover transition-transform duration-500 group-hover:scale-105"
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                    />
+                  </Link>
 
-                <div className="flex flex-1 flex-col p-5">
-                  <p className="text-[11px] font-bold uppercase tracking-wider text-ink/50">
-                    {p.category}
-                  </p>
-                  <h3 className="mt-1 text-base font-bold leading-snug text-ink transition-colors group-hover:text-[#0875B9]">
-                    <Link href={p.href}>{p.name}</Link>
-                  </h3>
-                  <div className="mt-2 flex items-center gap-1.5 text-xs text-ink/50">
-                    <span className="text-amber-400">★★★★★</span>
-                    <span>{p.reviews} avis</span>
-                  </div>
-                  <div className="mt-4 flex items-center gap-3">
-                    <span className="text-lg font-extrabold text-ink">
-                      {p.price.toLocaleString("fr-BE")} €
-                    </span>
-                    {p.oldPrice && (
-                      <span className="text-sm text-ink/40 line-through">
-                        {p.oldPrice.toLocaleString("fr-BE")} €
+                  <div className="flex flex-1 flex-col p-5">
+                    <p className="text-[11px] font-bold uppercase tracking-wider text-ink/50">
+                      {p.category}
+                    </p>
+                    <h3 className="mt-1 text-base font-bold leading-snug text-ink transition-colors group-hover:text-[#0875B9]">
+                      <Link href={p.href}>{p.name}</Link>
+                    </h3>
+                    <div className="mt-2 flex items-center gap-1.5 text-xs text-ink/50">
+                      <span className="text-amber-400">★★★★★</span>
+                      <span>{p.reviews} avis</span>
+                    </div>
+                    <div className="mt-4 flex items-center gap-3">
+                      <span className="text-lg font-extrabold text-ink">
+                        {p.price.toLocaleString("fr-BE")} €
                       </span>
-                    )}
+                      {p.oldPrice && (
+                        <span className="text-sm text-ink/40 line-through">
+                          {p.oldPrice.toLocaleString("fr-BE")} €
+                        </span>
+                      )}
+                    </div>
+                    <div className="mt-auto pt-5">
+                      <Link
+                        href={p.href}
+                        className="flex w-full items-center justify-center gap-2 rounded-xl py-3 text-sm font-semibold text-white transition-opacity hover:opacity-90"
+                        style={{ backgroundColor: "#0875B9" }}
+                      >
+                        Ajouter au panier <ArrowRight size={15} />
+                      </Link>
+                    </div>
                   </div>
-                  <div className="mt-auto pt-5">
-                    <Link
-                      href={p.href}
-                      className="flex w-full items-center justify-center gap-2 rounded-xl py-3 text-sm font-semibold text-white transition-opacity hover:opacity-90"
-                      style={{ backgroundColor: "#0875B9" }}
-                    >
-                      Ajouter au panier <ArrowRight size={15} />
-                    </Link>
-                  </div>
-                </div>
-              </article>
-            </StaggerItem>
-          ))}
-        </Stagger>
+                </article>
+              </div>
+            ))}
+          </div>
+
+          {/* Flèche droite desktop */}
+          <button
+            type="button"
+            onClick={handleNext}
+            aria-label="Produit suivant"
+            className="hidden sm:flex absolute -right-5 top-1/2 -translate-y-1/2 z-10 h-12 w-12 items-center justify-center rounded-full bg-white border border-ink/10 text-ink shadow-lg transition-all hover:bg-[#0875B9] hover:text-white hover:border-[#0875B9] hover:scale-105"
+          >
+            <ChevronRightIcon size={20} />
+          </button>
+        </div>
+
+        {/* ── Dots + flèches mobiles ── */}
+        <div className="mt-8 flex items-center justify-center gap-4">
+          <button
+            type="button"
+            onClick={handlePrev}
+            aria-label="Produit précédent"
+            className="flex sm:hidden h-10 w-10 items-center justify-center rounded-full border border-ink/15 text-ink/70 transition-colors hover:border-[#0875B9] hover:text-[#0875B9]"
+          >
+            <ChevronLeftIcon size={18} />
+          </button>
+
+          <div className="flex items-center gap-2">
+            {PRODUCTS.map((p, i) => (
+              <button
+                key={p.id}
+                type="button"
+                onClick={() => goTo(i)}
+                aria-label={`Aller au produit ${p.name}`}
+                aria-current={i === activeDot ? "true" : undefined}
+                className={`rounded-full transition-all duration-300 ${
+                  i === activeDot
+                    ? "h-2.5 w-7 bg-[#0875B9]"
+                    : "h-2.5 w-2.5 bg-ink/20 hover:bg-ink/40"
+                }`}
+              />
+            ))}
+          </div>
+
+          <button
+            type="button"
+            onClick={handleNext}
+            aria-label="Produit suivant"
+            className="flex sm:hidden h-10 w-10 items-center justify-center rounded-full border border-ink/15 text-ink/70 transition-colors hover:border-[#0875B9] hover:text-[#0875B9]"
+          >
+            <ChevronRightIcon size={18} />
+          </button>
+        </div>
 
         <Reveal delay={0.2}>
-          <div className="mt-14 flex justify-center">
+          <div className="mt-12 flex justify-center">
             <Link
               href="/boutique"
               className="inline-flex items-center gap-2 rounded-xl px-8 py-3.5 text-sm font-semibold text-white transition-opacity hover:opacity-90"

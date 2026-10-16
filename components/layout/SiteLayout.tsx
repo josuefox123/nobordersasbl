@@ -3,6 +3,7 @@
 import { usePathname } from "next/navigation";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import { ScrollToTop } from "@/components/ui/ScrollToTop";
 
 const AUTH_ROUTES = [
   "/login",
@@ -33,6 +34,7 @@ export function SiteLayout({ children }: { children: React.ReactNode }) {
         {children}
       </main>
       <Footer />
+      <ScrollToTop />
     </>
   );
 }

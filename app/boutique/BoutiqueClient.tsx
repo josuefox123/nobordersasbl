@@ -350,11 +350,49 @@ export function BoutiqueClient() {
               </button>
             </div>
 
-            <div className="flex flex-col gap-6">
-              {/* ── Carte 1 : Catégories ── */}
+            <div className="flex flex-col gap-5">
+              {/* ── Entête sidebar avec compte et reset rapide ── */}
+              <div className="flex items-center justify-between px-1">
+                <span className="text-sm font-bold text-ink">
+                  Filtres {activeFiltersCount > 0 && `(${activeFiltersCount})`}
+                </span>
+                {activeFiltersCount > 0 && (
+                  <button
+                    type="button"
+                    onClick={resetAllFilters}
+                    className="text-xs font-semibold text-[#0875B9] hover:underline"
+                  >
+                    Tout effacer
+                  </button>
+                )}
+              </div>
+
+              {/* ── Carte 1 : Trier par ── */}
+              <div className="rounded-2xl border border-ink/10 bg-white p-5 shadow-sm">
+                <div className="mb-3 flex items-center gap-2">
+                  <span className="h-4 w-1 rounded-full bg-[#0875B9]" />
+                  <h2 className="text-base font-bold text-ink">Trier par</h2>
+                </div>
+                <select
+                  value={sortBy}
+                  onChange={(e) => {
+                    setSortBy(e.target.value);
+                    setCurrentPage(1);
+                  }}
+                  className="w-full rounded-xl border border-ink/15 bg-paper py-2.5 px-3 text-xs font-medium text-ink focus:border-[#0875B9] focus:outline-none"
+                >
+                  <option value="featured">En vedette</option>
+                  <option value="price-asc">Prix : croissant</option>
+                  <option value="price-desc">Prix : décroissant</option>
+                  <option value="rating">Mieux notés</option>
+                  <option value="newest">Nouveautés</option>
+                </select>
+              </div>
+
+              {/* ── Carte 2 : Catégories ── */}
               <div className="rounded-2xl border border-ink/10 bg-white p-5 shadow-sm">
                 <div className="mb-4 flex items-center gap-2">
-                  <span className="h-4 w-1 rounded-full bg-[#CF4318]" />
+                  <span className="h-4 w-1 rounded-full bg-[#0875B9]" />
                   <h2 className="text-base font-bold text-ink">Catégories</h2>
                 </div>
 
@@ -372,7 +410,7 @@ export function BoutiqueClient() {
                             onClick={() => handleSelectCategory(cat.slug)}
                             className={`flex-1 text-left font-medium transition-colors ${
                               isSelected
-                                ? "font-bold text-[#CF4318]"
+                                ? "font-bold text-[#0875B9]"
                                 : "text-ink/80 hover:text-ink"
                             }`}
                           >
@@ -411,7 +449,7 @@ export function BoutiqueClient() {
                                     }
                                     className={`block w-full py-1 text-left text-xs transition-colors ${
                                       isSubSelected
-                                        ? "font-bold text-[#CF4318]"
+                                        ? "font-bold text-[#0875B9]"
                                         : "text-ink/70 hover:text-ink"
                                     }`}
                                   >
@@ -428,66 +466,83 @@ export function BoutiqueClient() {
                 </ul>
               </div>
 
-              {/* ── Carte 2 : Fourchette de prix ── */}
+              {/* ── Carte 3 : Fourchette de prix ── */}
               <div className="rounded-2xl border border-ink/10 bg-white p-5 shadow-sm">
                 <div className="mb-4 flex items-center gap-2">
-                  <span className="h-4 w-1 rounded-full bg-[#CF4318]" />
+                  <span className="h-4 w-1 rounded-full bg-[#0875B9]" />
                   <h2 className="text-base font-bold text-ink">Fourchette de prix</h2>
                 </div>
 
                 <div className="space-y-4">
-                  <div className="flex items-center justify-between text-xs font-semibold text-ink/70">
-                    <span>0 €</span>
-                    <span className="rounded-md bg-paper px-2 py-1 text-ink font-bold">
-                      jusqu&apos;à {tempMaxPrice.toLocaleString("fr-BE")} €
-                    </span>
+                  {/* Presets rapides */}
+                  <div>
+                    <label className="block text-[11px] font-bold uppercase tracking-wider text-ink/60 mb-1.5">
+                      Palier de prix
+                    </label>
+                    <select
+                      value={pricePreset}
+                      onChange={(e) => handlePricePresetChange(e.target.value)}
+                      className="w-full rounded-xl border border-ink/15 bg-paper py-2 px-3 text-xs font-medium text-ink focus:border-[#0875B9] focus:outline-none"
+                    >
+                      <option value="all">Tous les prix</option>
+                      <option value="under-50">Moins de 50 €</option>
+                      <option value="50-500">50 € à 500 €</option>
+                      <option value="500-2000">500 € à 2 000 €</option>
+                      <option value="over-2000">Plus de 2 000 €</option>
+                    </select>
                   </div>
 
-                  <input
-                    type="range"
-                    min="0"
-                    max="4000"
-                    step="50"
-                    value={tempMaxPrice}
-                    onChange={(e) => setTempMaxPrice(Number(e.target.value))}
-                    className="h-2 w-full cursor-pointer appearance-none rounded-lg bg-ink/10 accent-[#CF4318]"
-                  />
+                  {/* Slider de prix */}
+                  <div className="pt-3 border-t border-ink/10 space-y-3">
+                    <div className="flex items-center justify-between text-xs font-semibold text-ink/70">
+                      <span>0 €</span>
+                      <span className="rounded-md bg-paper px-2 py-1 text-ink font-bold">
+                        jusqu&apos;à {tempMaxPrice.toLocaleString("fr-BE")} €
+                      </span>
+                    </div>
 
-                  <div className="flex items-center justify-between pt-1">
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setMaxPrice(4000);
-                        setTempMaxPrice(4000);
-                        setCurrentPage(1);
-                      }}
-                      className="text-xs text-ink/50 hover:text-ink underline"
-                    >
-                      Réinitialiser
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setMaxPrice(tempMaxPrice);
-                        setCurrentPage(1);
-                      }}
-                      className="rounded-lg bg-[#CF4318] px-3 py-1.5 text-xs font-semibold text-white transition-colors hover:bg-[#B03815]"
-                    >
-                      Appliquer
-                    </button>
+                    <input
+                      type="range"
+                      min="0"
+                      max="4000"
+                      step="50"
+                      value={tempMaxPrice}
+                      onChange={(e) => setTempMaxPrice(Number(e.target.value))}
+                      className="h-2 w-full cursor-pointer appearance-none rounded-lg bg-ink/10 accent-[#0875B9]"
+                    />
+
+                    <div className="flex items-center justify-between pt-1">
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setMaxPrice(4000);
+                          setTempMaxPrice(4000);
+                          setPricePreset("all");
+                          setCurrentPage(1);
+                        }}
+                        className="text-xs text-ink/50 hover:text-ink underline"
+                      >
+                        Réinitialiser
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setMaxPrice(tempMaxPrice);
+                          setCurrentPage(1);
+                        }}
+                        className="rounded-lg bg-[#0875B9] px-3.5 py-1.5 text-xs font-semibold text-white transition-colors hover:bg-[#065f9a]"
+                      >
+                        Appliquer
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
 
-              {/* ── Carte 3 : Filtrer par couleur — commenté */}
-              {/* <div className="rounded-2xl border border-ink/10 bg-white p-5 shadow-sm">
-                ...filtre couleur...
-              </div> */}
-
               {/* ── Carte 4 : Filtrer par marque ── */}
               <div className="rounded-2xl border border-ink/10 bg-white p-5 shadow-sm">
                 <div className="mb-4 flex items-center gap-2">
-                  <span className="h-4 w-1 rounded-full bg-[#CF4318]" />
+                  <span className="h-4 w-1 rounded-full bg-[#0875B9]" />
                   <h2 className="text-base font-bold text-ink">Filtrer par marque</h2>
                 </div>
 
@@ -498,7 +553,7 @@ export function BoutiqueClient() {
                     value={brandSearch}
                     onChange={(e) => setBrandSearch(e.target.value)}
                     placeholder="Rechercher une marque..."
-                    className="w-full rounded-lg border border-ink/15 bg-paper py-2 pl-3 pr-8 text-xs text-ink placeholder:text-ink/40 focus:border-ink focus:outline-none"
+                    className="w-full rounded-lg border border-ink/15 bg-paper py-2 pl-3 pr-8 text-xs text-ink placeholder:text-ink/40 focus:border-[#0875B9] focus:outline-none"
                   />
                   <SearchIcon
                     size={14}
@@ -521,7 +576,7 @@ export function BoutiqueClient() {
                             type="checkbox"
                             checked={isChecked}
                             onChange={() => toggleTempBrand(brand)}
-                            className="h-4 w-4 rounded border-ink/20 text-[#CF4318] accent-[#CF4318] focus:ring-0"
+                            className="h-4 w-4 rounded border-ink/20 text-[#0875B9] accent-[#0875B9] focus:ring-0"
                           />
                           <span>{brand}</span>
                         </div>
@@ -541,7 +596,7 @@ export function BoutiqueClient() {
                   <button
                     type="button"
                     onClick={applyBrands}
-                    className="rounded-lg border border-[#CF4318] bg-white px-3.5 py-1.5 text-xs font-semibold text-[#CF4318] transition-colors hover:bg-[#CF4318] hover:text-white"
+                    className="rounded-lg border border-[#0875B9] bg-white px-3.5 py-1.5 text-xs font-semibold text-[#0875B9] transition-colors hover:bg-[#0875B9] hover:text-white"
                   >
                     Appliquer le filtre
                   </button>
@@ -553,6 +608,35 @@ export function BoutiqueClient() {
                     Tout effacer
                   </button>
                 </div>
+              </div>
+
+              {/* ── Carte 5 : Articles par page & Réinitialisation ── */}
+              <div className="rounded-2xl border border-ink/10 bg-white p-5 shadow-sm space-y-4">
+                <div>
+                  <label className="block text-[11px] font-bold uppercase tracking-wider text-ink/60 mb-1.5">
+                    Articles par page
+                  </label>
+                  <select
+                    value={itemsPerPage}
+                    onChange={(e) => {
+                      setItemsPerPage(Number(e.target.value));
+                      setCurrentPage(1);
+                    }}
+                    className="w-full rounded-xl border border-ink/15 bg-paper py-2 px-3 text-xs font-medium text-ink focus:border-[#0875B9] focus:outline-none"
+                  >
+                    <option value="6">6 articles</option>
+                    <option value="12">12 articles</option>
+                    <option value="24">24 articles</option>
+                  </select>
+                </div>
+
+                <button
+                  type="button"
+                  onClick={resetAllFilters}
+                  className="flex w-full items-center justify-center gap-2 rounded-xl border border-ink/15 bg-paper py-2.5 px-3 text-xs font-semibold text-ink/80 transition-colors hover:bg-ink hover:text-white"
+                >
+                  <span className="text-sm">↺</span> Effacer tous les filtres
+                </button>
               </div>
             </div>
           </aside>
@@ -569,7 +653,7 @@ export function BoutiqueClient() {
           {/*  COLONNE DROITE : PRODUITS & CONTRÔLES                 */}
           {/* ═══════════════════════════════════════════════════════ */}
           <main className="lg:col-span-8 xl:col-span-9">
-            {/* ── Barre de recherche & vue (Top bar) ── */}
+            {/* ── Barre de recherche & vue (Top bar simplifiée) ── */}
             <div className="rounded-2xl border border-ink/10 bg-white p-4 shadow-sm">
               <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
                 {/* Input de recherche */}
@@ -589,9 +673,28 @@ export function BoutiqueClient() {
                       }
                     }}
                     placeholder="Rechercher des produits, catégories, marques..."
-                    className="w-full rounded-xl border border-ink/15 bg-paper py-2.5 pl-10 pr-4 text-sm text-ink placeholder:text-ink/40 focus:border-ink focus:outline-none"
+                    className="w-full rounded-xl border border-ink/15 bg-paper py-2.5 pl-10 pr-4 text-sm text-ink placeholder:text-ink/40 focus:border-[#0875B9] focus:outline-none"
                   />
                 </div>
+
+                {/* Bouton Rechercher */}
+                <button
+                  type="button"
+                  onClick={() => {
+                    setSearchQuery(searchInput);
+                    setCurrentPage(1);
+                  }}
+                  className="rounded-xl bg-[#0875B9] px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#065f9a]"
+                >
+                  Rechercher
+                </button>
+              </div>
+
+              {/* ── Sous-barre : compteur de résultats et sélecteur de vue ── */}
+              <div className="mt-3 flex items-center justify-between border-t border-ink/10 pt-3">
+                <p className="text-xs sm:text-sm font-medium text-ink/70">
+                  <span className="font-bold text-ink">{filteredProducts.length}</span> produit{filteredProducts.length > 1 ? "s" : ""} trouvé{filteredProducts.length > 1 ? "s" : ""}
+                </p>
 
                 {/* Sélecteur Vue Grille / Liste */}
                 <div className="flex items-center gap-2">
@@ -606,7 +709,7 @@ export function BoutiqueClient() {
                       aria-label="Affichage en grille"
                       className={`grid h-8 w-8 place-items-center rounded-md transition-colors ${
                         viewMode === "grid"
-                          ? "bg-[#CF4318] text-white"
+                          ? "bg-[#0875B9] text-white"
                           : "text-ink/60 hover:text-ink"
                       }`}
                     >
@@ -630,7 +733,7 @@ export function BoutiqueClient() {
                       aria-label="Affichage en liste"
                       className={`grid h-8 w-8 place-items-center rounded-md transition-colors ${
                         viewMode === "list"
-                          ? "bg-[#CF4318] text-white"
+                          ? "bg-[#0875B9] text-white"
                           : "text-ink/60 hover:text-ink"
                       }`}
                     >
@@ -641,90 +744,6 @@ export function BoutiqueClient() {
                       </svg>
                     </button>
                   </div>
-                </div>
-
-                {/* Bouton Rechercher */}
-                <button
-                  type="button"
-                  onClick={() => {
-                    setSearchQuery(searchInput);
-                    setCurrentPage(1);
-                  }}
-                  className="rounded-xl bg-[#CF4318] px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#B03815]"
-                >
-                  Rechercher
-                </button>
-              </div>
-
-              {/* ── Ligne déroulants & Clear filters ── */}
-              <div className="mt-4 grid grid-cols-1 gap-3 border-t border-ink/10 pt-4 sm:grid-cols-2 md:grid-cols-4">
-                {/* Fourchette de prix preset */}
-                <div>
-                  <label className="block text-[11px] font-bold uppercase tracking-wider text-ink/60 mb-1">
-                    Fourchette de prix
-                  </label>
-                  <select
-                    value={pricePreset}
-                    onChange={(e) => handlePricePresetChange(e.target.value)}
-                    className="w-full rounded-lg border border-ink/15 bg-white py-2 px-3 text-xs text-ink focus:border-ink focus:outline-none"
-                  >
-                    <option value="all">Tous les prix</option>
-                    <option value="under-50">Moins de 50 €</option>
-                    <option value="50-500">50 € à 500 €</option>
-                    <option value="500-2000">500 € à 2 000 €</option>
-                    <option value="over-2000">Plus de 2 000 €</option>
-                  </select>
-                </div>
-
-                {/* Trier par */}
-                <div>
-                  <label className="block text-[11px] font-bold uppercase tracking-wider text-ink/60 mb-1">
-                    Trier par
-                  </label>
-                  <select
-                    value={sortBy}
-                    onChange={(e) => {
-                      setSortBy(e.target.value);
-                      setCurrentPage(1);
-                    }}
-                    className="w-full rounded-lg border border-ink/15 bg-white py-2 px-3 text-xs text-ink focus:border-ink focus:outline-none"
-                  >
-                    <option value="featured">En vedette</option>
-                    <option value="price-asc">Prix : croissant</option>
-                    <option value="price-desc">Prix : décroissant</option>
-                    <option value="rating">Mieux notés</option>
-                    <option value="newest">Nouveautés</option>
-                  </select>
-                </div>
-
-                {/* Articles par page */}
-                <div>
-                  <label className="block text-[11px] font-bold uppercase tracking-wider text-ink/60 mb-1">
-                    Articles par page
-                  </label>
-                  <select
-                    value={itemsPerPage}
-                    onChange={(e) => {
-                      setItemsPerPage(Number(e.target.value));
-                      setCurrentPage(1);
-                    }}
-                    className="w-full rounded-lg border border-ink/15 bg-white py-2 px-3 text-xs text-ink focus:border-ink focus:outline-none"
-                  >
-                    <option value="6">6 articles</option>
-                    <option value="12">12 articles</option>
-                    <option value="24">24 articles</option>
-                  </select>
-                </div>
-
-                {/* Effacer les filtres */}
-                <div className="flex items-end">
-                  <button
-                    type="button"
-                    onClick={resetAllFilters}
-                    className="flex w-full items-center justify-center gap-1.5 rounded-lg border border-ink/15 bg-paper py-2 px-3 text-xs font-semibold text-ink/75 transition-colors hover:border-ink hover:text-ink"
-                  >
-                    <span className="text-sm">↺</span> Effacer les filtres
-                  </button>
                 </div>
               </div>
             </div>
@@ -737,12 +756,12 @@ export function BoutiqueClient() {
                 </span>
 
                 {selectedCategory && (
-                  <span className="inline-flex items-center gap-1.5 rounded-lg bg-[#FBE3D9] px-2.5 py-1 text-xs font-medium text-[#CF4318]">
+                  <span className="inline-flex items-center gap-1.5 rounded-lg bg-[#0875B9]/10 px-2.5 py-1 text-xs font-medium text-[#0875B9]">
                     Catégorie : {selectedCategory}
                     <button
                       type="button"
                       onClick={() => setSelectedCategory(null)}
-                      className="hover:text-black"
+                      className="hover:text-ink"
                     >
                       ×
                     </button>
@@ -750,28 +769,29 @@ export function BoutiqueClient() {
                 )}
 
                 {selectedSub && (
-                  <span className="inline-flex items-center gap-1.5 rounded-lg bg-[#FBE3D9] px-2.5 py-1 text-xs font-medium text-[#CF4318]">
+                  <span className="inline-flex items-center gap-1.5 rounded-lg bg-[#0875B9]/10 px-2.5 py-1 text-xs font-medium text-[#0875B9]">
                     Sous-catégorie : {selectedSub}
                     <button
                       type="button"
                       onClick={() => setSelectedSub(null)}
-                      className="hover:text-black"
+                      className="hover:text-ink"
                     >
                       ×
                     </button>
                   </span>
                 )}
 
-                {maxPrice < 4000000 && (
-                  <span className="inline-flex items-center gap-1.5 rounded-lg bg-[#FBE3D9] px-2.5 py-1 text-xs font-medium text-[#CF4318]">
-                    ≤ {maxPrice.toLocaleString("fr-FR")} FCFA
+                {maxPrice < 4000 && (
+                  <span className="inline-flex items-center gap-1.5 rounded-lg bg-[#0875B9]/10 px-2.5 py-1 text-xs font-medium text-[#0875B9]">
+                    ≤ {maxPrice.toLocaleString("fr-FR")} €
                     <button
                       type="button"
                       onClick={() => {
-                        setMaxPrice(4000000);
-                        setTempMaxPrice(4000000);
+                        setMaxPrice(4000);
+                        setTempMaxPrice(4000);
+                        setPricePreset("all");
                       }}
-                      className="hover:text-black"
+                      className="hover:text-ink"
                     >
                       ×
                     </button>
@@ -781,15 +801,14 @@ export function BoutiqueClient() {
                 {selectedColors.map((color) => (
                   <span
                     key={color}
-                    className="inline-flex items-center gap-1.5 rounded-lg bg-[#FBE3D9] px-2.5 py-1 text-xs font-medium text-[#CF4318]"
-                  >
+                    className="inline-flex items-center gap-1.5 rounded-lg bg-[#0875B9]/10 px-2.5 py-1 text-xs font-medium text-[#0875B9]">
                     Couleur : {color}
                     <button
                       type="button"
                       onClick={() =>
                         setSelectedColors((prev) => prev.filter((c) => c !== color))
                       }
-                      className="hover:text-black"
+                      className="hover:text-ink"
                     >
                       ×
                     </button>
@@ -799,15 +818,14 @@ export function BoutiqueClient() {
                 {selectedBrands.map((brand) => (
                   <span
                     key={brand}
-                    className="inline-flex items-center gap-1.5 rounded-lg bg-[#FBE3D9] px-2.5 py-1 text-xs font-medium text-[#CF4318]"
-                  >
+                    className="inline-flex items-center gap-1.5 rounded-lg bg-[#0875B9]/10 px-2.5 py-1 text-xs font-medium text-[#0875B9]">
                     {brand}
                     <button
                       type="button"
                       onClick={() =>
                         setSelectedBrands((prev) => prev.filter((b) => b !== brand))
                       }
-                      className="hover:text-black"
+                      className="hover:text-ink"
                     >
                       ×
                     </button>
@@ -815,7 +833,7 @@ export function BoutiqueClient() {
                 ))}
 
                 {searchQuery && (
-                  <span className="inline-flex items-center gap-1.5 rounded-lg bg-[#FBE3D9] px-2.5 py-1 text-xs font-medium text-[#CF4318]">
+                  <span className="inline-flex items-center gap-1.5 rounded-lg bg-[#0875B9]/10 px-2.5 py-1 text-xs font-medium text-[#0875B9]">
                     « {searchQuery} »
                     <button
                       type="button"
@@ -823,7 +841,7 @@ export function BoutiqueClient() {
                         setSearchQuery("");
                         setSearchInput("");
                       }}
-                      className="hover:text-black"
+                      className="hover:text-ink"
                     >
                       ×
                     </button>
@@ -833,7 +851,7 @@ export function BoutiqueClient() {
                 <button
                   type="button"
                   onClick={resetAllFilters}
-                  className="ml-auto text-xs font-semibold text-ink/50 hover:text-flame underline"
+                  className="ml-auto text-xs font-semibold text-ink/50 hover:text-[#0875B9] underline"
                 >
                   Tout réinitialiser
                 </button>

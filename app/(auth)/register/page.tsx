@@ -5,183 +5,197 @@ import Image from "next/image";
 import { useState } from "react";
 
 export default function RegisterPage() {
+  const [fullName, setFullName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+  };
+
   return (
-    <>
-      {/* Logo */}
-      <div className="flex flex-col items-center mb-8">
-        <Image
-          src="/images/logo/logoFichier 2logo_2.png"
-          alt="No Borders ASBL"
-          width={192}
-          height={64}
-          className="mb-4 object-contain"
-        />
-        <h1 className="text-2xl font-bold text-[#0B0B0C] tracking-tight">Bienvenue !</h1>
-        <p className="text-sm text-[#55555C] mt-1">Créez votre compte pour accéder à votre espace membre</p>
-      </div>
-
-      {/* Boutons sociaux */}
-      <div className="flex flex-col gap-3 mb-5">
-        <button
-          id="btn-register-google"
-          type="button"
-          className="flex items-center justify-center gap-3 w-full border border-[#E0DDD8] rounded-lg py-3 px-4 text-sm font-medium text-[#0B0B0C] bg-white hover:bg-[#F4F3F0] transition-colors duration-200"
-        >
-          <svg width="18" height="18" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M43.611 20.083H42V20H24v8h11.303C33.654 32.657 29.332 36 24 36c-6.627 0-12-5.373-12-12s5.373-12 12-12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 12.955 4 4 12.955 4 24s8.955 20 20 20 20-8.955 20-20c0-1.341-.138-2.65-.389-3.917z" fill="#FFC107"/>
-            <path d="M6.306 14.691l6.571 4.819C14.655 15.108 19.0 12 24 12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 16.318 4 9.656 8.337 6.306 14.691z" fill="#FF3D00"/>
-            <path d="M24 44c5.166 0 9.86-1.977 13.409-5.192l-6.19-5.238A11.91 11.91 0 0 1 24 36c-5.311 0-9.823-3.438-11.388-8.165l-6.495 5.004C9.505 39.556 16.227 44 24 44z" fill="#4CAF50"/>
-            <path d="M43.611 20.083H42V20H24v8h11.303a12.04 12.04 0 0 1-4.087 5.571l.003-.002 6.19 5.238C36.971 39.205 44 34 44 24c0-1.341-.138-2.65-.389-3.917z" fill="#1976D2"/>
-          </svg>
-          S'inscrire avec Google
-        </button>
-      </div>
-
-      {/* Séparateur */}
-      <div className="flex items-center gap-4 mb-5">
-        <div className="flex-1 h-px bg-[#E0DDD8]" />
-        <span className="text-xs text-[#55555C] font-medium">Ou</span>
-        <div className="flex-1 h-px bg-[#E0DDD8]" />
-      </div>
-
-      {/* Formulaire */}
-      <form id="form-register" className="flex flex-col gap-4" noValidate>
-        {/* Nom complet */}
-        <div className="flex flex-col gap-1.5">
-          <label htmlFor="register-fullname" className="text-xs font-semibold text-[#0B0B0C] flex items-center gap-1">
-            Nom complet <span className="text-[#E2501F]">*</span>
-          </label>
-          <input
-            id="register-fullname"
-            type="text"
-            placeholder="Entrez votre nom complet"
-            autoComplete="name"
-            className="w-full border border-[#E0DDD8] rounded-lg px-4 py-3 text-sm text-[#0B0B0C] placeholder-[#A8A5A0] focus:outline-none focus:border-[#1B3F7B] transition-colors bg-white"
-          />
-        </div>
-
-        {/* Adresse mail */}
-        <div className="flex flex-col gap-1.5">
-          <label htmlFor="register-email" className="text-xs font-semibold text-[#0B0B0C] flex items-center gap-1">
-            Adresse mail <span className="text-[#E2501F]">*</span>
-          </label>
-          <input
-            id="register-email"
-            type="email"
-            placeholder="exemple@email.com"
-            autoComplete="email"
-            className="w-full border border-[#E0DDD8] rounded-lg px-4 py-3 text-sm text-[#0B0B0C] placeholder-[#A8A5A0] focus:outline-none focus:border-[#1B3F7B] transition-colors bg-white"
-          />
-        </div>
-
-        {/* Mot de passe */}
-        <div className="flex flex-col gap-1.5">
-          <label htmlFor="register-password" className="text-xs font-semibold text-[#0B0B0C] flex items-center gap-1">
-            Mot de passe <span className="text-[#E2501F]">*</span>
-          </label>
-          <div className="relative">
-            <input
-              id="register-password"
-              type={showPassword ? "text" : "password"}
-              placeholder="Entrez votre mot de passe"
-              autoComplete="new-password"
-              className="w-full border border-[#E0DDD8] rounded-lg px-4 py-3 pr-11 text-sm text-[#0B0B0C] placeholder-[#A8A5A0] focus:outline-none focus:border-[#1B3F7B] transition-colors bg-white"
+    <div className="min-h-screen bg-[#FAF9F5] text-[#141413] flex flex-col justify-center items-center py-10 px-4 sm:px-6 lg:px-8 selection:bg-[#E5E3DC]">
+      <div className="w-full max-w-5xl mx-auto flex flex-col lg:flex-row items-center justify-center gap-10 lg:gap-16 xl:gap-20">
+        {/* ── COLONNE GAUCHE : Formulaire & Identité No Borders ── */}
+        <div className="w-full max-w-[440px] flex flex-col items-center">
+          {/* Logo officiel No Borders */}
+          <Link
+            href="/"
+            className="mb-5 inline-block transition-transform hover:scale-[1.02]"
+            aria-label="Retour à l'accueil"
+          >
+            <Image
+              src="/images/logo/logoFichier 2logo_2.png"
+              alt="No Borders ASBL"
+              width={200}
+              height={60}
+              className="h-11 sm:h-12 w-auto object-contain"
+              priority
             />
-            <button
-              type="button"
-              id="btn-toggle-register-password"
-              onClick={() => setShowPassword(!showPassword)}
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-[#A8A5A0] hover:text-[#55555C] transition-colors"
-              aria-label={showPassword ? "Masquer le mot de passe" : "Afficher le mot de passe"}
-            >
-              {showPassword ? (
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24" />
-                  <line x1="1" y1="1" x2="23" y2="23" />
-                </svg>
-              ) : (
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
-                  <circle cx="12" cy="12" r="3" />
-                </svg>
-              )}
-            </button>
-          </div>
-          <p className="text-[11px] text-[#55555C] leading-relaxed">
-            Vous devrez utiliser un mot de passe contenant au moins 8 caractères dont 1 chiffre, 1 majuscule, 1 minuscule special.
-          </p>
-        </div>
-
-        {/* Confirmation du mot de passe */}
-        <div className="flex flex-col gap-1.5">
-          <label htmlFor="register-confirm-password" className="text-xs font-semibold text-[#0B0B0C] flex items-center gap-1">
-            Confirmez le mot de passe <span className="text-[#E2501F]">*</span>
-          </label>
-          <div className="relative">
-            <input
-              id="register-confirm-password"
-              type={showConfirmPassword ? "text" : "password"}
-              placeholder="Confirmez votre mot de passe"
-              autoComplete="new-password"
-              className="w-full border border-[#E0DDD8] rounded-lg px-4 py-3 pr-11 text-sm text-[#0B0B0C] placeholder-[#A8A5A0] focus:outline-none focus:border-[#1B3F7B] transition-colors bg-white"
-            />
-            <button
-              type="button"
-              id="btn-toggle-register-confirm-password"
-              onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-[#A8A5A0] hover:text-[#55555C] transition-colors"
-              aria-label={showConfirmPassword ? "Masquer la confirmation du mot de passe" : "Afficher la confirmation du mot de passe"}
-            >
-              {showConfirmPassword ? (
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24" />
-                  <line x1="1" y1="1" x2="23" y2="23" />
-                </svg>
-              ) : (
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
-                  <circle cx="12" cy="12" r="3" />
-                </svg>
-              )}
-            </button>
-          </div>
-        </div>
-
-        {/* CGU */}
-        <p className="text-[11px] text-[#55555C] leading-relaxed text-center">
-          En vous connectant, vous acceptez nos{" "}
-          <Link href="#" className="text-[#1B3F7B] underline hover:text-[#E2501F] transition-colors">
-            conditions générales
-          </Link>{" "}
-          et la{" "}
-          <Link href="#" className="text-[#1B3F7B] underline hover:text-[#E2501F] transition-colors">
-            politique de confidentialité
           </Link>
-        </p>
 
-        {/* Bouton submit */}
-        <button
-          id="btn-submit-register"
-          type="submit"
-          className="w-full bg-[#0875B9] text-white rounded-lg py-3.5 text-sm font-bold tracking-wide hover:bg-[#065a8f] transition-colors duration-200 mt-1"
-        >
-          Créer mon compte
-        </button>
-      </form>
+          {/* Titre & sous-titre contextualisés */}
+          <h1 className="font-serif text-[2.35rem] sm:text-[2.75rem] text-[#141413] tracking-[-0.03em] leading-tight text-center font-normal whitespace-nowrap">
+            Rejoignez l’aventure
+          </h1>
+          <p className="mt-2 text-sm sm:text-[15px] text-[#55555C] text-center font-normal">
+            Créez votre compte pour participer aux projets et activités
+          </p>
 
-      {/* Lien connexion */}
-      <p className="text-center text-xs text-[#55555C] mt-6">
-        Vous avez déjà un compte ?{" "}
-        <Link
-          href="/login"
-          id="link-login-from-register"
-          className="text-[#0B0B0C] font-bold hover:text-[#E2501F] transition-colors underline underline-offset-2"
-        >
-          Connectez-vous
-        </Link>
-      </p>
-    </>
+          {/* Carte blanche flottante */}
+          <div className="mt-7 w-full max-w-[390px] bg-white rounded-[28px] border border-[#ECE9E2] shadow-[0_4px_30px_rgba(0,0,0,0.04)] p-6 sm:p-7 flex flex-col gap-3">
+            {/* Bouton Google */}
+            <button
+              id="btn-register-google"
+              type="button"
+              className="w-full flex items-center justify-center gap-2.5 py-3 px-4 rounded-xl border border-[#E5E3DC] bg-white hover:bg-[#F9F8F5] text-sm font-medium text-[#141413] transition-colors shadow-2xs"
+            >
+              <svg width="18" height="18" viewBox="0 0 24 24">
+                <path
+                  fill="#4285F4"
+                  d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.8-2.4 3.66v3.04h3.88c2.28-2.09 3.66-5.18 3.66-9.14z"
+                />
+                <path
+                  fill="#34A853"
+                  d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.04c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.25v3.13C3.26 21.36 7.36 24 12 24z"
+                />
+                <path
+                  fill="#FBBC05"
+                  d="M5.28 14.28c-.25-.72-.38-1.49-.38-2.28s.13-1.56.38-2.28V6.59H1.25C.45 8.18 0 9.99 0 12s.45 3.82 1.25 5.41l4.03-3.13z"
+                />
+                <path
+                  fill="#EA4335"
+                  d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.36 0 3.26 2.64 1.25 6.59l4.03 3.13c.95-2.83 3.6-4.97 6.72-4.97z"
+                />
+              </svg>
+              S&apos;inscrire avec Google
+            </button>
+
+            {/* Séparateur OU */}
+            <div className="py-0.5 text-center">
+              <span className="text-[11px] font-semibold uppercase tracking-wider text-[#9B9994]">
+                OU
+              </span>
+            </div>
+
+            {/* Formulaire d'inscription */}
+            <form id="form-register" onSubmit={handleSubmit} className="flex flex-col gap-3">
+              <input
+                id="register-fullname"
+                type="text"
+                value={fullName}
+                onChange={(e) => setFullName(e.target.value)}
+                placeholder="Nom et prénom"
+                autoComplete="name"
+                required
+                className="w-full rounded-xl border border-[#E5E3DC] bg-white px-4 py-3 text-sm text-[#141413] placeholder-[#9B9994] focus:outline-none focus:border-[#0875B9] transition-colors"
+              />
+
+              <input
+                id="register-email"
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="votre@email.com"
+                autoComplete="email"
+                required
+                className="w-full rounded-xl border border-[#E5E3DC] bg-white px-4 py-3 text-sm text-[#141413] placeholder-[#9B9994] focus:outline-none focus:border-[#0875B9] transition-colors"
+              />
+
+              <div className="relative">
+                <input
+                  id="register-password"
+                  type={showPassword ? "text" : "password"}
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="Mot de passe (8+ caractères)"
+                  autoComplete="new-password"
+                  required
+                  className="w-full rounded-xl border border-[#E5E3DC] bg-white px-4 py-3 pr-11 text-sm text-[#141413] placeholder-[#9B9994] focus:outline-none focus:border-[#0875B9] transition-colors"
+                />
+                <button
+                  type="button"
+                  id="btn-toggle-register-password"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-3.5 top-1/2 -translate-y-1/2 text-[#9B9994] hover:text-[#141413] transition-colors"
+                  aria-label={showPassword ? "Masquer le mot de passe" : "Afficher le mot de passe"}
+                >
+                  {showPassword ? (
+                    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24" />
+                      <line x1="1" y1="1" x2="23" y2="23" />
+                    </svg>
+                  ) : (
+                    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8z" />
+                      <circle cx="12" cy="12" r="3" />
+                    </svg>
+                  )}
+                </button>
+              </div>
+
+              <button
+                id="btn-submit-register"
+                type="submit"
+                className="w-full rounded-xl bg-[#141413] py-3.5 text-sm font-semibold text-white transition-colors hover:bg-black mt-0.5"
+              >
+                Créer mon compte
+              </button>
+            </form>
+
+            {/* Texte légal */}
+            <p className="text-[11px] text-[#787672] text-center leading-normal mt-1">
+              En vous inscrivant, vous acceptez la{" "}
+              <Link
+                href="/politique-de-confidentialite"
+                className="underline hover:text-[#141413] transition-colors"
+              >
+                politique de confidentialité
+              </Link>{" "}
+              de No Borders ASBL.
+            </p>
+          </div>
+
+          {/* Action membre & Navigation */}
+          <div className="mt-6 flex flex-col items-center gap-3.5">
+            <Link
+              href="/login"
+              id="link-login"
+              className="inline-flex items-center gap-2 rounded-xl border border-[#E5E3DC] bg-white/80 px-4 py-2.5 text-xs font-semibold text-[#141413] transition-colors hover:bg-white hover:border-[#D0CDC6] shadow-2xs"
+            >
+              <span>✦</span> Vous avez déjà un compte ? Se connecter
+            </Link>
+
+            <div className="flex items-center gap-3 text-xs text-[#8C8A84]">
+              <Link href="/" className="hover:text-[#141413] transition-colors">
+                ← Accueil
+              </Link>
+              <span>•</span>
+              <Link href="/boutique" className="hover:text-[#141413] transition-colors">
+                Boutique solidaire
+              </Link>
+              <span>•</span>
+              <Link href="/nos-activites" className="hover:text-[#141413] transition-colors">
+                Nos activités
+              </Link>
+            </div>
+          </div>
+        </div>
+
+        {/* ── COLONNE DROITE : Photo No Borders ASBL (Vélos en bambou) ── */}
+        <div className="w-full max-w-[430px] lg:max-w-[460px] flex items-center justify-center">
+          <div className="relative aspect-[4/5] w-full max-w-[420px] overflow-hidden rounded-[32px] sm:rounded-[36px] shadow-sm border border-black/5 bg-[#EFECE6]">
+            <Image
+              src="/images/auth/login-noborders.jpg"
+              alt="No Borders ASBL — Vélos artisanaux en bambou"
+              fill
+              priority
+              className="object-cover"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }

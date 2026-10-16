@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { site, intro, timeline } from "@/lib/content";
+import { site, timeline } from "@/lib/content";
 import { Reveal, Stagger, StaggerItem } from "@/components/ui/Reveal";
 import { ArrowRight, SparkIcon } from "@/components/ui/Icons";
+import { AboutIntro } from "@/components/sections/AboutIntro";
 
 export const metadata: Metadata = {
   title: "À propos",
@@ -15,16 +16,23 @@ export default function AProposPage() {
   return (
     <div className="pt-28 sm:pt-36">
       {/* ── En-tête ── */}
-      <section className="bg-paper py-16 sm:py-24 border-b border-ink/5">
+      <section className="border-b border-ink/5 bg-paper py-12 sm:py-16">
         <div className="container">
-          <div className="max-w-3xl">
-            <span className="eyebrow">Notre Histoire</span>
-            <h1 className="mt-4 text-display-lg font-extrabold tracking-tight text-ink">
-              À propos de No Borders
-            </h1>
-            <p className="mt-6 text-lg sm:text-xl text-ink/75 leading-relaxed">
-              {intro}
-            </p>
+          <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
+            <AboutIntro />
+
+            <div className="my-6 sm:my-8">
+              <div className="relative aspect-[4/3] w-full overflow-hidden rounded-3xl border border-ink/10 bg-ink/5 shadow-xl">
+                <Image
+                  src="/images/hero-groupe.jpg"
+                  alt="Membres de No Borders ASBL réunis à Mons"
+                  fill
+                  priority
+                  className="object-cover"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                />
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -73,14 +81,14 @@ export default function AProposPage() {
             <Reveal delay={0.15}>
               <div className="relative aspect-[4/3] overflow-hidden rounded-3xl bg-ink shadow-2xl ring-1 ring-black/5">
                 <Image
-                  src="/images/mains.jpg"
-                  alt="Membres de No Borders ASBL unis pour l'interculturalité"
+                  src="/images/debut-2.jpg"
+                  alt="Équipe fondatrice de No Borders ASBL à Mons"
                   fill
                   className="object-cover"
                   sizes="(max-width: 1024px) 100vw, 50vw"
                   priority
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-ink/30 via-transparent to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-ink/40 via-transparent to-transparent" />
                 <div className="absolute bottom-6 left-6 right-6 rounded-2xl bg-white/95 p-5 backdrop-blur shadow-lg">
                   <p className="text-sm font-bold text-ink">
                     « Briseur de frontières mentales »

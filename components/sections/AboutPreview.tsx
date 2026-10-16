@@ -5,7 +5,7 @@ import { Reveal } from "@/components/ui/Reveal";
 
 export function AboutPreview() {
   return (
-    <section className="bg-paper py-20 sm:py-28" aria-labelledby="about-preview-heading">
+    <section className="bg-paper py-14 sm:py-20" aria-labelledby="about-preview-heading">
       <div className="container">
 
         {/* ── En-tête de section ── */}

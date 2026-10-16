@@ -1,14 +1,20 @@
-import type { Metadata } from "next";
+"use client";
+
+import { usePathname } from "next/navigation";
 import type { ReactNode } from "react";
 
-export const metadata: Metadata = {
-  title: {
-    default: "Authentification | No Borders ASBL",
-    template: "%s | No Borders ASBL",
-  },
-};
-
 export default function AuthLayout({ children }: { children: React.ReactNode }) {
+  const pathname = usePathname();
+  const isCleanAuthPage =
+    pathname === "/login" ||
+    pathname === "/connexion" ||
+    pathname === "/register" ||
+    pathname === "/inscription";
+
+  if (isCleanAuthPage) {
+    return <>{children}</>;
+  }
+
   return (
     <div className="min-h-screen flex">
       {/* Colonne gauche — formulaire */}

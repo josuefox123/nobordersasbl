@@ -25,8 +25,8 @@ export function Reveal({ children, className, delay = 0, y = 40, x = 0, as = "di
       className={className}
       initial={reduce ? false : { opacity: 0, y, x }}
       whileInView={{ opacity: 1, y: 0, x: 0 }}
-      viewport={{ once, margin: "0px 0px -12% 0px" }}
-      transition={{ duration: 0.9, ease: EASE, delay }}
+      viewport={{ once, margin: "0px" }}
+      transition={{ duration: 0.7, ease: EASE, delay }}
     >
       {children}
     </Comp>
@@ -52,7 +52,7 @@ export function Stagger({ children, className, as = "div" }: { children: ReactNo
       variants={containerVariants}
       initial={reduce ? false : "hidden"}
       whileInView="show"
-      viewport={{ once: true, margin: "0px 0px -10% 0px" }}
+      viewport={{ once: true, margin: "0px" }}
     >
       {children}
     </Comp>
