@@ -81,14 +81,14 @@ export default function AProposPage() {
             <Reveal delay={0.15}>
               <div className="relative aspect-[4/3] overflow-hidden rounded-3xl bg-ink shadow-2xl ring-1 ring-black/5">
                 <Image
-                  src="/images/mains.jpg"
-                  alt="Membres de No Borders ASBL unis pour l'interculturalité"
+                  src="/images/debut-2.jpg"
+                  alt="Équipe fondatrice de No Borders ASBL à Mons"
                   fill
                   className="object-cover"
                   sizes="(max-width: 1024px) 100vw, 50vw"
                   priority
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-ink/30 via-transparent to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-ink/40 via-transparent to-transparent" />
                 <div className="absolute bottom-6 left-6 right-6 rounded-2xl bg-white/95 p-5 backdrop-blur shadow-lg">
                   <p className="text-sm font-bold text-ink">
                     « Briseur de frontières mentales »

@@ -107,8 +107,8 @@ export function MissionSection() {
               <Reveal delay={0.2}>
                 <div className="group relative aspect-[16/11] overflow-hidden rounded-[2rem] bg-ink/5 shadow-xl ring-1 ring-black/5">
                   <Image
-                    src="/images/mains.jpg"
-                    alt="Valeurs No Borders ASBL — solidarité et respect mutuel"
+                    src="/images/via-kanana.jpg"
+                    alt="Valeurs No Borders ASBL — inclusion, solidarité et interculturalité à Mons"
                     fill
                     className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                     sizes="(max-width: 1024px) 100vw, 50vw"
