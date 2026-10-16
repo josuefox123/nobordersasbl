@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { objectives, horizon, testimonials } from "@/lib/content";
+import { objectives, horizon } from "@/lib/content";
 import { Reveal, Stagger, StaggerItem } from "@/components/ui/Reveal";
-import { ArrowRight, QuoteIcon, SparkIcon } from "@/components/ui/Icons";
+import { ArrowRight, SparkIcon } from "@/components/ui/Icons";
 
 export const metadata: Metadata = {
   title: "Notre Projet",
@@ -93,44 +93,11 @@ export default function NotreProjetPage() {
                 « {horizon.motto} »
               </span>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Témoignages intégrés */}
-      <section className="py-20 sm:py-28 bg-paper">
-        <div className="container">
-          <div className="text-center max-w-2xl mx-auto">
-            <span className="eyebrow justify-center">Retours d'Expérience</span>
-            <h2 className="mt-3 text-3xl font-extrabold text-ink sm:text-4xl">
-              Ils témoignent de leur vécu
-            </h2>
-          </div>
-
-          <div className="mt-16 grid gap-8 md:grid-cols-2">
-            {testimonials.map((t) => (
-              <div key={t.name} className="rounded-3xl border border-ink/10 bg-white p-8 shadow-sm">
-                <QuoteIcon size={28} className="text-flame mb-4" />
-                <p className="text-base text-ink/85 italic leading-relaxed">
-                  « {t.quote} »
-                </p>
-                <div className="mt-6 flex items-center gap-4 border-t border-ink/10 pt-4">
-                  <div className="relative h-12 w-12 overflow-hidden rounded-full bg-paper">
-                    <Image src={t.image} alt={t.name} fill className="object-cover" />
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-ink">{t.name}</h3>
-                    <span className="text-xs text-ink/60 uppercase">Membre</span>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          <div className="mt-16 text-center">
-            <Link href="/nous-contacter" className="btn btn-primary btn-lg gap-2">
-              Participer à nos projets <ArrowRight size={18} />
-            </Link>
+            <div className="mt-12">
+              <Link href="/nous-contacter" className="btn btn-primary btn-lg gap-2">
+                Participer à nos projets <ArrowRight size={18} />
+              </Link>
+            </div>
           </div>
         </div>
       </section>
