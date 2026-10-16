@@ -14,14 +14,30 @@ export default function LoginPage() {
   return (
     <div className="min-h-screen bg-[#FAF9F5] text-[#141413] flex flex-col justify-center items-center py-10 px-4 sm:px-6 lg:px-8 selection:bg-[#E5E3DC]">
       <div className="w-full max-w-5xl mx-auto flex flex-col lg:flex-row items-center justify-center gap-10 lg:gap-16 xl:gap-20">
-        {/* ── COLONNE GAUCHE : Formulaire épuré ── */}
+        {/* ── COLONNE GAUCHE : Formulaire & Identité No Borders ── */}
         <div className="w-full max-w-[440px] flex flex-col items-center">
-          {/* Titre & sous-titre */}
-          <h1 className="font-serif text-[2.4rem] sm:text-[2.85rem] text-[#141413] tracking-[-0.03em] leading-tight text-center font-normal whitespace-nowrap">
-            Question what’s next
+          {/* Logo officiel No Borders */}
+          <Link
+            href="/"
+            className="mb-5 inline-block transition-transform hover:scale-[1.02]"
+            aria-label="Retour à l'accueil"
+          >
+            <Image
+              src="/images/logo/logoFichier 2logo_2.png"
+              alt="No Borders ASBL"
+              width={200}
+              height={60}
+              className="h-11 sm:h-12 w-auto object-contain"
+              priority
+            />
+          </Link>
+
+          {/* Titre & sous-titre contextualisés */}
+          <h1 className="font-serif text-[2.35rem] sm:text-[2.75rem] text-[#141413] tracking-[-0.03em] leading-tight text-center font-normal whitespace-nowrap">
+            Brisez les frontières
           </h1>
           <p className="mt-2 text-sm sm:text-[15px] text-[#55555C] text-center font-normal">
-            Your thinking partner for big ambitions
+            Connectez-vous pour accéder à votre espace membre
           </p>
 
           {/* Carte blanche flottante */}
@@ -50,7 +66,7 @@ export default function LoginPage() {
                   d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.36 0 3.26 2.64 1.25 6.59l4.03 3.13c.95-2.83 3.6-4.97 6.72-4.97z"
                 />
               </svg>
-              Continue with Google
+              Continuer avec Google
             </button>
 
             {/* Bouton Apple */}
@@ -62,13 +78,13 @@ export default function LoginPage() {
               <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.37c.63-.79 1.06-1.88.94-2.98-.93.04-2.02.63-2.67 1.4-.57.66-1.06 1.77-.93 2.85 1.03.08 2.06-.52 2.66-1.27z" />
               </svg>
-              Continue with Apple
+              Continuer avec Apple
             </button>
 
-            {/* Séparateur OR */}
+            {/* Séparateur OU */}
             <div className="py-0.5 text-center">
               <span className="text-[11px] font-semibold uppercase tracking-wider text-[#9B9994]">
-                OR
+                OU
               </span>
             </div>
 
@@ -79,10 +95,10 @@ export default function LoginPage() {
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="Enter your email"
+                placeholder="votre@email.com"
                 autoComplete="email"
                 required
-                className="w-full rounded-xl border border-[#E5E3DC] bg-white px-4 py-3 text-sm text-[#141413] placeholder-[#9B9994] focus:outline-none focus:border-[#141413] transition-colors"
+                className="w-full rounded-xl border border-[#E5E3DC] bg-white px-4 py-3 text-sm text-[#141413] placeholder-[#9B9994] focus:outline-none focus:border-[#0875B9] transition-colors"
               />
 
               <button
@@ -90,63 +106,58 @@ export default function LoginPage() {
                 type="submit"
                 className="w-full rounded-xl bg-[#141413] py-3.5 text-sm font-semibold text-white transition-colors hover:bg-black mt-0.5"
               >
-                Continue with email
+                Continuer avec l&apos;e-mail
               </button>
             </form>
 
             {/* Texte légal */}
             <p className="text-[11px] text-[#787672] text-center leading-normal mt-1">
-              By continuing, you acknowledge No Borders&apos;s{" "}
+              En continuant, vous acceptez la{" "}
               <Link
                 href="/notre-projet"
                 className="underline hover:text-[#141413] transition-colors"
               >
-                Privacy Policy
-              </Link>
-              .
+                politique de confidentialité
+              </Link>{" "}
+              de No Borders ASBL.
             </p>
           </div>
 
-          {/* Bouton application desktop */}
-          <div className="mt-6 flex justify-center">
-            <button
-              type="button"
-              className="inline-flex items-center gap-2 rounded-xl border border-[#E5E3DC] bg-white/70 px-4 py-2 text-xs font-semibold text-[#141413] transition-colors hover:bg-white hover:border-[#D0CDC6] shadow-2xs"
-            >
-              <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor">
-                <rect x="2" y="2" width="5" height="5" rx="1" />
-                <rect x="9" y="2" width="5" height="5" rx="1" />
-                <rect x="2" y="9" width="5" height="5" rx="1" />
-                <rect x="9" y="9" width="5" height="5" rx="1" />
-              </svg>
-              Download desktop app
-            </button>
-          </div>
-
-          {/* Liens de navigation secondaires */}
-          <div className="mt-5 flex items-center gap-3 text-xs text-[#8C8A84]">
-            <Link href="/" className="hover:text-[#141413] transition-colors">
-              ← Retour à l&apos;accueil
-            </Link>
-            <span>•</span>
+          {/* Action membre & Navigation */}
+          <div className="mt-6 flex flex-col items-center gap-3.5">
             <Link
               href="/register"
-              className="hover:text-[#141413] font-medium transition-colors underline underline-offset-2"
+              id="link-register"
+              className="inline-flex items-center gap-2 rounded-xl border border-[#E5E3DC] bg-white/80 px-4 py-2.5 text-xs font-semibold text-[#141413] transition-colors hover:bg-white hover:border-[#D0CDC6] shadow-2xs"
             >
-              Créer un compte
+              <span>✦</span> Pas encore de compte ? Créer un compte
             </Link>
+
+            <div className="flex items-center gap-3 text-xs text-[#8C8A84]">
+              <Link href="/" className="hover:text-[#141413] transition-colors">
+                ← Accueil
+              </Link>
+              <span>•</span>
+              <Link href="/boutique" className="hover:text-[#141413] transition-colors">
+                Boutique solidaire
+              </Link>
+              <span>•</span>
+              <Link href="/nos-activites" className="hover:text-[#141413] transition-colors">
+                Nos activités
+              </Link>
+            </div>
           </div>
         </div>
 
-        {/* ── COLONNE DROITE : Image illustrative de référence ── */}
+        {/* ── COLONNE DROITE : Photo No Borders ASBL (Vélos en bambou) ── */}
         <div className="w-full max-w-[430px] lg:max-w-[460px] flex items-center justify-center">
-          <div className="relative aspect-[364/434] w-full max-w-[420px] overflow-hidden rounded-[32px] sm:rounded-[36px]">
+          <div className="relative aspect-[4/5] w-full max-w-[420px] overflow-hidden rounded-[32px] sm:rounded-[36px] shadow-sm border border-black/5 bg-[#EFECE6]">
             <Image
-              src="/images/auth/login-claude.png"
-              alt="Question what's next"
+              src="/images/auth/login-noborders.jpg"
+              alt="No Borders ASBL — Vélos artisanaux en bambou"
               fill
               priority
-              className="object-contain"
+              className="object-cover"
             />
           </div>
         </div>
