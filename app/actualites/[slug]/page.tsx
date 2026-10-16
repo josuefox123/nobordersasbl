@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowRight, CalendarIcon } from "@/components/ui/Icons";
+import { PageHeader } from "@/components/ui/PageHeader";
 import { Reveal, Stagger, StaggerItem } from "@/components/ui/Reveal";
 import { gallery, news } from "@/lib/content";
 
@@ -151,11 +152,18 @@ export default function ActualiteDetailPage({ params }: Props) {
             >
               Retour sur l’événement
             </h2>
-            {fakeBody.map((p) => (
+            {[fakeIntro, ...fakeBody].map((p) => (
               <p key={p.slice(0, 20)} className="mt-5 text-base leading-relaxed text-ink/75 sm:text-lg">
                 {p}
               </p>
             ))}
+            <Link
+              href="/nous-contacter"
+              id="actualite-nous-contacter"
+              className="mt-10 inline-flex items-center gap-2.5 rounded-xl bg-[#0875B9] px-6 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-[#065f9a] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0875B9]"
+            >
+              Nous contacter <ArrowRight size={17} />
+            </Link>
           </Reveal>
         </div>
       </section>

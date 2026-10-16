@@ -19,6 +19,7 @@ import {
   SearchIcon,
   ShoppingBagIcon,
 } from "@/components/ui/Icons";
+import { PageHeader } from "@/components/ui/PageHeader";
 
 /* ─────────────────────────────────────────────────────────── */
 /*  Composant principal Boutique                               */
@@ -301,47 +302,30 @@ export function BoutiqueClient() {
         </div>
       )}
 
-      {/* ── Fil d'Ariane & En-tête ── */}
-      <section className="border-b border-ink/5 bg-paper py-8 sm:py-10">
-        <div className="container">
-          <nav aria-label="Fil d'Ariane">
-            <ol className="flex items-center gap-2 text-sm text-ink/50">
-              <li>
-                <Link href="/" className="transition-colors hover:text-flame">
-                  Accueil
-                </Link>
-              </li>
-              <li aria-hidden="true">/</li>
-              <li aria-current="page" className="font-semibold text-ink">
-                Boutique
-              </li>
-            </ol>
-          </nav>
-          <div className="mt-4 flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
-            <div>
-              <h1 className="text-display-md font-extrabold tracking-tight text-ink sm:text-4xl">
-                Boutique vélo & accessoires
-              </h1>
-              <p className="mt-2 text-sm text-ink/70 sm:text-base">
-                Vélos en bambou artisanaux, vélos adaptés Hase Bikes, ElliptiGO et équipement éco-responsable.
-              </p>
-            </div>
-            {/* Bouton filtres mobile */}
-            <button
-              type="button"
-              onClick={() => setMobileFiltersOpen(true)}
-              className="inline-flex items-center justify-center gap-2 rounded-xl border border-ink/20 bg-white px-4 py-2.5 text-sm font-semibold text-ink shadow-sm lg:hidden hover:border-ink"
-            >
-              <span>Filtres</span>
-              {activeFiltersCount > 0 && (
-                <span className="flex h-5 w-5 items-center justify-center rounded-full bg-emerald-700 text-xs font-bold text-white">
-                  {activeFiltersCount}
-                </span>
-              )}
-            </button>
-          </div>
-        </div>
-      </section>
+      {/* ── En-tête avec breadcrumb ── */}
+      <PageHeader
+        crumbs={[
+          { label: "Accueil", href: "/" },
+          { label: "Boutique" },
+        ]}
+        title="Boutique vélo & accessoires"
+        description="Vélos en bambou artisanaux, vélos adaptés Hase Bikes, ElliptiGO et équipement éco-responsable."
+        image="https://images.unsplash.com/photo-1485965120184-e220f721d03e?w=1600&q=80&auto=format&fit=crop"
+        action={
+          <button
+            type="button"
+            onClick={() => setMobileFiltersOpen(true)}
+            className="inline-flex items-center justify-center gap-2 rounded-xl border border-white/30 bg-white/10 px-4 py-2.5 text-sm font-semibold text-white backdrop-blur-sm lg:hidden hover:bg-white/20"
+          >
+            <span>Filtres</span>
+            {activeFiltersCount > 0 && (
+              <span className="flex h-5 w-5 items-center justify-center rounded-full bg-white text-xs font-bold text-[#0875B9]">
+                {activeFiltersCount}
+              </span>
+            )}
+          </button>
+        }
+      />
 
       {/* ── Contenu principal : Sidebar gauche + Grille droite ── */}
       <div className="container mt-8 sm:mt-12">

@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { news } from "@/lib/content";
 import { ArrowRight, ChevronDownIcon } from "@/components/ui/Icons";
+import { PageHeader } from "@/components/ui/PageHeader";
 
 const PER_PAGE = 8; // cards par page
 
@@ -25,22 +26,18 @@ export function ActualitesClient() {
   }
 
   return (
-    <div className="pt-28 sm:pt-36">
+    <div className="mt-[84px] lg:mt-[188px] bg-white">
 
-      {/* ── Hero de page ── */}
-      <section className="border-b border-ink/5 bg-paper py-16 sm:py-24">
-        <div className="container">
-          <div className="max-w-3xl">
-            <h1 className="text-display-lg font-extrabold tracking-tight text-ink">
-              Actualités
-            </h1>
-            <p className="mt-6 text-lg leading-relaxed text-ink/75 sm:text-xl">
-              Sport, culture, environnement, citoyenneté — suivez toutes les activités
-              et initiatives de No Borders ASBL à Mons et en Wallonie.
-            </p>
-          </div>
-        </div>
-      </section>
+      {/* ── En-tête avec breadcrumb ── */}
+      <PageHeader
+        crumbs={[
+          { label: "Accueil", href: "/" },
+          { label: "Actualités" },
+        ]}
+        title="Nos actualités"
+        description="Sport, culture, environnement, citoyenneté — suivez toutes les activités et initiatives de No Borders ASBL à Mons et en Wallonie."
+        image="https://images.unsplash.com/photo-1485965120184-e220f721d03e?w=1600&q=80&auto=format&fit=crop"
+      />
 
       {/* ── Grille des articles ── */}
       <section className="bg-white py-20 sm:py-28">
