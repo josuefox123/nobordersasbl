@@ -6,62 +6,62 @@ import Link from "next/link";
 import { Reveal } from "@/components/ui/Reveal";
 import { ArrowRight, ChevronLeftIcon, ChevronRightIcon } from "@/components/ui/Icons";
 
-// Images Unsplash vérifiées par photo ID (format stable)
+// Images dédiées à chaque catégorie de vélo
 const CATEGORIES = [
   {
     title: "Vélos de ville",
     description:
       "Des vélos pratiques et confortables, idéals pour les déplacements quotidiens en ville et les trajets domicile-travail.",
-    image: "https://images.unsplash.com/photo-1532298229144-0ec0c57515c7?w=600&q=80&auto=format&fit=crop",
+    image: "/images/categories/velos-de-ville.jpg",
     href: "/boutique?categorie=velos-de-ville",
   },
   {
     title: "VTT (vélos tout-terrain)",
     description:
       "Des vélos robustes conçus pour explorer les sentiers, les chemins accidentés et les terrains difficiles.",
-    image: "https://images.unsplash.com/photo-1485965120184-e220f721d03e?w=600&q=80&auto=format&fit=crop",
+    image: "/images/categories/vtt.jpg",
     href: "/boutique?categorie=vtt",
   },
   {
     title: "Vélos gravel",
     description:
       "Des vélos polyvalents adaptés aussi bien aux routes goudronnées qu'aux chemins de gravier et aux pistes.",
-    image: "https://images.unsplash.com/photo-1485965120184-e220f721d03e?w=600&q=80&auto=format&fit=crop",
+    image: "/images/categories/velos-gravel.jpg",
     href: "/boutique?categorie=velos-gravel",
   },
   {
     title: "Vélos trekking",
     description:
       "Des vélos confortables et polyvalents, parfaits pour les longues balades, les randonnées et les voyages à vélo.",
-    image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80&auto=format&fit=crop",
+    image: "/images/categories/velos-trekking.jpg",
     href: "/boutique?categorie=velos-trekking",
   },
   {
     title: "Vélos tandem",
     description:
       "Des vélos conçus pour deux personnes, permettant de pédaler ensemble et de partager des balades ou des aventures.",
-    image: "https://images.unsplash.com/photo-1571068316344-75bc76f77890?w=600&q=80&auto=format&fit=crop",
+    image: "/images/categories/velos-tandem.jpg",
     href: "/boutique?categorie=velos-tandem",
   },
   {
     title: "Vélos elliptiques",
     description:
       "Des vélos innovants qui reproduisent le mouvement d'un appareil elliptique, combinant déplacement en extérieur et entraînement physique.",
-    image: "https://images.unsplash.com/photo-1517649763962-0c623066013b?w=600&q=80&auto=format&fit=crop",
+    image: "/images/categories/velos-elliptiques.jpg",
     href: "/boutique?categorie=velos-elliptiques",
   },
   {
     title: "Vélos debout (Stand Up Bikes)",
     description:
       "Des vélos permettant de pédaler en position debout, offrant une expérience de conduite originale axée sur le mouvement et le fitness.",
-    image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80&auto=format&fit=crop",
+    image: "/images/categories/velos-debout.jpg",
     href: "/boutique?categorie=stand-up-bikes",
   },
   {
     title: "Vélos cargo",
     description:
       "Des vélos conçus pour transporter des marchandises, des courses ou des équipements grâce à leur capacité de chargement adaptée.",
-    image: "https://images.unsplash.com/photo-1532298229144-0ec0c57515c7?w=600&q=80&auto=format&fit=crop",
+    image: "/images/categories/velos-cargo.jpg",
     href: "/boutique?categorie=velos-cargo",
   },
 ];
