@@ -3,6 +3,7 @@
 import { useState, type FormEvent } from "react";
 import { site } from "@/lib/content";
 import { MailIcon, PhoneIcon, PinIcon, CheckIcon, ArrowRight, SparkIcon } from "@/components/ui/Icons";
+import { PageHeader } from "@/components/ui/PageHeader";
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -47,22 +48,7 @@ export default function ContactPage() {
 
             {/* ── Colonne gauche : infos de contact ── */}
             <div className="flex flex-col gap-4 lg:col-span-4">
-              {INFO_ITEMS.map((item) => {
-                const Icon = item.icon;
-                return (
-                  <div
-                    key={item.label}
-                    className="flex items-start gap-4 rounded-2xl bg-white p-6 shadow-sm border border-ink/8"
-                  >
-                    {/* Icône colorée */}
-                    <div
-                      className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl"
-                      style={{ backgroundColor: item.bg }}
-                    >
-                      <Icon size={20} style={{ color: item.color }} />
-                    </div>
-
-              <div className="rounded-3xl border border-ink/10 bg-paper p-8 space-y-6">
+              <div className="rounded-3xl border border-ink/10 bg-white p-8 space-y-6">
                 <div className="flex items-start gap-4">
                   <div className="grid h-12 w-12 place-items-center rounded-2xl bg-white text-[#0875B9] shrink-0 shadow-sm">
                     <PinIcon size={20} />

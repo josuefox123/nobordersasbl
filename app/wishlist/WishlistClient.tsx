@@ -40,17 +40,6 @@ const initialWishlist: WishlistItem[] = [
     image: "/images/lancement-myboo.jpg",
     inStock: true,
   },
-  {
-    id: 8,
-    name: "Casque recyclé Ecobirdy",
-    category: "Équipement · Sécurité",
-    price: 58000,
-    rating: 5.0,
-    reviews: 48,
-    image: "/images/ghana-booomers.jpg",
-    badge: { text: "Épuisé", type: "soldout" },
-    inStock: false,
-  },
 ];
 
 type TabId =
