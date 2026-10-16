@@ -158,14 +158,14 @@ select:-webkit-autofill:focus {
   }
 }
 
-/* ── Animation pluie de logos (PartnersMarquee) ── */
-@keyframes rain-fall {
-  from { transform: translateY(-33.333%); }
+/* ── Animation cascade oblique de logos (PartnersMarquee) ── */
+@keyframes oblique-fall {
+  from { transform: translateY(-50%); }
   to   { transform: translateY(0%); }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  [style*="rain-fall"] {
+  [style*="oblique-fall"] {
     animation: none !important;
     transform: translateY(0) !important;
   }

@@ -3,46 +3,71 @@ import { partners, supporters } from "@/lib/content";
 import { Reveal } from "@/components/ui/Reveal";
 
 const allPartners = [...partners, ...supporters];
-const COUNT = allPartners.length;
 
-/**
- * Chaque "colonne de pluie" — trajectoire diagonale indépendante.
- * left       : position horizontale de départ
- * duration   : durée du cycle (vitesses différentes = effet naturel)
- * delay      : décalage de départ (évite que tout parte en même temps)
- * skew       : angle oblique de la colonne
- * logoIndex  : quel logo utiliser (cyclé sur allPartners)
- */
+// Colonnes avec partenaires variés et décalages temporels
 const COLUMNS = [
-  { left: "4%",  duration: "9s",  delay: "0s",    skew: "-10deg", logoIndex: 0 },
-  { left: "14%", duration: "13s", delay: "-3.5s", skew: "-10deg", logoIndex: 1 },
-  { left: "24%", duration: "10s", delay: "-1s",   skew: "-10deg", logoIndex: 2 },
-  { left: "34%", duration: "15s", delay: "-5s",   skew: "-10deg", logoIndex: 3 },
-  { left: "44%", duration: "11s", delay: "-2.5s", skew: "-10deg", logoIndex: 4 },
-  { left: "54%", duration: "8s",  delay: "-4s",   skew: "-10deg", logoIndex: 5 },
-  { left: "64%", duration: "14s", delay: "-0.5s", skew: "-10deg", logoIndex: 6 },
-  { left: "74%", duration: "12s", delay: "-3s",   skew: "-10deg", logoIndex: 7 },
-  { left: "84%", duration: "9.5s", delay: "-1.5s", skew: "-10deg", logoIndex: 8 },
+  {
+    duration: "18s",
+    delay: "0s",
+    className: "hidden lg:flex",
+    items: [partners[0], partners[4], partners[6], supporters[1]],
+  },
+  {
+    duration: "22s",
+    delay: "-5s",
+    className: "hidden sm:flex",
+    items: [partners[1], partners[3], supporters[0], partners[2]],
+  },
+  {
+    duration: "16s",
+    delay: "-9s",
+    className: "flex",
+    items: [partners[2], partners[5], partners[0], partners[1]],
+  },
+  {
+    duration: "21s",
+    delay: "-3s",
+    className: "flex",
+    items: [partners[3], partners[6], supporters[1], partners[4]],
+  },
+  {
+    duration: "17s",
+    delay: "-7s",
+    className: "flex",
+    items: [partners[4], supporters[0], partners[1], partners[3]],
+  },
+  {
+    duration: "23s",
+    delay: "-12s",
+    className: "hidden sm:flex",
+    items: [partners[5], partners[0], partners[2], partners[6]],
+  },
+  {
+    duration: "19s",
+    delay: "-4s",
+    className: "hidden lg:flex",
+    items: [supporters[0], supporters[1], partners[4], partners[5]],
+  },
 ];
 
 export function PartnersMarquee() {
   return (
     <section
-      className="overflow-hidden py-20 sm:py-28"
-      style={{ backgroundColor: "#F1F5F9" }}
+      className="overflow-hidden py-12 sm:py-16"
+      style={{ backgroundColor: "#F8FAFC" }}
       aria-labelledby="partenaires-titre"
     >
       <div className="container">
-        {/* ── En-tête centré ── */}
+        {/* ── En-tête compact ── */}
         <Reveal>
-          <div className="mb-16 text-center">
+          <div className="mb-8 text-center sm:mb-10">
             <h2
               id="partenaires-titre"
-              className="text-3xl font-extrabold tracking-tight text-ink sm:text-4xl md:text-5xl"
+              className="text-2xl font-extrabold tracking-tight text-ink sm:text-3xl md:text-4xl"
             >
               Ils nous font confiance
             </h2>
-            <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-ink/70 sm:text-lg">
+            <p className="mx-auto mt-2 max-w-xl text-sm leading-relaxed text-ink/70 sm:text-base">
               Des partenaires engagés qui partagent notre vision d'une mobilité
               douce, solidaire et respectueuse de l'environnement.
             </p>
@@ -50,67 +75,68 @@ export function PartnersMarquee() {
         </Reveal>
       </div>
 
-      {/* ── Zone d'animation — pleine largeur ── */}
+      {/* ── Zone d'animation compacte avec défilement oblique ── */}
       <div
-        className="relative w-full overflow-hidden"
-        style={{ height: "280px" }}
+        className="relative w-full overflow-hidden hover:[&_[style*='oblique-fall']]:[animation-play-state:paused]"
+        style={{ height: "220px" }}
         aria-hidden="true"
       >
         {/* Dégradé haut */}
         <div
-          className="pointer-events-none absolute inset-x-0 top-0 z-10 h-20 bg-gradient-to-b"
-          style={{ backgroundImage: "linear-gradient(to bottom, #F1F5F9, transparent)" }}
+          className="pointer-events-none absolute inset-x-0 top-0 z-10 h-14"
+          style={{ backgroundImage: "linear-gradient(to bottom, #F8FAFC, transparent)" }}
         />
         {/* Dégradé bas */}
         <div
-          className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-20 bg-gradient-to-t"
-          style={{ backgroundImage: "linear-gradient(to top, #F1F5F9, transparent)" }}
+          className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-14"
+          style={{ backgroundImage: "linear-gradient(to top, #F8FAFC, transparent)" }}
         />
 
-        {/* ── Colonnes de logos en pluie diagonale ── */}
-        {COLUMNS.map((col, colIdx) => {
-          const partner = allPartners[col.logoIndex % COUNT];
-          return (
+        {/* ── Colonnes obliques descendantes ── */}
+        <div className="flex h-full items-center justify-center gap-4 sm:gap-6 lg:gap-8">
+          {COLUMNS.map((col, colIdx) => (
             <div
               key={colIdx}
-              className="absolute top-0"
+              className={`shrink-0 flex-col items-center ${col.className}`}
               style={{
-                left: col.left,
-                transform: `skewX(${col.skew})`,
-                width: "88px",
+                transform: "rotate(-12deg)",
               }}
             >
-              {/* 3 copies — chacune = hauteur complète du conteneur, une seule visible à la fois */}
               <div
+                className="flex flex-col gap-3.5 sm:gap-4"
                 style={{
-                  animation: `rain-fall ${col.duration} linear ${col.delay} infinite`,
+                  animation: `oblique-fall ${col.duration} linear ${col.delay} infinite`,
                   willChange: "transform",
                 }}
               >
-                {[0, 1, 2].map((copy) => (
-                  <div
-                    key={copy}
-                    className="flex items-center justify-center"
-                    style={{ height: "280px" }}
+                {/* 2 copies complètes pour boucle infinie sans saut */}
+                {[...col.items, ...col.items].map((partner, itemIdx) => (
+                  <a
+                    key={`${partner.name}-${itemIdx}`}
+                    href={partner.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    title={partner.name}
+                    className="group flex h-[62px] w-[116px] items-center justify-center rounded-2xl border border-slate-200/90 bg-white p-2.5 shadow-sm transition-all duration-300 hover:scale-105 hover:border-[#0875B9]/40 hover:shadow-md sm:h-[74px] sm:w-[136px] sm:p-3"
+                    style={{
+                      transform: "rotate(12deg)",
+                    }}
                   >
-                    <div
-                      className="relative overflow-hidden rounded-2xl bg-white p-3 shadow-sm grayscale opacity-60 transition-all duration-300 hover:grayscale-0 hover:opacity-100 hover:shadow-md"
-                      style={{ width: "72px", height: "48px" }}
-                    >
+                    <div className="relative h-full w-full">
                       <Image
                         src={partner.logo}
                         alt={partner.name}
                         fill
-                        className="object-contain p-1"
-                        sizes="72px"
+                        className="object-contain p-1 opacity-80 transition-opacity duration-300 group-hover:opacity-100"
+                        sizes="(max-width: 640px) 116px, 136px"
                       />
                     </div>
-                  </div>
+                  </a>
                 ))}
               </div>
             </div>
-          );
-        })}
+          ))}
+        </div>
       </div>
 
       {/* ── Liste accessible ── */}
