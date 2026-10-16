@@ -53,7 +53,7 @@ export function Hero() {
   return (
     <section
       aria-label="Accueil No Borders ASBL"
-      className="relative w-full overflow-hidden mt-[84px] lg:mt-[188px] min-h-[360px] lg:h-[clamp(390px,48vh,470px)] flex flex-col justify-center"
+      className="relative w-full overflow-hidden mt-[84px] lg:mt-[188px] min-h-[calc(100svh-84px)] lg:h-[calc(100vh-188px)] lg:min-h-[520px] flex flex-col justify-center"
     >
       {/* ── Slideshow d'arrière-plan ── */}
       <div className="absolute inset-0 overflow-hidden">
