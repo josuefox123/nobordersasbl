@@ -161,7 +161,7 @@ export function ActivitiesSection() {
         <Reveal>
           <div className="mb-14 text-center">
             <h2 className="text-3xl font-extrabold tracking-tight text-ink sm:text-4xl md:text-5xl">
-              Nos activités au cœur du territoire
+              Nos vélos au cœur du territoire
             </h2>
             <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-ink/70 sm:text-lg">
               Découvrez notre sélection de vélos adaptés à chaque style de vie.
