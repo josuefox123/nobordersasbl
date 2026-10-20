@@ -33,7 +33,7 @@ export function AboutPreview() {
           {/* Colonne gauche : texte + bouton */}
           <Reveal delay={0.1}>
             <div>
-              <p className="text-[0.7rem] font-bold uppercase tracking-[0.25em] text-[#0875B9]">
+              <p className="text-[0.7rem] font-bold uppercase tracking-[0.25em] text-primary">
                 Notre histoire
               </p>
               <h3 className="mt-2 text-2xl font-bold text-ink sm:text-3xl">
@@ -53,7 +53,7 @@ export function AboutPreview() {
 
               <Link
                 href="/"
-                className="mt-10 inline-flex items-center gap-2.5 rounded-xl bg-[#0875B9] px-6 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-[#065f9a] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0875B9]"
+                className="mt-10 inline-flex items-center gap-2.5 rounded-xl bg-primary px-6 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-primary-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
               >
                 Découvrir notre histoire
                 <ArrowRight size={17} />

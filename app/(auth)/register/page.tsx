@@ -15,26 +15,10 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#FAF9F5] text-[#141413] flex flex-col justify-center items-center py-10 px-4 sm:px-6 lg:px-8 selection:bg-[#E5E3DC]">
+    <div className="mt-[84px] lg:mt-[188px] min-h-[calc(100vh-84px)] lg:min-h-[calc(100vh-188px)] bg-[#FAF9F5] text-[#141413] flex flex-col justify-center items-center py-12 px-4 sm:px-6 lg:px-8 selection:bg-[#E5E3DC]">
       <div className="w-full max-w-5xl mx-auto flex flex-col lg:flex-row items-center justify-center gap-10 lg:gap-16 xl:gap-20">
         {/* ── COLONNE GAUCHE : Formulaire & Identité No Borders ── */}
         <div className="w-full max-w-[440px] flex flex-col items-center">
-          {/* Logo officiel No Borders */}
-          <Link
-            href="/"
-            className="mb-5 inline-block transition-transform hover:scale-[1.02]"
-            aria-label="Retour à l'accueil"
-          >
-            <Image
-              src="/images/logo/logoFichier 2logo_2.png"
-              alt="No Borders ASBL"
-              width={200}
-              height={60}
-              className="h-11 sm:h-12 w-auto object-contain"
-              priority
-            />
-          </Link>
-
           {/* Titre & sous-titre contextualisés */}
           <h1 className="font-serif text-[2.35rem] sm:text-[2.75rem] text-[#141413] tracking-[-0.03em] leading-tight text-center font-normal whitespace-nowrap">
             Rejoignez l’aventure
@@ -89,7 +73,7 @@ export default function RegisterPage() {
                 placeholder="Nom et prénom"
                 autoComplete="name"
                 required
-                className="w-full rounded-xl border border-[#E5E3DC] bg-white px-4 py-3 text-sm text-[#141413] placeholder-[#9B9994] focus:outline-none focus:border-[#0875B9] transition-colors"
+                className="w-full rounded-xl border border-[#E5E3DC] bg-white px-4 py-3 text-sm text-[#141413] placeholder-[#9B9994] focus:outline-none focus:border-primary transition-colors"
               />
 
               <input
@@ -100,7 +84,7 @@ export default function RegisterPage() {
                 placeholder="votre@email.com"
                 autoComplete="email"
                 required
-                className="w-full rounded-xl border border-[#E5E3DC] bg-white px-4 py-3 text-sm text-[#141413] placeholder-[#9B9994] focus:outline-none focus:border-[#0875B9] transition-colors"
+                className="w-full rounded-xl border border-[#E5E3DC] bg-white px-4 py-3 text-sm text-[#141413] placeholder-[#9B9994] focus:outline-none focus:border-primary transition-colors"
               />
 
               <div className="relative">
@@ -112,7 +96,7 @@ export default function RegisterPage() {
                   placeholder="Mot de passe (8+ caractères)"
                   autoComplete="new-password"
                   required
-                  className="w-full rounded-xl border border-[#E5E3DC] bg-white px-4 py-3 pr-11 text-sm text-[#141413] placeholder-[#9B9994] focus:outline-none focus:border-[#0875B9] transition-colors"
+                  className="w-full rounded-xl border border-[#E5E3DC] bg-white px-4 py-3 pr-11 text-sm text-[#141413] placeholder-[#9B9994] focus:outline-none focus:border-primary transition-colors"
                 />
                 <button
                   type="button"
@@ -138,7 +122,7 @@ export default function RegisterPage() {
               <button
                 id="btn-submit-register"
                 type="submit"
-                className="w-full rounded-xl bg-[#141413] py-3.5 text-sm font-semibold text-white transition-colors hover:bg-black mt-0.5"
+                className="w-full rounded-xl bg-primary py-3.5 text-sm font-semibold text-white transition-colors hover:bg-primary-hover shadow-xs mt-0.5"
               >
                 Créer mon compte
               </button>
@@ -184,7 +168,7 @@ export default function RegisterPage() {
         </div>
 
         {/* ── COLONNE DROITE : Photo No Borders ASBL (Vélos en bambou) ── */}
-        <div className="w-full max-w-[430px] lg:max-w-[460px] flex items-center justify-center">
+        <div className="hidden lg:flex w-full max-w-[430px] lg:max-w-[460px] items-center justify-center">
           <div className="relative aspect-[4/5] w-full max-w-[420px] overflow-hidden rounded-[32px] sm:rounded-[36px] shadow-sm border border-black/5 bg-[#EFECE6]">
             <Image
               src="/images/auth/login-noborders.jpg"

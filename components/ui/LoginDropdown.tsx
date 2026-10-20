@@ -53,22 +53,29 @@ export function LoginDropdown() {
       {open && (
         <div
           role="menu"
-          style={{
-            position: "absolute",
-            top: "calc(100% + 8px)",
-            right: 0,
-            zIndex: 9999,
-            minWidth: "200px",
-          }}
-          className="overflow-hidden rounded-xl border border-ink/10 bg-white shadow-2xl"
+          className="absolute top-[calc(100%+8px)] left-0 sm:left-auto sm:right-0 z-[9999] min-w-[200px] max-w-[calc(100vw-24px)] overflow-hidden rounded-xl border border-ink/10 bg-white shadow-2xl"
         >
+          <Link
+            href="/wishlist?tab=settings"
+            role="menuitem"
+            onClick={() => setOpen(false)}
+            className="flex items-center gap-3 px-5 py-3.5 text-sm font-medium text-ink transition-colors hover:bg-paper"
+          >
+            <UserIcon size={16} className="text-primary" />
+            Profil
+          </Link>
+
+          <div className="mx-4 h-px bg-ink/10" aria-hidden="true" />
+
           <Link
             href="/login"
             role="menuitem"
             onClick={() => setOpen(false)}
             className="flex items-center gap-3 px-5 py-3.5 text-sm font-medium text-ink transition-colors hover:bg-paper"
           >
-            <UserIcon size={16} className="text-ink/40" />
+            <svg className="h-4 w-4 shrink-0 text-ink/40" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
+            </svg>
             Se connecter
           </Link>
 

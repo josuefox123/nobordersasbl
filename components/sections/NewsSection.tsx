@@ -54,7 +54,7 @@ export function NewsSection() {
                   <div className="mt-auto pt-6 w-full flex justify-center">
                     <Link
                       href={`/actualites/${item.slug}`}
-                      className="inline-flex items-center gap-2 rounded-lg bg-[#0875B9] px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#065f9a] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0875B9]"
+                      className="inline-flex items-center gap-2 rounded-lg bg-primary px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-primary-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
                     >
                       En savoir plus <ArrowRight size={15} />
                     </Link>
@@ -71,7 +71,7 @@ export function NewsSection() {
           <div className="mt-12 flex justify-center">
             <Link
               href="/actualites"
-              className="inline-flex items-center gap-2 rounded-xl border-2 border-[#0875B9] px-8 py-3.5 text-sm font-semibold text-[#0875B9] transition-colors hover:bg-[#0875B9] hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0875B9]"
+              className="inline-flex items-center gap-2 rounded-xl border-2 border-primary px-8 py-3.5 text-sm font-semibold text-primary transition-colors hover:bg-primary hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
             >
               Tous les articles <ArrowRight size={16} />
             </Link>

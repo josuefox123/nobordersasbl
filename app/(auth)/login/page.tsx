@@ -6,32 +6,18 @@ import { useState } from "react";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
   };
 
   return (
-    <div className="min-h-screen bg-[#FAF9F5] text-[#141413] flex flex-col justify-center items-center py-10 px-4 sm:px-6 lg:px-8 selection:bg-[#E5E3DC]">
+    <div className="mt-[84px] lg:mt-[188px] min-h-[calc(100vh-84px)] lg:min-h-[calc(100vh-188px)] bg-[#FAF9F5] text-[#141413] flex flex-col justify-center items-center py-12 px-4 sm:px-6 lg:px-8 selection:bg-[#E5E3DC]">
       <div className="w-full max-w-5xl mx-auto flex flex-col lg:flex-row items-center justify-center gap-10 lg:gap-16 xl:gap-20">
         {/* ── COLONNE GAUCHE : Formulaire & Identité No Borders ── */}
         <div className="w-full max-w-[440px] flex flex-col items-center">
-          {/* Logo officiel No Borders */}
-          <Link
-            href="/"
-            className="mb-5 inline-block transition-transform hover:scale-[1.02]"
-            aria-label="Retour à l'accueil"
-          >
-            <Image
-              src="/images/logo/logoFichier 2logo_2.png"
-              alt="No Borders ASBL"
-              width={200}
-              height={60}
-              className="h-11 sm:h-12 w-auto object-contain"
-              priority
-            />
-          </Link>
-
           {/* Titre & sous-titre contextualisés */}
           <h1 className="font-serif text-[2.35rem] sm:text-[2.75rem] text-[#141413] tracking-[-0.03em] leading-tight text-center font-normal whitespace-nowrap">
             Brisez les frontières
@@ -76,7 +62,7 @@ export default function LoginPage() {
               </span>
             </div>
 
-            {/* Formulaire Email */}
+            {/* Formulaire Connexion */}
             <form id="form-login" onSubmit={handleSubmit} className="flex flex-col gap-3">
               <input
                 id="login-email"
@@ -86,15 +72,58 @@ export default function LoginPage() {
                 placeholder="votre@email.com"
                 autoComplete="email"
                 required
-                className="w-full rounded-xl border border-[#E5E3DC] bg-white px-4 py-3 text-sm text-[#141413] placeholder-[#9B9994] focus:outline-none focus:border-[#0875B9] transition-colors"
+                className="w-full rounded-xl border border-[#E5E3DC] bg-white px-4 py-3 text-sm text-[#141413] placeholder-[#9B9994] focus:outline-none focus:border-primary transition-colors"
               />
+
+              <div className="relative">
+                <input
+                  id="login-password"
+                  type={showPassword ? "text" : "password"}
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="Mot de passe"
+                  autoComplete="current-password"
+                  required
+                  className="w-full rounded-xl border border-[#E5E3DC] bg-white px-4 py-3 pr-11 text-sm text-[#141413] placeholder-[#9B9994] focus:outline-none focus:border-primary transition-colors"
+                />
+                <button
+                  type="button"
+                  id="btn-toggle-login-password"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-3.5 top-1/2 -translate-y-1/2 text-[#9B9994] hover:text-[#141413] transition-colors"
+                  aria-label={showPassword ? "Masquer le mot de passe" : "Afficher le mot de passe"}
+                >
+                  {showPassword ? (
+                    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24" />
+                      <line x1="1" y1="1" x2="23" y2="23" />
+                    </svg>
+                  ) : (
+                    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8z" />
+                      <circle cx="12" cy="12" r="3" />
+                    </svg>
+                  )}
+                </button>
+              </div>
+
+              {/* Lien mot de passe oublié */}
+              <div className="flex items-center justify-end -mt-0.5">
+                <Link
+                  href="/forgot-password"
+                  id="link-forgot-password"
+                  className="text-xs font-medium text-[#55555C] hover:text-primary transition-colors"
+                >
+                  Mot de passe oublié ?
+                </Link>
+              </div>
 
               <button
                 id="btn-submit-login"
                 type="submit"
-                className="w-full rounded-xl bg-[#141413] py-3.5 text-sm font-semibold text-white transition-colors hover:bg-black mt-0.5"
+                className="w-full rounded-xl bg-primary py-3.5 text-sm font-semibold text-white transition-colors hover:bg-primary-hover shadow-xs mt-0.5"
               >
-                Continuer avec l&apos;e-mail
+                Se connecter
               </button>
             </form>
 
@@ -138,7 +167,7 @@ export default function LoginPage() {
         </div>
 
         {/* ── COLONNE DROITE : Photo No Borders ASBL (Vélos en bambou) ── */}
-        <div className="w-full max-w-[430px] lg:max-w-[460px] flex items-center justify-center">
+        <div className="hidden lg:flex w-full max-w-[430px] lg:max-w-[460px] items-center justify-center">
           <div className="relative aspect-[4/5] w-full max-w-[420px] overflow-hidden rounded-[32px] sm:rounded-[36px] shadow-sm border border-black/5 bg-[#EFECE6]">
             <Image
               src="/images/auth/login-noborders.jpg"

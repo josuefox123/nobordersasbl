@@ -1,139 +1,131 @@
-import type { Metadata } from "next";
-import Link from "next/link";
+"use client";
 
-export const metadata: Metadata = {
-  title: "Vérification OTP",
-  description: "Confirmez votre identité avec le code reçu par email.",
-};
+import Link from "next/link";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 export default function OtpPage() {
+  const router = useRouter();
+  const [digits, setDigits] = useState(["", "", "", "", "", ""]);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    router.push("/reset-password");
+  };
+
+  const handleDigitChange = (index: number, val: string) => {
+    const clean = val.slice(-1);
+    const newDigits = [...digits];
+    newDigits[index] = clean;
+    setDigits(newDigits);
+    if (clean && index < 5) {
+      const nextInput = document.getElementById(`otp-digit-${index + 2}`);
+      nextInput?.focus();
+    }
+  };
+
   return (
-    <>
-      {/* Lien retour */}
-      <div className="mb-8">
-        <Link
-          href="/login"
-          id="link-back-to-login-otp"
-          className="inline-flex items-center gap-2 text-sm text-[#55555C] hover:text-[#1B3F7B] transition-colors font-medium"
-        >
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <polyline points="15 18 9 12 15 6" />
-          </svg>
-          Retour à la connexion
-        </Link>
-      </div>
+    <div className="mt-[84px] lg:mt-[188px] min-h-[calc(100vh-84px)] lg:min-h-[calc(100vh-188px)] bg-[#FAF9F5] text-[#141413] flex flex-col justify-center items-center py-12 px-4 sm:px-6 lg:px-8 selection:bg-[#E5E3DC]">
+      <div className="w-full max-w-5xl mx-auto flex flex-col lg:flex-row items-center justify-center gap-10 lg:gap-16 xl:gap-20">
+        {/* ── COLONNE GAUCHE : Formulaire & Identité No Borders ── */}
+        <div className="w-full max-w-[440px] flex flex-col items-center">
+          {/* Titre & sous-titre contextualisés */}
+          <h1 className="font-serif text-[2.35rem] sm:text-[2.75rem] text-[#141413] tracking-[-0.03em] leading-tight text-center font-normal whitespace-nowrap">
+            Vérification OTP
+          </h1>
+          <p className="mt-2 text-sm sm:text-[15px] text-[#55555C] text-center font-normal">
+            Saisissez le code à 6 chiffres reçu par e-mail
+          </p>
 
-      {/* Icône email animée */}
-      <div className="flex flex-col items-center mb-8">
-        <div className="relative w-20 h-20 rounded-2xl bg-[#EEF2FF] flex items-center justify-center mb-5">
-          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#1B3F7B" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
-            <polyline points="22,6 12,13 2,6" />
-          </svg>
-          {/* Badge vert */}
-          <span className="absolute -top-2 -right-2 w-6 h-6 rounded-full bg-[#1F6F5C] flex items-center justify-center">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
-              <polyline points="20 6 9 17 4 12" />
-            </svg>
-          </span>
-        </div>
-        <h1 className="text-2xl font-bold text-[#0B0B0C] tracking-tight">Vérification du code</h1>
-        <p className="text-sm text-[#55555C] mt-2 text-center leading-relaxed max-w-xs">
-          Nous avons envoyé un code de vérification à 6 chiffres à votre adresse mail. Vérifiez votre boîte de réception.
-        </p>
-        <div className="mt-2 bg-[#F4F3F0] rounded-lg px-4 py-2 inline-flex items-center gap-2">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#55555C" strokeWidth="2">
-            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
-            <polyline points="22,6 12,13 2,6" />
-          </svg>
-          <span className="text-xs font-semibold text-[#0B0B0C]">votre@email.com</span>
-        </div>
-      </div>
+          {/* Carte blanche flottante */}
+          <div className="mt-7 w-full max-w-[390px] bg-white rounded-[28px] border border-[#ECE9E2] shadow-[0_4px_30px_rgba(0,0,0,0.04)] p-6 sm:p-7 flex flex-col gap-4">
+            <form id="form-otp" onSubmit={handleSubmit} className="flex flex-col gap-4">
+              <div className="flex gap-2 sm:gap-2.5 justify-center">
+                {[1, 2, 3, 4, 5, 6].map((i) => (
+                  <input
+                    key={i}
+                    id={`otp-digit-${i}`}
+                    type="text"
+                    inputMode="numeric"
+                    maxLength={1}
+                    value={digits[i - 1]}
+                    onChange={(e) => handleDigitChange(i - 1, e.target.value)}
+                    placeholder="–"
+                    className="w-10 h-12 sm:w-11 sm:h-12 text-center border border-[#E5E3DC] rounded-xl text-lg sm:text-xl font-bold text-[#141413] placeholder-[#D0CDC6] focus:outline-none focus:border-primary transition-colors bg-white caret-transparent"
+                    aria-label={`Chiffre ${i} du code OTP`}
+                  />
+                ))}
+              </div>
 
-      {/* Formulaire OTP */}
-      <form id="form-otp" className="flex flex-col gap-6" noValidate>
-        {/* Champs OTP */}
-        <div className="flex flex-col gap-2">
-          <label className="text-xs font-semibold text-[#0B0B0C] text-center">
-            Entrez le code à 6 chiffres
-          </label>
-          <div className="flex gap-3 justify-center">
-            {[1, 2, 3, 4, 5, 6].map((i) => (
-              <input
-                key={i}
-                id={`otp-digit-${i}`}
-                type="text"
-                inputMode="numeric"
-                maxLength={1}
-                placeholder="–"
-                className="w-12 h-14 text-center border border-[#E0DDD8] rounded-xl text-xl font-bold text-[#0B0B0C] placeholder-[#E0DDD8] focus:outline-none focus:border-[#1B3F7B] focus:ring-2 focus:ring-[#1B3F7B]/10 transition-all bg-white caret-transparent"
-                aria-label={`Chiffre ${i} du code OTP`}
-              />
-            ))}
-          </div>
-        </div>
+              {/* Renvoyer le code */}
+              <div className="text-xs text-[#55555C] text-center flex items-center justify-center gap-1">
+                <span>Code non reçu ?</span>
+                <button
+                  type="button"
+                  id="btn-resend-otp"
+                  className="font-semibold text-primary hover:underline"
+                >
+                  Renvoyer (09:47)
+                </button>
+              </div>
 
-        {/* Timer */}
-        <div className="flex flex-col items-center gap-3">
-          <div className="flex items-center gap-2 text-xs text-[#55555C]">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <circle cx="12" cy="12" r="10" />
-              <polyline points="12 6 12 12 16 14" />
-            </svg>
-            <span>Le code expire dans <span className="font-bold text-[#1B3F7B]">09:47</span></span>
+              <button
+                id="btn-submit-otp"
+                type="submit"
+                className="w-full rounded-xl bg-primary py-3.5 text-sm font-semibold text-white transition-colors hover:bg-primary-hover shadow-xs mt-1"
+              >
+                Vérifier le code
+              </button>
+            </form>
+
+            <p className="text-[11px] text-[#787672] text-center leading-normal">
+              Le code expire dans 10 minutes. Vérifiez vos courriers indésirables si besoin.
+            </p>
           </div>
 
-          {/* Renvoyer le code */}
-          <div className="text-xs text-[#55555C]">
-            Vous n'avez pas reçu le code ?{" "}
-            <button
-              type="button"
-              id="btn-resend-otp"
-              className="text-[#1B3F7B] font-bold hover:text-[#E2501F] transition-colors underline underline-offset-2"
+          {/* Action membre & Navigation */}
+          <div className="mt-6 flex flex-col items-center gap-3.5">
+            <Link
+              href="/forgot-password"
+              id="link-back-to-forgot-otp"
+              className="inline-flex items-center gap-2 rounded-xl border border-[#E5E3DC] bg-white/80 px-4 py-2.5 text-xs font-semibold text-[#141413] transition-colors hover:bg-white hover:border-[#D0CDC6] shadow-2xs"
             >
-              Renvoyer le code
-            </button>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M19 12H5M12 19l-7-7 7-7" />
+              </svg>
+              Modifier l&apos;e-mail
+            </Link>
+
+            <div className="flex items-center gap-3 text-xs text-[#8C8A84]">
+              <Link href="/" className="hover:text-[#141413] transition-colors">
+                ← Accueil
+              </Link>
+              <span>•</span>
+              <Link href="/boutique" className="hover:text-[#141413] transition-colors">
+                Boutique solidaire
+              </Link>
+              <span>•</span>
+              <Link href="/nos-activites" className="hover:text-[#141413] transition-colors">
+                Nos activités
+              </Link>
+            </div>
           </div>
         </div>
 
-        {/* Bouton submit */}
-        <button
-          id="btn-submit-otp"
-          type="submit"
-          className="w-full bg-[#0875B9] text-white rounded-lg py-3.5 text-sm font-bold tracking-wide hover:bg-[#065a8f] transition-colors duration-200 flex items-center justify-center gap-2"
-        >
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <polyline points="20 6 9 17 4 12" />
-          </svg>
-          Vérifier le code
-        </button>
-      </form>
-
-      {/* Aide */}
-      <div className="mt-6 bg-[#FFF8F5] border border-[#F5D5C7] rounded-xl p-4 flex gap-3">
-        <div className="shrink-0 mt-0.5">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#E2501F" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <circle cx="12" cy="12" r="10" />
-            <line x1="12" y1="8" x2="12" y2="12" />
-            <line x1="12" y1="16" x2="12.01" y2="16" />
-          </svg>
+        {/* ── COLONNE DROITE : Photo No Borders ASBL ── */}
+        <div className="hidden lg:flex w-full max-w-[430px] lg:max-w-[460px] items-center justify-center">
+          <div className="relative aspect-[4/5] w-full max-w-[420px] overflow-hidden rounded-[32px] sm:rounded-[36px] shadow-sm border border-black/5 bg-[#EFECE6]">
+            <Image
+              src="/images/auth/login-noborders.jpg"
+              alt="No Borders ASBL — Vélos artisanaux en bambou"
+              fill
+              priority
+              className="object-cover"
+            />
+          </div>
         </div>
-        <p className="text-[11px] text-[#C84A1A] leading-relaxed">
-          Si vous ne trouvez pas l'email, vérifiez votre dossier spam ou indésirables. Le code est valable 10 minutes.
-        </p>
       </div>
-
-      {/* Lien connexion */}
-      <p className="text-center text-xs text-[#55555C] mt-8">
-        Vous avez déjà un compte vérifié ?{" "}
-        <Link
-          href="/login"
-          id="link-login-from-otp"
-          className="text-[#0B0B0C] font-bold hover:text-[#E2501F] transition-colors underline underline-offset-2"
-        >
-          Se connecter
-        </Link>
-      </p>
-    </>
+    </div>
   );
 }

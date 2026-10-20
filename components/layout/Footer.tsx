@@ -59,7 +59,7 @@ export function Footer() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={`${s.label} (nouvel onglet)`}
-                    className="grid h-10 w-10 place-items-center rounded-full border border-white/15 text-white/80 transition-colors hover:border-[#0875B9] hover:bg-[#0875B9] hover:text-white"
+                    className="grid h-10 w-10 place-items-center rounded-full border border-white/15 text-white/80 transition-colors hover:border-primary hover:bg-primary hover:text-white"
                   >
                     <Icon size={18} />
                   </a>
@@ -87,6 +87,11 @@ export function Footer() {
               <li>
                 <Link href="/nous-soutenir" className="text-white/75 transition-colors hover:text-white">
                   Nous soutenir
+                </Link>
+              </li>
+              <li>
+                <Link href="/politique-de-confidentialite" className="text-white/75 transition-colors hover:text-white">
+                  Politique de confidentialité
                 </Link>
               </li>
             </ul>
@@ -129,20 +134,20 @@ export function Footer() {
             <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-white/50">Contact officiel</h3>
             <ul className="mt-5 space-y-3 text-sm text-white/75">
               <li className="flex items-start gap-2.5">
-                <PinIcon size={16} className="mt-1 text-[#0875B9] shrink-0" />
+                <PinIcon size={16} className="mt-1 text-primary shrink-0" />
                 <span>
                   {site.address.street},<br />
                   {site.address.zip} {site.address.city}, {site.address.country}
                 </span>
               </li>
               <li className="flex items-center gap-2.5">
-                <PhoneIcon size={16} className="text-[#0875B9] shrink-0" />
+                <PhoneIcon size={16} className="text-primary shrink-0" />
                 <a href={site.phoneHref} className="hover:text-white">
                   {site.phone}
                 </a>
               </li>
               <li className="flex items-center gap-2.5">
-                <MailIcon size={16} className="text-[#0875B9] shrink-0" />
+                <MailIcon size={16} className="text-primary shrink-0" />
                 <a href={`mailto:${site.email}`} className="hover:text-white break-all">
                   {site.email}
                 </a>

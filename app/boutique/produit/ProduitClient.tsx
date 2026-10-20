@@ -6,6 +6,7 @@ import { useEffect, useMemo, useState, type ReactNode } from "react";
 import { useSearchParams } from "next/navigation";
 import { productCategories, productColors, products } from "@/lib/content";
 import { CheckIcon, HeartIcon, ShoppingBagIcon } from "@/components/ui/Icons";
+import { PageHeader } from "@/components/ui/PageHeader";
 
 const highlights: { title: string; text: string; icon: ReactNode }[] = [
   {
@@ -202,47 +203,23 @@ export function ProduitClient() {
       {/* Notification */}
       {notice && (
         <div role="status" className="fixed bottom-6 right-6 z-[100] flex items-center gap-3 rounded-xl bg-ink px-5 py-3.5 text-sm font-semibold text-white shadow-2xl">
-          <span className="grid h-6 w-6 place-items-center rounded-full bg-flame-soft text-flame-deep">
+          <span className="grid h-6 w-6 place-items-center rounded-full bg-primary/10 text-primary">
             <CheckIcon size={14} />
           </span>
           {notice}
         </div>
       )}
 
-      {/* ── Fil d'Ariane (Design identique à la page Actualités) ── */}
-      <section className="border-b border-ink/5 bg-paper py-8 sm:py-10">
-        <div className="container">
-          <nav aria-label="Fil d'Ariane">
-            <ol className="flex flex-wrap items-center gap-2 text-sm text-ink/50">
-              <li>
-                <Link href="/" className="transition-colors hover:text-flame">
-                  Accueil
-                </Link>
-              </li>
-              <li aria-hidden="true">/</li>
-              <li>
-                <Link href="/boutique" className="transition-colors hover:text-flame">
-                  Boutique
-                </Link>
-              </li>
-              {category && (
-                <>
-                  <li aria-hidden="true">/</li>
-                  <li>
-                    <Link href="/boutique" className="transition-colors hover:text-flame">
-                      {category.label}
-                    </Link>
-                  </li>
-                </>
-              )}
-              <li aria-hidden="true">/</li>
-              <li aria-current="page" className="line-clamp-1 font-semibold text-ink">
-                {product.name}
-              </li>
-            </ol>
-          </nav>
-        </div>
-      </section>
+      <PageHeader
+        crumbs={[
+          { label: "Accueil", href: "/" },
+          { label: "Boutique", href: "/boutique" },
+          ...(category ? [{ label: category.label, href: "/boutique" }] : []),
+          { label: product.name },
+        ]}
+        title={product.name}
+        description={description}
+      />
 
       {/* ── Contenu principal : Galerie, Détails & Onglets sur fond blanc jusqu'au footer ── */}
       <section className="flex-1 bg-white py-12 sm:py-16">
@@ -262,7 +239,7 @@ export function ProduitClient() {
                 sizes="(max-width: 1024px) 100vw, 58vw"
               />
               {discount > 0 && (
-                <span className="absolute left-4 top-4 rounded-md bg-flame-soft px-2.5 py-1 text-xs font-bold text-flame-deep shadow-sm">
+                <span className="absolute left-4 top-4 rounded-md bg-primary/10 px-2.5 py-1 text-xs font-bold text-primary shadow-sm">
                   -{discount}%
                 </span>
               )}
@@ -277,7 +254,7 @@ export function ProduitClient() {
                   aria-label={`Voir l'image ${i + 1}`}
                   aria-pressed={i === activeImage}
                   className={`relative h-16 w-16 shrink-0 overflow-hidden rounded-lg border-2 bg-white transition-colors sm:h-20 sm:w-20 ${
-                    i === activeImage ? "border-flame-deep" : "border-ink/10 hover:border-ink/30"
+                    i === activeImage ? "border-primary" : "border-ink/10 hover:border-ink/30"
                   }`}
                 >
                   <Image src={src} alt="" fill className="object-cover" sizes="80px" />
@@ -290,7 +267,7 @@ export function ProduitClient() {
           <div className="lg:col-span-5">
             <div className="rounded-2xl border border-ink/10 bg-white p-5 shadow-sm sm:p-7">
               <div className="flex items-center justify-between gap-3">
-                <span className="rounded-full border border-flame-deep/20 bg-flame-soft px-3 py-1 text-[11px] font-semibold text-flame-deep">
+                <span className="rounded-full border border-primary/20 bg-primary/10 px-3 py-1 text-[11px] font-semibold text-primary">
                   {category?.label}
                 </span>
                 <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-leaf">
@@ -298,15 +275,11 @@ export function ProduitClient() {
                 </span>
               </div>
 
-              <h1 className="mt-4 text-2xl font-extrabold leading-tight tracking-tight text-ink sm:text-3xl">
-                {product.name}
-              </h1>
-
-              <div className="mt-3 flex flex-wrap items-center gap-2 text-xs text-ink/50">
+              <div className="mt-4 flex flex-wrap items-center gap-2 text-xs text-ink/50">
                 <Stars value={product.rating} />
                 <span className="font-bold text-ink">{product.rating.toLocaleString("fr-FR")}</span>
                 <span aria-hidden="true">·</span>
-                <button type="button" onClick={() => setTab("avis")} className="font-semibold text-flame-deep hover:underline">
+                <button type="button" onClick={() => setTab("avis")} className="font-semibold text-primary hover:underline">
                   {product.reviews} avis
                 </button>
                 <span aria-hidden="true">·</span>
@@ -319,7 +292,7 @@ export function ProduitClient() {
                 {product.oldPrice && (
                   <>
                     <span className="text-sm text-ink/40 line-through">{fcfa(product.oldPrice)}</span>
-                    <span className="rounded-full bg-flame-soft px-2.5 py-0.5 text-[11px] font-bold text-flame-deep">
+                    <span className="rounded-full bg-primary/10 px-2.5 py-0.5 text-[11px] font-bold text-primary">
                       Économisez {fcfa(product.oldPrice - product.price)}
                     </span>
                   </>
@@ -342,7 +315,7 @@ export function ProduitClient() {
                       aria-label={c.label}
                       aria-pressed={color === c.slug}
                       className={`grid h-9 w-9 place-items-center rounded-full border transition-transform hover:scale-110 ${
-                        color === c.slug ? "ring-2 ring-flame-deep ring-offset-2" : "border-black/15"
+                        color === c.slug ? "ring-2 ring-primary ring-offset-2" : "border-black/15"
                       }`}
                       style={{ backgroundColor: c.hex }}
                     >
@@ -365,7 +338,7 @@ export function ProduitClient() {
                   type="button"
                   id="produit-ajouter-panier"
                   onClick={() => notify(`${qty} × ${product.name} ajouté au panier !`)}
-                  className="flex flex-1 items-center justify-center gap-2 rounded-xl bg-flame-soft px-4 text-sm font-bold text-flame-deep transition-colors hover:bg-flame-deep hover:text-white"
+                  className="flex flex-1 items-center justify-center gap-2 rounded-xl bg-primary/10 px-4 text-sm font-bold text-primary transition-colors hover:bg-primary hover:text-white"
                 >
                   <ShoppingBagIcon size={17} /> Ajouter au panier
                 </button>
@@ -375,7 +348,7 @@ export function ProduitClient() {
                   aria-label={liked ? "Retirer des favoris" : "Ajouter aux favoris"}
                   aria-pressed={liked}
                   className={`grid w-11 place-items-center rounded-xl border transition-colors ${
-                    liked ? "border-flame-deep bg-flame-soft text-flame-deep" : "border-ink/15 text-ink/60 hover:border-ink hover:text-ink"
+                    liked ? "border-primary bg-primary/10 text-primary" : "border-ink/15 text-ink/60 hover:border-ink hover:text-ink"
                   }`}
                 >
                   <HeartIcon size={18} fill={liked ? "currentColor" : "none"} />
@@ -386,7 +359,7 @@ export function ProduitClient() {
                 type="button"
                 id="produit-acheter"
                 onClick={() => notify("Redirection vers le paiement (démo)")}
-                className="mt-3 flex w-full items-center justify-center gap-2 rounded-xl border border-flame-deep/30 py-3 text-sm font-semibold text-ink transition-colors hover:bg-flame-soft hover:text-flame-deep"
+                className="mt-3 flex w-full items-center justify-center gap-2 rounded-xl border border-primary/30 py-3 text-sm font-semibold text-ink transition-colors hover:bg-primary/10 hover:text-primary"
               >
                 <Svg size={16}><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8Z" /></Svg>
                 Acheter maintenant
@@ -401,7 +374,7 @@ export function ProduitClient() {
                   { label: "Assistance 7j/7", icon: <path d="M3 18v-6a9 9 0 0 1 18 0v6M21 19a2 2 0 0 1-2 2h-1v-6h3v4ZM3 19a2 2 0 0 0 2 2h1v-6H3v4Z" /> },
                 ].map((g, i) => (
                   <div key={g.label} className={`flex items-center gap-2 p-3 ${i % 2 === 0 ? "border-r border-ink/10" : ""} ${i < 2 ? "border-b border-ink/10" : ""}`}>
-                    <span className="shrink-0 text-flame-deep"><Svg size={15}>{g.icon}</Svg></span>
+                    <span className="shrink-0 text-primary"><Svg size={15}>{g.icon}</Svg></span>
                     {g.label}
                   </div>
                 ))}
@@ -423,7 +396,7 @@ export function ProduitClient() {
                 onClick={() => setTab(t.id)}
                 className={`shrink-0 border-b-2 px-5 py-4 text-sm font-semibold transition-colors sm:px-7 ${
                   tab === t.id
-                    ? "border-flame-deep bg-white text-flame-deep"
+                    ? "border-primary bg-white text-primary"
                     : "border-transparent text-ink/50 hover:text-ink"
                 }`}
               >
@@ -446,8 +419,8 @@ export function ProduitClient() {
                   <h3 className="mt-8 text-base font-bold text-ink">Points forts</h3>
                   <div className="mt-4 grid gap-4 sm:grid-cols-2">
                     {highlights.map((h) => (
-                      <div key={h.title} className="flex gap-3 rounded-xl border border-ink/10 p-4 transition-colors hover:border-flame-deep/30">
-                        <span className="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-flame-soft text-flame-deep">
+                      <div key={h.title} className="flex gap-3 rounded-xl border border-ink/10 p-4 transition-colors hover:border-primary/30">
+                        <span className="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-primary/10 text-primary">
                           <Svg>{h.icon}</Svg>
                         </span>
                         <div>
@@ -461,7 +434,7 @@ export function ProduitClient() {
 
                 <aside className="h-fit rounded-xl border border-ink/10 bg-paper p-5">
                   <h3 className="flex items-center gap-2 text-base font-bold text-ink">
-                    <span className="text-flame-deep">
+                    <span className="text-primary">
                       <Svg><path d="M21 8 12 3 3 8v8l9 5 9-5V8ZM3 8l9 5 9-5M12 13v8" /></Svg>
                     </span>
                     Contenu du colis
@@ -469,7 +442,7 @@ export function ProduitClient() {
                   <ul className="mt-4 divide-y divide-ink/10">
                     {included.map((item) => (
                       <li key={item} className="flex items-center gap-2.5 py-2.5 text-sm text-ink/70">
-                        <CheckIcon size={15} className="shrink-0 text-flame-deep" />
+                        <CheckIcon size={15} className="shrink-0 text-primary" />
                         {item}
                       </li>
                     ))}
@@ -483,8 +456,7 @@ export function ProduitClient() {
               <div className="grid gap-8 md:grid-cols-2">
                 {specs.map((group) => (
                   <div key={group.title}>
-                    <h3 className="mb-3 flex items-center gap-2 text-sm font-bold text-ink">
-                      <span className="h-4 w-1 rounded-full bg-flame-deep" />
+                    <h3 className="mb-3 text-sm font-bold text-ink">
                       {group.title}
                     </h3>
                     <table className="w-full border border-ink/10 text-sm">
@@ -515,7 +487,7 @@ export function ProduitClient() {
                     <li key={r.name} className="rounded-xl border border-ink/10 p-5">
                       <div className="flex flex-wrap items-center justify-between gap-2">
                         <div className="flex items-center gap-3">
-                          <span className="grid h-9 w-9 place-items-center rounded-full bg-flame-soft text-sm font-bold text-flame-deep">
+                          <span className="grid h-9 w-9 place-items-center rounded-full bg-primary/10 text-sm font-bold text-primary">
                             {r.name.charAt(0)}
                           </span>
                           <div>
@@ -538,7 +510,7 @@ export function ProduitClient() {
         <section className="mt-16 sm:mt-24 border-t border-ink/10 pt-12 sm:pt-16" aria-labelledby="similar-products-heading">
           <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-8">
             <div>
-              <p className="text-xs font-bold uppercase tracking-wider text-[#CF4318]">
+              <p className="text-xs font-bold uppercase tracking-wider text-primary">
                 Découvrez aussi
               </p>
               <h2 id="similar-products-heading" className="mt-1 text-2xl font-bold font-heading text-ink sm:text-3xl">
@@ -550,7 +522,7 @@ export function ProduitClient() {
             </div>
             <Link
               href="/boutique"
-              className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#CF4318] hover:text-[#B03815] transition-colors"
+              className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary hover:text-primary-hover transition-colors"
             >
               <span>Voir toute la boutique</span>
               <span aria-hidden="true">→</span>
@@ -577,13 +549,8 @@ export function ProduitClient() {
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
                   />
                   {p.isNew && (
-                    <span className="absolute left-3 top-3 rounded-md bg-[#CF4318] px-2.5 py-1 text-xs font-bold text-white shadow-sm">
+                    <span className="absolute left-3 top-3 rounded-md bg-primary px-2.5 py-1 text-xs font-bold text-white shadow-sm">
                       Nouveauté
-                    </span>
-                  )}
-                  {p.oldPrice && !p.isNew && (
-                    <span className="absolute left-3 top-3 rounded-md bg-[#CF4318] px-2.5 py-1 text-xs font-bold text-white shadow-sm">
-                      -{Math.round(((p.oldPrice - p.price) / p.oldPrice) * 100)}%
                     </span>
                   )}
                 </Link>
@@ -594,7 +561,7 @@ export function ProduitClient() {
                     {p.category.replace("-", " ")}
                   </p>
 
-                  <h3 className="mt-1 text-base font-bold leading-snug text-ink group-hover:text-[#CF4318] transition-colors">
+                  <h3 className="mt-1 text-base font-bold leading-snug text-ink group-hover:text-primary transition-colors">
                     <Link href="/boutique/produit">{p.name}</Link>
                   </h3>
 
@@ -618,7 +585,7 @@ export function ProduitClient() {
                     <button
                       type="button"
                       onClick={() => notify(`« ${p.name} » ajouté au panier !`)}
-                      className="w-full rounded-xl bg-[#CF4318] py-2.5 px-4 text-xs font-bold text-white transition-colors hover:bg-[#B03815] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#CF4318]"
+                      className="w-full rounded-xl bg-primary py-2.5 px-4 text-xs font-bold text-white transition-colors hover:bg-primary-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
                     >
                       Ajouter au panier
                     </button>

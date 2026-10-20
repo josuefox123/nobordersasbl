@@ -2,26 +2,32 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --primary: #26B997;
+  --primary-hover: #1FA887;
+  --primary-soft: #E8F8F5;
+}
+
 @layer base {
   html {
     scroll-behavior: smooth;
     -webkit-tap-highlight-color: transparent;
-    /* Empêche tout débordement horizontal sur mobile */
-    overflow-x: hidden;
+    /* Empêche tout débordement horizontal sur mobile sans bloquer position: sticky */
+    overflow-x: clip;
   }
   body {
     @apply bg-paper text-ink antialiased;
     font-feature-settings: "ss01", "cv11";
-    /* Renforce le confinement horizontal */
-    overflow-x: hidden;
+    /* Renforce le confinement horizontal sans casser le scroll sticky */
+    overflow-x: clip;
     max-width: 100%;
   }
   ::selection {
-    background-color: #0875B9;
+    background-color: var(--primary);
     color: #ffffff;
   }
   :focus-visible {
-    outline: 3px solid #0875B9;
+    outline: 3px solid var(--primary);
     outline-offset: 3px;
   }
 }
@@ -79,15 +85,15 @@
 
   /* Navigation moderne : liens avec état .active */
   .nav-menu-link {
-    @apply relative mx-1.5 flex items-center py-2 px-3 text-[0.95rem] font-medium text-ink/75 transition-all duration-200 hover:text-[#0875B9];
+    @apply relative mx-1.5 flex items-center py-2 px-3 text-[0.95rem] font-medium text-ink/75 transition-all duration-200 hover:text-primary;
   }
   .nav-menu-link.active,
   .nav-menu-link[aria-current="page"] {
-    @apply font-semibold text-[#0875B9];
+    @apply font-semibold text-primary;
   }
   .nav-menu-link::after {
     content: "";
-    @apply absolute bottom-0 left-2.5 right-2.5 h-[2.5px] scale-x-0 rounded-full bg-[#0875B9] transition-transform duration-300 ease-out-expo;
+    @apply absolute bottom-0 left-2.5 right-2.5 h-[2.5px] scale-x-0 rounded-full bg-primary transition-transform duration-300 ease-out-expo;
   }
   .nav-menu-link:hover::after,
   .nav-menu-link.active::after,

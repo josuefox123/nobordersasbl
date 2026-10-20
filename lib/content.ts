@@ -136,13 +136,13 @@ export const objectives = [
   },
   {
     id: "mobilite",
-    title: "Mobilité douce & environnement",
+    title: "Promotion de la mobilité douce et sensibilisation à la protection de l’environnement",
     text: "Face aux enjeux environnementaux (pollution, saturation du réseau routier, réchauffement climatique) et pour promouvoir les bienfaits du vélo (sur l’esprit, sur le corps et sur le portefeuille), nous préconisons l’usage fréquent du vélo dans nos déplacements. Nous motivons en particulier les femmes africaines à utiliser le vélo afin de créer une activité plus inclusive. Nous sensibilisons aussi la population à l’usage de produits écologiques et/ou issus de l’économie circulaire.",
     image: "/images/bxl-tour.jpg",
   },
   {
     id: "nord-sud",
-    title: "Solidarité Nord-Sud",
+    title: "Promotion de la solidarité Nord-Sud",
     text: "Notre propre parcours et les origines de nos différents membres nous poussent à soutenir les initiatives entrepreneuriales développées dans les Suds et à établir des partenariats dans le but de créer un réel impact social.",
     image: "/images/ghana-booomers.jpg",
   },
@@ -154,7 +154,14 @@ export const horizon = {
   motto: "Plus loin ! Plus haut ! Plus fort ! Ensemble.",
 };
 
-export type Testimonial = { name: string; image: string; quote: string; full: string[] };
+/** Images affichées en fin de page « Notre Projet » (ancien slider). */
+export const projectSlider = [
+  { src: "/slider/P40+ICHEC.webp", alt: "ICHEC" },
+  { src: "/slider/P93+Dragon+Audax+Mons.webp", alt: "Dragon Audax Mons" },
+  { src: "/slider/Parker+Hannifin.webp", alt: "Parker Hannifin" },
+] as const;
+
+export type Testimonial = { name: string; image: string; quote: string; question?: string; full: string[] };
 
 /** Témoignages publiés sur la page « Notre Projet » du site officiel. */
 export const testimonials: Testimonial[] = [
@@ -180,10 +187,11 @@ export const testimonials: Testimonial[] = [
     name: "Giuseppe Ciccia",
     image: "/images/t-giuseppe.png",
     quote: "J’ai rencontré des personnes formidables venues de tous horizons, ce qui m’a permis un enrichissement culturel incroyable.",
+    question: "Qu'est-ce que notre club t'a apporté sur le plan perso et culturel ?",
     full: [
       "Personnellement j’ai rencontré des personnes formidables qui venaient de tous horizons, ce qui m’a permis un enrichissement culturel incroyable ; bon nombre d’entre eux sont devenus des amis avec le temps. Chapeau à votre association qui a eu une superbe idée de mixage culturel à l’époque, c’était à l’avant-garde par rapport aux problèmes de cultures qu'on peut rencontrer aujourd’hui dans la société.",
       "Sportivement aussi il y a eu beaucoup de plaisir à se retrouver chaque weekend pour les matchs, surtout pour moi qui habite du côté d’Arlon : la route n’a jamais été un problème, je n’aurais raté le match pour rien au monde !",
-      "Enfin je me suis inspiré personnellement des No Borders pour créer mes No Border ici du côté d’Arlon au foot en salle l’an passé. Qui sait, peut-être un jour il y aura les No Border au basket ou autre ?",
+      "Enfin je me suis inspiré personnellement des No Borders pour créer mes No Border ici du côté d’Arlon au foot en salle l’an passé, la pérennité de ce projet s’étend en Belgique et est donc assurée pour encore longtemps. Qui sait, peut-être un jour il y aura les No Border au basket ou autre ?",
     ],
   },
   {

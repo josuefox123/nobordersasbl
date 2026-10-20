@@ -44,7 +44,7 @@ export function PageHeader({
         className="absolute inset-0"
         style={{
           background:
-            "linear-gradient(135deg, rgba(8,117,185,0.78) 0%, rgba(5,60,110,0.72) 100%)",
+            "linear-gradient(135deg, rgba(38,185,151,0.78) 0%, rgba(20,110,90,0.72) 100%)",
         }}
       />
 
@@ -96,7 +96,6 @@ export function PageHeader({
           </div>
           {action && <div className="shrink-0">{action}</div>}
         </div>
-
       </div>
     </section>
   );

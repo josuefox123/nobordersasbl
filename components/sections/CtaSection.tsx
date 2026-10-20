@@ -8,16 +8,16 @@ export function CtaSection() {
   return (
     <section className="relative overflow-hidden py-24 text-white sm:py-32" style={{ backgroundColor: "#0B0B0C" }}>
 
-      {/* Halo bleu — cohérent avec notre couleur primaire */}
+      {/* Halo vert — cohérent avec notre couleur primaire */}
       <div
         aria-hidden="true"
         className="pointer-events-none absolute -bottom-32 left-1/3 h-96 w-96 rounded-full blur-[130px]"
-        style={{ backgroundColor: "rgba(8,117,185,0.25)" }}
+        style={{ backgroundColor: "rgba(38,185,151,0.25)" }}
       />
       <div
         aria-hidden="true"
         className="pointer-events-none absolute -top-20 right-1/4 h-72 w-72 rounded-full blur-[100px]"
-        style={{ backgroundColor: "rgba(8,117,185,0.15)" }}
+        style={{ backgroundColor: "rgba(38,185,151,0.15)" }}
       />
 
       <div className="container relative">
@@ -28,7 +28,7 @@ export function CtaSection() {
             <Reveal>
               <h2 className="text-3xl font-extrabold tracking-tight sm:text-4xl md:text-5xl lg:text-6xl">
                 Devenez acteur du changement avec{" "}
-                <span style={{ color: "#0875B9" }}>No Borders</span>.
+                <span className="text-primary">No Borders</span>.
               </h2>
             </Reveal>
 
@@ -42,11 +42,10 @@ export function CtaSection() {
 
             <Reveal delay={0.3}>
               <div className="mt-10 flex flex-wrap gap-4">
-                {/* Bouton primaire bleu */}
+                {/* Bouton primaire vert */}
                 <Link
                   href="/nous-contacter?sujet=benevolat"
-                  className="inline-flex items-center gap-2 rounded-xl px-7 py-4 text-sm font-bold text-white transition-opacity hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50"
-                  style={{ backgroundColor: "#0875B9" }}
+                  className="inline-flex items-center gap-2 rounded-xl bg-primary px-7 py-4 text-sm font-bold text-white transition-colors hover:bg-primary-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50"
                 >
                   <SparkIcon size={17} /> Devenir bénévole
                 </Link>
@@ -77,24 +76,15 @@ export function CtaSection() {
                 <h3 className="text-xl font-bold text-white">Notre engagement</h3>
                 <ul className="mt-6 space-y-4 text-sm text-white/80">
                   <li className="flex items-start gap-3">
-                    <span
-                      className="mt-2 h-2 w-2 shrink-0 rounded-full"
-                      style={{ backgroundColor: "#0875B9" }}
-                    />
+                    <span className="mt-2 h-2 w-2 shrink-0 rounded-full bg-primary" />
                     <span>Transparence totale et statut ASBL légal en Belgique (n° 0837.069.715).</span>
                   </li>
                   <li className="flex items-start gap-3">
-                    <span
-                      className="mt-2 h-2 w-2 shrink-0 rounded-full"
-                      style={{ backgroundColor: "#0875B9" }}
-                    />
+                    <span className="mt-2 h-2 w-2 shrink-0 rounded-full bg-primary" />
                     <span>Activités ouvertes à tous sans distinction d'origine, d'âge ou de condition.</span>
                   </li>
                   <li className="flex items-start gap-3">
-                    <span
-                      className="mt-2 h-2 w-2 shrink-0 rounded-full"
-                      style={{ backgroundColor: "#0875B9" }}
-                    />
+                    <span className="mt-2 h-2 w-2 shrink-0 rounded-full bg-primary" />
                     <span>100 % des dons réinvestis dans nos projets d'inclusion et nos sorties.</span>
                   </li>
                 </ul>

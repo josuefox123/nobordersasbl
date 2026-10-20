@@ -10,6 +10,7 @@ import { ProductSearchSection } from "@/components/sections/ProductSearchSection
 import { FeaturedProducts } from "@/components/sections/FeaturedProducts";
 import { TestimonialsSection } from "@/components/sections/TestimonialsSection";
 import { CtaSection } from "@/components/sections/CtaSection";
+import { CookieConsent } from "@/components/ui/CookieConsent";
 
 export default function HomePage() {
   return (
@@ -27,6 +28,7 @@ export default function HomePage() {
       {/* <ProjectsSection /> — commenté */}
       {/* <NewsletterSection /> — commentée */}
       <NewsSection />
+      <CookieConsent />
     </>
   );
 }

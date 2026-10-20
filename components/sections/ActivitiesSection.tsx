@@ -9,60 +9,74 @@ import { ArrowRight, ChevronLeftIcon, ChevronRightIcon } from "@/components/ui/I
 // Images dédiées à chaque catégorie de vélo
 const CATEGORIES = [
   {
-    title: "Vélos de ville",
+    title: "ElliptiGO 11R – Vélo elliptique",
     description:
-      "Des vélos pratiques et confortables, idéals pour les déplacements quotidiens en ville et les trajets domicile-travail.",
-    image: "/images/categories/velos-de-ville.jpg",
-    href: "/boutique?categorie=velos-de-ville",
+      "Le vélo elliptique ElliptiGO 11R offre une expérience de course à pied sans impact grâce à son mouvement de pédalage elliptique breveté. Équipé de bras de transmission en fibre de carbone qui réduisent le poids et absorbent les vibrations de la route, il dispose de 11 vitesses pour affronter les montées les plus raides et rouler confortablement sur les terrains plats ou vallonnés. Sa colonne de direction réglable et pliable facilite le transport et le rangement, pour un entraînement performant alliant confort et polyvalence.",
+    image: "/images/categories/sec-velos-elliptiques.jpg",
+    href: "/boutique?q=ElliptiGO",
   },
   {
-    title: "VTT (vélos tout-terrain)",
+    title: "Gravel Bikes – Vélos Gravel",
     description:
-      "Des vélos robustes conçus pour explorer les sentiers, les chemins accidentés et les terrains difficiles.",
-    image: "/images/categories/vtt.jpg",
-    href: "/boutique?categorie=vtt",
+      "Découvrez notre gamme de vélos Gravel en bambou, conçus pour offrir confort, légèreté et polyvalence sur les routes et les chemins. Grâce à leur cadre en bambou qui absorbe efficacement les vibrations, leurs haubans permettant un dégagement de pneus jusqu’à 40 mm et leurs transmissions Shimano GRX à 11 ou 12 vitesses, ces vélos garantissent une conduite confortable et des performances adaptées aux aventures sur différents terrains. Leurs câbles intégrés et leurs fixations pour accessoires allient design épuré, praticité et fonctionnalité.",
+    image: "/images/categories/Gravel Bikes – Vélos Gravel.jpg",
+    href: "/boutique?q=Gravel",
   },
   {
-    title: "Vélos gravel",
+    title: "City et Trekking Bikes – Vélos de ville et de randonnée",
     description:
-      "Des vélos polyvalents adaptés aussi bien aux routes goudronnées qu'aux chemins de gravier et aux pistes.",
-    image: "/images/categories/velos-gravel.jpg",
-    href: "/boutique?categorie=velos-gravel",
+      "Découvrez notre gamme de vélos de ville et de trekking en bambou, conçus pour offrir confort, durabilité et polyvalence au quotidien comme lors de longues randonnées. Grâce aux propriétés naturelles du bambou, qui absorbe efficacement les vibrations, ces vélos garantissent une conduite agréable, même sur les pavés et les routes irrégulières. Disponibles avec différentes formes de cadre — diamant, trapèze ou enjambement bas —, ils sont personnalisables selon vos préférences. Leurs composants robustes et durables assurent une utilisation fiable, tandis que certains modèles sont compatibles avec une transmission par courroie Gates pour un entretien simplifié.",
+    image: "/images/categories/City et Trekking Bikes – Vélos de ville et de randonnée.jpg",
+    href: "/boutique?q=City",
   },
   {
-    title: "Vélos trekking",
+    title: "Vélos électriques et VTT – E-Mountainbikes",
     description:
-      "Des vélos confortables et polyvalents, parfaits pour les longues balades, les randonnées et les voyages à vélo.",
-    image: "/images/categories/velos-trekking.jpg",
-    href: "/boutique?categorie=velos-trekking",
+      "Découvrez notre gamme de VTT et de vélos électriques tout-terrain en bambou, conçus pour offrir confort, maniabilité et performance sur les sentiers comme sur les routes. Grâce à leur cadre en bambou naturellement amortissant, leurs pneus Schwalbe Smart Sam de 27,5 pouces et leur fourche à suspension pneumatique RockShox Recon, ces vélos assurent une conduite stable et agréable sur différents terrains. Le modèle électrique Atakora EP8 est équipé d’un puissant moteur Shimano EP8 développant un couple de 85 Nm, idéal pour affronter les montées et profiter pleinement de vos aventures en plein air.",
+    image: "/images/categories/Vélos électriques et VTT – E-Mountainbikes.jpg",
+    href: "/boutique?q=VTT",
   },
   {
-    title: "Vélos tandem",
+    title: "Vélos électriques compacts – E-Kompaktbikes",
     description:
-      "Des vélos conçus pour deux personnes, permettant de pédaler ensemble et de partager des balades ou des aventures.",
-    image: "/images/categories/velos-tandem.jpg",
-    href: "/boutique?categorie=velos-tandem",
+      "Découvrez le Jamasi, le vélo électrique compact en bambou de my Boo, conçu pour faciliter vos déplacements quotidiens. Pratique, innovant et confortable, il est équipé d’un moteur Shimano STEPS EP5 développant un couple de 60 Nm, d’une batterie de 504 Wh et d’une transmission par courroie nécessitant peu d’entretien. Son guidon réglable en hauteur, sa tige de selle à serrage rapide et sa poignée de transport intégrée facilitent son adaptation à chaque utilisateur, son rangement et son transport. Personnalisable avec différents accessoires, le Jamasi allie compacité, technologie et mobilité durable.",
+    image: "/images/categories/Vélos électriques compacts – E-Kompaktbikes.jpg",
+    href: "/boutique?q=compact",
   },
   {
-    title: "Vélos elliptiques",
+    title: "Vélos électriques de trekking – E-Trekking",
     description:
-      "Des vélos innovants qui reproduisent le mouvement d'un appareil elliptique, combinant déplacement en extérieur et entraînement physique.",
-    image: "/images/categories/velos-elliptiques.jpg",
-    href: "/boutique?categorie=velos-elliptiques",
+      "Découvrez notre gamme de vélos électriques de trekking en bambou, conçus pour vous accompagner aussi bien dans vos déplacements quotidiens en ville que lors de longues randonnées. Grâce à leur cadre en bambou qui absorbe naturellement les vibrations, ces vélos offrent un confort de conduite exceptionnel sur différents types de routes. Équipés de moteurs centraux et de batteries Shimano performants, ils garantissent une assistance électrique fluide, une autonomie adaptée aux longues distances et une expérience de conduite naturelle. Disponibles avec différentes formes de cadre — diamant, trapèze ou enjambement bas —, ils sont personnalisables selon vos préférences et conçus avec des composants robustes et durables pour une mobilité fiable au quotidien.",
+    image: "/images/categories/Vélos électriques de trekking – E-Trekking.jpg",
+    href: "/boutique?q=trekking",
   },
   {
-    title: "Vélos debout (Stand Up Bikes)",
+    title: "Tandems – Vélos pour deux personnes",
     description:
-      "Des vélos permettant de pédaler en position debout, offrant une expérience de conduite originale axée sur le mouvement et le fitness.",
-    image: "/images/categories/velos-debout.jpg",
-    href: "/boutique?categorie=stand-up-bikes",
+      "Découvrez notre gamme de tandems conçus pour partager le plaisir du vélo à deux. Grâce à leur conception ergonomique et à leurs positions assises décalées, les tandems offrent confort, stabilité et excellente visibilité aux deux cyclistes. Leur cadre réglable s’adapte à différents utilisateurs, adultes comme enfants, tandis que les versions avec assistance électrique facilitent les longues randonnées et les parcours exigeants. Pratiques et polyvalents, ces vélos sont idéaux pour les balades, les voyages et les aventures à deux.",
+    image: "/images/categories/Tandems – Vélos pour deux personnes.jpg",
+    href: "/boutique?q=Tandem",
   },
   {
-    title: "Vélos cargo",
+    title: "Tricycles pour adultes",
     description:
-      "Des vélos conçus pour transporter des marchandises, des courses ou des équipements grâce à leur capacité de chargement adaptée.",
-    image: "/images/categories/velos-cargo.jpg",
-    href: "/boutique?categorie=velos-cargo",
+      "Découvrez notre gamme de tricycles pour adultes, conçus pour offrir confort, stabilité et liberté de mouvement au quotidien. Grâce à leur conception à trois roues, avec une roue directrice à l’avant et deux roues à l’arrière, ils assurent une excellente stabilité sans nécessiter de garder l’équilibre comme sur un vélo classique. Équipés de sièges confortables, de suspensions performantes et disponibles avec assistance électrique, ils s’adaptent aussi bien aux promenades qu’aux déplacements quotidiens. Leur ergonomie réglable permet de répondre aux besoins de différents utilisateurs et de profiter pleinement du plaisir de rouler.",
+    image: "/images/categories/Tricycles pour adultes.jpg",
+    href: "/boutique?q=Tricycle",
+  },
+  {
+    title: "Vélos électriques de ville – E-Citybikes",
+    description:
+      "Découvrez notre gamme de vélos électriques de ville en bambou, conçus pour offrir un maximum de confort, de sécurité et de praticité lors de vos déplacements quotidiens. Équipés de moteurs centraux Shimano et d’un cadre en bambou qui absorbe naturellement les vibrations, ces vélos garantissent une assistance électrique agréable et une conduite stable. Leur cadre à enjambement bas facilite la montée et la descente, tandis que la batterie intégrée au porte-bagages et la poignée de transport en bambou apportent davantage de fonctionnalité. Disponibles en plusieurs modèles, les vélos E-City allient design naturel, technologie moderne et mobilité urbaine confortable.",
+    image: "/images/categories/Vélos électriques de ville – E-Citybikes.jpg",
+    href: "/boutique?q=City",
+  },
+  {
+    title: "Kettwiesel TWO – Tricycle électrique tandem",
+    description:
+      "Découvrez le Kettwiesel TWO de HASE BIKES, un tricycle électrique tandem innovant conçu pour permettre à deux personnes de pédaler côte à côte en toute sécurité et dans un confort optimal. Équipé d’un moteur Bosch Performance Line CX développant un couple de 100 Nm, il facilite les déplacements, même sur les pentes. Sa suspension intégrale absorbe les irrégularités du terrain, tandis que ses sièges pivotants et réglables s’adaptent aux utilisateurs mesurant de 1,30 m à 2 m. Grâce à son assistance électrique, sa maniabilité et sa conception ergonomique, il est idéal pour les balades à deux, les sorties en famille et la mobilité inclusive.",
+    image: "/images/categories/Kettwiesel TWO – Tricycle électrique tandem.jpg",
+    href: "/boutique?q=Kettwiesel",
   },
 ];
 
@@ -177,7 +191,7 @@ export function ActivitiesSection() {
             type="button"
             onClick={handlePrev}
             aria-label="Catégorie précédente"
-            className="hidden sm:flex absolute -left-5 top-1/2 -translate-y-1/2 z-10 h-12 w-12 items-center justify-center rounded-full bg-white border border-ink/10 text-ink shadow-lg transition-all hover:bg-[#0875B9] hover:text-white hover:border-[#0875B9] hover:scale-105"
+            className="hidden sm:flex absolute -left-5 top-1/2 -translate-y-1/2 z-10 h-12 w-12 items-center justify-center rounded-full bg-white border border-ink/10 text-ink shadow-lg transition-all hover:bg-primary hover:text-white hover:border-primary hover:scale-105"
           >
             <ChevronLeftIcon size={20} />
           </button>
@@ -208,10 +222,14 @@ export function ActivitiesSection() {
                     />
                   </div>
                   <div className="flex flex-1 flex-col p-6 sm:p-7">
-                    <h3 className="text-lg font-bold tracking-tight text-ink">{cat.title}</h3>
-                    <p className="mt-2 text-sm leading-relaxed text-ink/65">{cat.description}</p>
+                    <h3 className="text-lg font-bold tracking-tight text-ink line-clamp-2 min-h-[3.5rem] flex items-center">
+                      {cat.title}
+                    </h3>
+                    <p className="mt-2 text-sm leading-relaxed text-ink/65 line-clamp-3 min-h-[4.5rem]">
+                      {cat.description}
+                    </p>
                     <div className="mt-auto pt-5">
-                      <span className="inline-flex items-center gap-1.5 text-sm font-semibold" style={{ color: "#0875B9" }}>
+                      <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary">
                         Voir tous les vélos <ArrowRight size={15} />
                       </span>
                     </div>
@@ -226,7 +244,7 @@ export function ActivitiesSection() {
             type="button"
             onClick={handleNext}
             aria-label="Catégorie suivante"
-            className="hidden sm:flex absolute -right-5 top-1/2 -translate-y-1/2 z-10 h-12 w-12 items-center justify-center rounded-full bg-white border border-ink/10 text-ink shadow-lg transition-all hover:bg-[#0875B9] hover:text-white hover:border-[#0875B9] hover:scale-105"
+            className="hidden sm:flex absolute -right-5 top-1/2 -translate-y-1/2 z-10 h-12 w-12 items-center justify-center rounded-full bg-white border border-ink/10 text-ink shadow-lg transition-all hover:bg-primary hover:text-white hover:border-primary hover:scale-105"
           >
             <ChevronRightIcon size={20} />
           </button>
@@ -238,7 +256,7 @@ export function ActivitiesSection() {
             type="button"
             onClick={handlePrev}
             aria-label="Catégorie précédente"
-            className="flex sm:hidden h-10 w-10 items-center justify-center rounded-full border border-ink/15 text-ink/70 transition-colors hover:border-[#0875B9] hover:text-[#0875B9]"
+            className="flex sm:hidden h-10 w-10 items-center justify-center rounded-full border border-ink/15 text-ink/70 transition-colors hover:border-primary hover:text-primary"
           >
             <ChevronLeftIcon size={18} />
           </button>
@@ -253,7 +271,7 @@ export function ActivitiesSection() {
                 aria-current={i === activeDot ? "true" : undefined}
                 className={`rounded-full transition-all duration-300 ${
                   i === activeDot
-                    ? "h-2.5 w-7 bg-[#0875B9]"
+                    ? "h-2.5 w-7 bg-primary"
                     : "h-2.5 w-2.5 bg-ink/20 hover:bg-ink/40"
                 }`}
               />
@@ -264,7 +282,7 @@ export function ActivitiesSection() {
             type="button"
             onClick={handleNext}
             aria-label="Catégorie suivante"
-            className="flex sm:hidden h-10 w-10 items-center justify-center rounded-full border border-ink/15 text-ink/70 transition-colors hover:border-[#0875B9] hover:text-[#0875B9]"
+            className="flex sm:hidden h-10 w-10 items-center justify-center rounded-full border border-ink/15 text-ink/70 transition-colors hover:border-primary hover:text-primary"
           >
             <ChevronRightIcon size={18} />
           </button>
@@ -274,8 +292,7 @@ export function ActivitiesSection() {
           <div className="mt-12 flex justify-center">
             <Link
               href="/boutique"
-              className="inline-flex items-center gap-2 rounded-xl px-8 py-3.5 text-sm font-semibold text-white transition-opacity hover:opacity-90"
-              style={{ backgroundColor: "#0875B9" }}
+              className="inline-flex items-center gap-2 rounded-xl bg-primary px-8 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-primary-hover"
             >
               Voir toutes les catégories <ArrowRight size={16} />
             </Link>

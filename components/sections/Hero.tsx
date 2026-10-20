@@ -53,7 +53,7 @@ export function Hero() {
   return (
     <section
       aria-label="Accueil No Borders ASBL"
-      className="relative w-full overflow-hidden mt-[84px] lg:mt-[188px] min-h-[calc(100svh-84px)] lg:h-[calc(100vh-188px)] lg:min-h-[520px] flex flex-col justify-center"
+      className="relative w-full overflow-hidden mt-[84px] lg:mt-[188px] min-h-[380px] sm:min-h-[460px] lg:h-[calc(100vh-188px)] lg:min-h-[520px] flex flex-col justify-center"
     >
       {/* ── Slideshow d'arrière-plan ── */}
       <div className="absolute inset-0 overflow-hidden">
@@ -96,7 +96,7 @@ export function Hero() {
             Découvrez l&apos;Excellence du{" "}
             <span className="relative inline-block text-white">
               Sport
-              <span className="absolute -bottom-1 left-0 h-1.5 w-full rounded-full bg-[#0875B9]" />
+              <span className="absolute -bottom-1 left-0 h-1.5 w-full rounded-full bg-primary" />
             </span>{" "}
             et de la Mobilité
           </h1>
@@ -112,7 +112,7 @@ export function Hero() {
           <div className="flex flex-wrap items-center gap-3 pt-1">
             <Link
               href="/boutique"
-              className="btn px-6 py-2.5 sm:py-3 text-sm sm:text-[0.95rem] gap-2 border-0 bg-[#0875B9] text-white shadow-xl shadow-black/30 ring-1 ring-white/20 hover:bg-[#065f9a]"
+              className="btn px-6 py-2.5 sm:py-3 text-sm sm:text-[0.95rem] gap-2 border-0 bg-primary text-white shadow-xl shadow-black/30 ring-1 ring-white/20 hover:bg-primary-hover"
             >
               Découvrir nos vélos <ArrowRight size={18} />
             </Link>
@@ -143,7 +143,7 @@ export function Hero() {
             onClick={() => goTo(i)}
             className={`rounded-full transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white ${
               i === current
-                ? "h-2.5 w-8 bg-[#0875B9] ring-2 ring-white"
+                ? "h-2.5 w-8 bg-primary ring-2 ring-white"
                 : "h-2.5 w-2.5 bg-white/50 hover:bg-white/80"
             }`}
           />
@@ -165,7 +165,7 @@ export function Hero() {
             aria-label={`Diapositive ${i + 1}`}
             onClick={() => goTo(i)}
             className={`rounded-full transition-all duration-300 ${
-              i === current ? "h-2 w-6 bg-[#0875B9]" : "h-2 w-2 bg-white/50"
+              i === current ? "h-2 w-6 bg-primary" : "h-2 w-2 bg-white/50"
             }`}
           />
         ))}

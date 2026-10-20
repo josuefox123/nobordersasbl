@@ -5,8 +5,8 @@ import { ChevronDownIcon } from "@/components/ui/Icons";
 
 const LANGUAGES = [
   { code: "fr", label: "Français", flag: "🇫🇷" },
-  { code: "en", label: "English",  flag: "🇬🇧" },
-  { code: "be", label: "Belgique", flag: "🇧🇪" },
+  { code: "en", label: "English", flag: "🇬🇧" },
+  { code: "nl", label: "Nederlands", flag: "🇳🇱" },
 ];
 
 export function LanguageSwitcher() {
@@ -70,7 +70,7 @@ export function LanguageSwitcher() {
               <span className="text-base">{lang.flag}</span>
               {lang.label}
               {current.code === lang.code && (
-                <span className="ml-auto h-2 w-2 rounded-full bg-flame" />
+                <span className="ml-auto h-2 w-2 rounded-full bg-primary" />
               )}
             </button>
           ))}

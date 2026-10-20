@@ -23,7 +23,7 @@ export function ScrollToTop() {
       type="button"
       onClick={scrollTop}
       aria-label="Retour en haut de page"
-      className={`fixed bottom-8 right-6 z-[99] flex h-12 w-12 items-center justify-center rounded-full bg-[#0875B9] text-white shadow-xl transition-all duration-300 hover:bg-[#065f9a] hover:scale-110 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0875B9]/50 sm:right-8 ${
+      className={`fixed bottom-8 right-6 z-[99] flex h-12 w-12 items-center justify-center rounded-full bg-primary text-white shadow-xl transition-all duration-300 hover:bg-primary-hover hover:scale-110 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 sm:right-8 ${
         visible
           ? "translate-y-0 opacity-100 scale-100"
           : "translate-y-4 opacity-0 scale-75 pointer-events-none"

@@ -75,7 +75,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="fr" className={montserrat.variable}>
-      <body className="flex min-h-screen flex-col font-sans bg-paper text-ink selection:bg-[#0875B9] selection:text-white">
+      <body className="flex min-h-screen flex-col font-sans bg-paper text-ink selection:bg-primary selection:text-white">
         <SiteLayout>{children}</SiteLayout>
       </body>
     </html>

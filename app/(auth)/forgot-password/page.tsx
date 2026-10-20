@@ -1,105 +1,103 @@
-import type { Metadata } from "next";
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
-
-export const metadata: Metadata = {
-  title: "Mot de passe oublié",
-  description: "Réinitialisez votre mot de passe No Borders ASBL.",
-};
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 export default function ForgotPasswordPage() {
+  const router = useRouter();
+  const [email, setEmail] = useState("");
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    router.push("/otp");
+  };
+
   return (
-    <>
-      {/* Lien retour */}
-      <div className="mb-8">
-        <Link
-          href="/login"
-          id="link-back-to-login"
-          className="inline-flex items-center gap-2 text-sm text-[#55555C] hover:text-[#1B3F7B] transition-colors font-medium"
-        >
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <polyline points="15 18 9 12 15 6" />
-          </svg>
-          Retour à la connexion
-        </Link>
-      </div>
+    <div className="mt-[84px] lg:mt-[188px] min-h-[calc(100vh-84px)] lg:min-h-[calc(100vh-188px)] bg-[#FAF9F5] text-[#141413] flex flex-col justify-center items-center py-12 px-4 sm:px-6 lg:px-8 selection:bg-[#E5E3DC]">
+      <div className="w-full max-w-5xl mx-auto flex flex-col lg:flex-row items-center justify-center gap-10 lg:gap-16 xl:gap-20">
+        {/* ── COLONNE GAUCHE : Formulaire & Identité No Borders ── */}
+        <div className="w-full max-w-[440px] flex flex-col items-center">
+          {/* Titre & sous-titre contextualisés */}
+          <h1 className="font-serif text-[2.35rem] sm:text-[2.75rem] text-[#141413] tracking-[-0.03em] leading-tight text-center font-normal whitespace-nowrap">
+            Mot de passe oublié
+          </h1>
+          <p className="mt-2 text-sm sm:text-[15px] text-[#55555C] text-center font-normal">
+            Recevez un code de vérification pour réinitialiser l&apos;accès
+          </p>
 
-      {/* Logo + titre */}
-      <div className="flex flex-col items-center mb-8">
-        <div className="w-16 h-16 rounded-2xl bg-[#EEF2FF] flex items-center justify-center mb-5">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#1B3F7B" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-            <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
-            <path d="M7 11V7a5 5 0 0 1 10 0v4" />
-          </svg>
-        </div>
-        <h1 className="text-2xl font-bold text-[#0B0B0C] tracking-tight">Mot de passe oublié ?</h1>
-        <p className="text-sm text-[#55555C] mt-2 text-center leading-relaxed max-w-xs">
-          Saisissez votre adresse mail et nous vous enverrons un lien pour réinitialiser votre mot de passe.
-        </p>
-      </div>
+          {/* Carte blanche flottante */}
+          <div className="mt-7 w-full max-w-[390px] bg-white rounded-[28px] border border-[#ECE9E2] shadow-[0_4px_30px_rgba(0,0,0,0.04)] p-6 sm:p-7 flex flex-col gap-3">
+            <form id="form-forgot-password" onSubmit={handleSubmit} className="flex flex-col gap-3">
+              <input
+                id="forgot-email"
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="votre@email.com"
+                autoComplete="email"
+                required
+                className="w-full rounded-xl border border-[#E5E3DC] bg-white px-4 py-3 text-sm text-[#141413] placeholder-[#9B9994] focus:outline-none focus:border-primary transition-colors"
+              />
 
-      {/* Formulaire */}
-      <form id="form-forgot-password" className="flex flex-col gap-4" noValidate>
-        <div className="flex flex-col gap-1.5">
-          <label htmlFor="forgot-email" className="text-xs font-semibold text-[#0B0B0C] flex items-center gap-1">
-            Adresse mail <span className="text-[#E2501F]">*</span>
-          </label>
-          <div className="relative">
-            <div className="absolute left-3 top-1/2 -translate-y-1/2 text-[#A8A5A0]">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
-                <polyline points="22,6 12,13 2,6" />
+              <button
+                id="btn-submit-forgot-password"
+                type="submit"
+                className="w-full rounded-xl bg-primary py-3.5 text-sm font-semibold text-white transition-colors hover:bg-primary-hover shadow-xs mt-0.5"
+              >
+                Envoyer le code
+              </button>
+            </form>
+
+            {/* Texte informatif */}
+            <p className="text-[11px] text-[#787672] text-center leading-normal mt-1">
+              Un code de vérification à 6 chiffres vous sera envoyé à cette adresse mail pour sécuriser la réinitialisation.
+            </p>
+          </div>
+
+          {/* Action membre & Navigation */}
+          <div className="mt-6 flex flex-col items-center gap-3.5">
+            <Link
+              href="/login"
+              id="link-back-to-login"
+              className="inline-flex items-center gap-2 rounded-xl border border-[#E5E3DC] bg-white/80 px-4 py-2.5 text-xs font-semibold text-[#141413] transition-colors hover:bg-white hover:border-[#D0CDC6] shadow-2xs"
+            >
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M19 12H5M12 19l-7-7 7-7" />
               </svg>
+              Retour à la connexion
+            </Link>
+
+            <div className="flex items-center gap-3 text-xs text-[#8C8A84]">
+              <Link href="/" className="hover:text-[#141413] transition-colors">
+                ← Accueil
+              </Link>
+              <span>•</span>
+              <Link href="/boutique" className="hover:text-[#141413] transition-colors">
+                Boutique solidaire
+              </Link>
+              <span>•</span>
+              <Link href="/nos-activites" className="hover:text-[#141413] transition-colors">
+                Nos activités
+              </Link>
             </div>
-            <input
-              id="forgot-email"
-              type="email"
-              placeholder="votre@email.com"
-              autoComplete="email"
-              className="w-full border border-[#E0DDD8] rounded-lg pl-10 pr-4 py-3 text-sm text-[#0B0B0C] placeholder-[#A8A5A0] focus:outline-none focus:border-[#1B3F7B] transition-colors bg-white"
-            />
           </div>
         </div>
 
-        {/* Bouton submit */}
-        <button
-          id="btn-submit-forgot-password"
-          type="submit"
-          className="w-full bg-[#0875B9] text-white rounded-lg py-3.5 text-sm font-bold tracking-wide hover:bg-[#065a8f] transition-colors duration-200 mt-2 flex items-center justify-center gap-2"
-        >
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <line x1="22" y1="2" x2="11" y2="13" />
-            <polygon points="22 2 15 22 11 13 2 9 22 2" />
-          </svg>
-          Envoyer le lien de réinitialisation
-        </button>
-      </form>
-
-      {/* Infobull */}
-      <div className="mt-6 bg-[#F0F4FF] border border-[#C7D6F5] rounded-xl p-4 flex gap-3">
-        <div className="shrink-0 mt-0.5">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1B3F7B" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <circle cx="12" cy="12" r="10" />
-            <line x1="12" y1="8" x2="12" y2="12" />
-            <line x1="12" y1="16" x2="12.01" y2="16" />
-          </svg>
+        {/* ── COLONNE DROITE : Photo No Borders ASBL ── */}
+        <div className="hidden lg:flex w-full max-w-[430px] lg:max-w-[460px] items-center justify-center">
+          <div className="relative aspect-[4/5] w-full max-w-[420px] overflow-hidden rounded-[32px] sm:rounded-[36px] shadow-sm border border-black/5 bg-[#EFECE6]">
+            <Image
+              src="/images/auth/login-noborders.jpg"
+              alt="No Borders ASBL — Vélos artisanaux en bambou"
+              fill
+              priority
+              className="object-cover"
+            />
+          </div>
         </div>
-        <p className="text-[11px] text-[#1B3F7B] leading-relaxed">
-          Si un compte est associé à cette adresse mail, vous recevrez un email contenant les instructions pour réinitialiser votre mot de passe. Vérifiez également vos courriers indésirables.
-        </p>
       </div>
-
-      {/* Lien connexion */}
-      <p className="text-center text-xs text-[#55555C] mt-8">
-        Vous vous souvenez de votre mot de passe ?{" "}
-        <Link
-          href="/login"
-          id="link-login-from-forgot"
-          className="text-[#0B0B0C] font-bold hover:text-[#E2501F] transition-colors underline underline-offset-2"
-        >
-          Se connecter
-        </Link>
-      </p>
-    </>
+    </div>
   );
 }

@@ -50,7 +50,7 @@ export default function ContactPage() {
             <div className="flex flex-col gap-4 lg:col-span-4">
               <div className="rounded-3xl border border-ink/10 bg-white p-8 space-y-6">
                 <div className="flex items-start gap-4">
-                  <div className="grid h-12 w-12 place-items-center rounded-2xl bg-white text-[#0875B9] shrink-0 shadow-sm">
+                  <div className="grid h-12 w-12 place-items-center rounded-2xl bg-primary/10 text-primary shrink-0 shadow-sm">
                     <PinIcon size={20} />
                   </div>
                   <div>
@@ -63,43 +63,43 @@ export default function ContactPage() {
                 </div>
 
                 <div className="flex items-start gap-4">
-                  <div className="grid h-12 w-12 place-items-center rounded-2xl bg-white text-[#0875B9] shrink-0 shadow-sm">
+                  <div className="grid h-12 w-12 place-items-center rounded-2xl bg-primary/10 text-primary shrink-0 shadow-sm">
                     <PhoneIcon size={20} />
                   </div>
                   <div>
                     <h3 className="font-bold text-ink text-sm">Téléphone</h3>
-                    <a href={site.phoneHref} className="mt-1 block text-sm font-semibold text-ink hover:text-[#0875B9]">
+                    <a href={site.phoneHref} className="mt-1 block text-sm font-semibold text-ink hover:text-primary">
                       {site.phone}
                     </a>
                   </div>
                 </div>
 
                 <div className="flex items-start gap-4">
-                  <div className="grid h-12 w-12 place-items-center rounded-2xl bg-white text-[#0875B9] shrink-0 shadow-sm">
+                  <div className="grid h-12 w-12 place-items-center rounded-2xl bg-primary/10 text-primary shrink-0 shadow-sm">
                     <MailIcon size={20} />
                   </div>
                   <div>
                     <h3 className="font-bold text-ink text-sm">Courrier électronique</h3>
-                    <a href={`mailto:${site.email}`} className="mt-1 block text-sm font-semibold text-ink hover:text-[#0875B9] break-all">
+                    <a href={`mailto:${site.email}`} className="mt-1 block text-sm font-semibold text-ink hover:text-primary break-all">
                       {site.email}
                     </a>
                   </div>
                 </div>
               </div>
 
-              <div className="overflow-hidden rounded-3xl border border-[#0875B9]/15 bg-primary-soft">
+              <div className="overflow-hidden rounded-3xl border border-primary/20 bg-primary-soft">
                 {/* En-tête de la card */}
-                <div className="flex items-center gap-3 border-b border-[#0875B9]/10 bg-[#0875B9]/[0.07] px-6 py-4">
-                  <div className="grid h-9 w-9 place-items-center rounded-xl bg-[#0875B9] text-white shadow-sm">
+                <div className="flex items-center gap-3 border-b border-primary/10 bg-primary/10 px-6 py-4">
+                  <div className="grid h-9 w-9 place-items-center rounded-xl bg-primary text-white shadow-sm">
                     <SparkIcon size={18} />
                   </div>
-                  <span className="text-xs font-bold uppercase tracking-[0.18em] text-[#0875B9]">
+                  <span className="text-xs font-bold uppercase tracking-[0.18em] text-primary">
                     Identifiants officiels
                   </span>
                 </div>
 
                 {/* Lignes d'informations */}
-                <dl className="divide-y divide-[#0875B9]/10 px-6">
+                <dl className="divide-y divide-primary/10 px-6">
                   <div className="flex items-center justify-between gap-4 py-4">
                     <dt className="text-xs font-semibold uppercase tracking-wider text-ink/55">
                       N° d&apos;entreprise
@@ -162,7 +162,7 @@ export default function ContactPage() {
                           value={formData.name}
                           onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                           placeholder="Votre nom"
-                          className="w-full rounded-lg border border-ink/15 bg-paper px-4 py-3.5 text-sm text-ink placeholder:text-ink/35 focus:border-[#0875B9] focus:outline-none focus:ring-2 focus:ring-[#0875B9]/20"
+                          className="w-full rounded-lg border border-ink/15 bg-paper px-4 py-3.5 text-sm text-ink placeholder:text-ink/35 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
                         />
                       </div>
                       <div>
@@ -173,7 +173,7 @@ export default function ContactPage() {
                           value={formData.email}
                           onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                           placeholder="Votre adresse e-mail"
-                          className="w-full rounded-lg border border-ink/15 bg-paper px-4 py-3.5 text-sm text-ink placeholder:text-ink/35 focus:border-[#0875B9] focus:outline-none focus:ring-2 focus:ring-[#0875B9]/20"
+                          className="w-full rounded-lg border border-ink/15 bg-paper px-4 py-3.5 text-sm text-ink placeholder:text-ink/35 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
                         />
                       </div>
                     </div>
@@ -183,7 +183,7 @@ export default function ContactPage() {
                       id="subject"
                       value={formData.subject}
                       onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
-                      className="w-full rounded-lg border border-ink/15 bg-paper px-4 py-3.5 text-sm text-ink focus:border-[#0875B9] focus:outline-none focus:ring-2 focus:ring-[#0875B9]/20"
+                      className="w-full rounded-lg border border-ink/15 bg-paper px-4 py-3.5 text-sm text-ink focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
                     >
                       <option value="benevolat">Rejoindre l&apos;équipe / Bénévolat</option>
                       <option value="partenariat">Proposer un partenariat</option>
@@ -200,14 +200,13 @@ export default function ContactPage() {
                       value={formData.message}
                       onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                       placeholder="Votre message..."
-                      className="w-full rounded-lg border border-ink/15 bg-paper px-4 py-3.5 text-sm text-ink placeholder:text-ink/35 focus:border-[#0875B9] focus:outline-none focus:ring-2 focus:ring-[#0875B9]/20"
+                      className="w-full rounded-lg border border-ink/15 bg-paper px-4 py-3.5 text-sm text-ink placeholder:text-ink/35 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
                     />
 
                     {/* Bouton submit pleine largeur */}
                     <button
                       type="submit"
-                      className="w-full rounded-lg py-4 text-sm font-bold uppercase tracking-widest text-white transition-opacity hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0875B9]"
-                      style={{ backgroundColor: "#0875B9" }}
+                      className="w-full rounded-lg bg-primary py-4 text-sm font-bold uppercase tracking-widest text-white transition-colors hover:bg-primary-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
                     >
                       Envoyer le message
                     </button>

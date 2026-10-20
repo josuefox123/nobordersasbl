@@ -319,7 +319,7 @@ export function BoutiqueClient() {
           >
             <span>Filtres</span>
             {activeFiltersCount > 0 && (
-              <span className="flex h-5 w-5 items-center justify-center rounded-full bg-white text-xs font-bold text-[#0875B9]">
+              <span className="flex h-5 w-5 items-center justify-center rounded-full bg-white text-xs font-bold text-primary">
                 {activeFiltersCount}
               </span>
             )}
@@ -360,7 +360,7 @@ export function BoutiqueClient() {
                   <button
                     type="button"
                     onClick={resetAllFilters}
-                    className="text-xs font-semibold text-[#0875B9] hover:underline"
+                    className="text-xs font-semibold text-primary hover:underline"
                   >
                     Tout effacer
                   </button>
@@ -370,7 +370,6 @@ export function BoutiqueClient() {
               {/* ── Carte 1 : Trier par ── */}
               <div className="rounded-2xl border border-ink/10 bg-white p-5 shadow-sm">
                 <div className="mb-3 flex items-center gap-2">
-                  <span className="h-4 w-1 rounded-full bg-[#0875B9]" />
                   <h2 className="text-base font-bold text-ink">Trier par</h2>
                 </div>
                 <select
@@ -379,7 +378,7 @@ export function BoutiqueClient() {
                     setSortBy(e.target.value);
                     setCurrentPage(1);
                   }}
-                  className="w-full rounded-xl border border-ink/15 bg-paper py-2.5 px-3 text-xs font-medium text-ink focus:border-[#0875B9] focus:outline-none"
+                  className="w-full rounded-xl border border-ink/15 bg-paper py-2.5 px-3 text-xs font-medium text-ink focus:border-primary focus:outline-none"
                 >
                   <option value="featured">En vedette</option>
                   <option value="price-asc">Prix : croissant</option>
@@ -392,7 +391,6 @@ export function BoutiqueClient() {
               {/* ── Carte 2 : Catégories ── */}
               <div className="rounded-2xl border border-ink/10 bg-white p-5 shadow-sm">
                 <div className="mb-4 flex items-center gap-2">
-                  <span className="h-4 w-1 rounded-full bg-[#0875B9]" />
                   <h2 className="text-base font-bold text-ink">Catégories</h2>
                 </div>
 
@@ -410,7 +408,7 @@ export function BoutiqueClient() {
                             onClick={() => handleSelectCategory(cat.slug)}
                             className={`flex-1 text-left font-medium transition-colors ${
                               isSelected
-                                ? "font-bold text-[#0875B9]"
+                                ? "font-bold text-primary"
                                 : "text-ink/80 hover:text-ink"
                             }`}
                           >
@@ -449,7 +447,7 @@ export function BoutiqueClient() {
                                     }
                                     className={`block w-full py-1 text-left text-xs transition-colors ${
                                       isSubSelected
-                                        ? "font-bold text-[#0875B9]"
+                                        ? "font-bold text-primary"
                                         : "text-ink/70 hover:text-ink"
                                     }`}
                                   >
@@ -469,7 +467,6 @@ export function BoutiqueClient() {
               {/* ── Carte 3 : Fourchette de prix ── */}
               <div className="rounded-2xl border border-ink/10 bg-white p-5 shadow-sm">
                 <div className="mb-4 flex items-center gap-2">
-                  <span className="h-4 w-1 rounded-full bg-[#0875B9]" />
                   <h2 className="text-base font-bold text-ink">Fourchette de prix</h2>
                 </div>
 
@@ -482,7 +479,7 @@ export function BoutiqueClient() {
                     <select
                       value={pricePreset}
                       onChange={(e) => handlePricePresetChange(e.target.value)}
-                      className="w-full rounded-xl border border-ink/15 bg-paper py-2 px-3 text-xs font-medium text-ink focus:border-[#0875B9] focus:outline-none"
+                      className="w-full rounded-xl border border-ink/15 bg-paper py-2 px-3 text-xs font-medium text-ink focus:border-primary focus:outline-none"
                     >
                       <option value="all">Tous les prix</option>
                       <option value="under-50">Moins de 50 €</option>
@@ -508,7 +505,7 @@ export function BoutiqueClient() {
                       step="50"
                       value={tempMaxPrice}
                       onChange={(e) => setTempMaxPrice(Number(e.target.value))}
-                      className="h-2 w-full cursor-pointer appearance-none rounded-lg bg-ink/10 accent-[#0875B9]"
+                      className="h-2 w-full cursor-pointer appearance-none rounded-lg bg-ink/10 accent-primary"
                     />
 
                     <div className="flex items-center justify-between pt-1">
@@ -530,7 +527,7 @@ export function BoutiqueClient() {
                           setMaxPrice(tempMaxPrice);
                           setCurrentPage(1);
                         }}
-                        className="rounded-lg bg-[#0875B9] px-3.5 py-1.5 text-xs font-semibold text-white transition-colors hover:bg-[#065f9a]"
+                        className="rounded-lg bg-primary px-3.5 py-1.5 text-xs font-semibold text-white transition-colors hover:bg-primary-hover"
                       >
                         Appliquer
                       </button>
@@ -542,7 +539,6 @@ export function BoutiqueClient() {
               {/* ── Carte 4 : Filtrer par marque ── */}
               <div className="rounded-2xl border border-ink/10 bg-white p-5 shadow-sm">
                 <div className="mb-4 flex items-center gap-2">
-                  <span className="h-4 w-1 rounded-full bg-[#0875B9]" />
                   <h2 className="text-base font-bold text-ink">Filtrer par marque</h2>
                 </div>
 
@@ -553,7 +549,7 @@ export function BoutiqueClient() {
                     value={brandSearch}
                     onChange={(e) => setBrandSearch(e.target.value)}
                     placeholder="Rechercher une marque..."
-                    className="w-full rounded-lg border border-ink/15 bg-paper py-2 pl-3 pr-8 text-xs text-ink placeholder:text-ink/40 focus:border-[#0875B9] focus:outline-none"
+                    className="w-full rounded-lg border border-ink/15 bg-paper py-2 pl-3 pr-8 text-xs text-ink placeholder:text-ink/40 focus:border-primary focus:outline-none"
                   />
                   <SearchIcon
                     size={14}
@@ -576,7 +572,7 @@ export function BoutiqueClient() {
                             type="checkbox"
                             checked={isChecked}
                             onChange={() => toggleTempBrand(brand)}
-                            className="h-4 w-4 rounded border-ink/20 text-[#0875B9] accent-[#0875B9] focus:ring-0"
+                            className="h-4 w-4 rounded border-ink/20 text-primary accent-primary focus:ring-0"
                           />
                           <span>{brand}</span>
                         </div>
@@ -596,7 +592,7 @@ export function BoutiqueClient() {
                   <button
                     type="button"
                     onClick={applyBrands}
-                    className="rounded-lg border border-[#0875B9] bg-white px-3.5 py-1.5 text-xs font-semibold text-[#0875B9] transition-colors hover:bg-[#0875B9] hover:text-white"
+                    className="rounded-lg border border-primary bg-white px-3.5 py-1.5 text-xs font-semibold text-primary transition-colors hover:bg-primary hover:text-white"
                   >
                     Appliquer le filtre
                   </button>
@@ -622,7 +618,7 @@ export function BoutiqueClient() {
                       setItemsPerPage(Number(e.target.value));
                       setCurrentPage(1);
                     }}
-                    className="w-full rounded-xl border border-ink/15 bg-paper py-2 px-3 text-xs font-medium text-ink focus:border-[#0875B9] focus:outline-none"
+                    className="w-full rounded-xl border border-ink/15 bg-paper py-2 px-3 text-xs font-medium text-ink focus:border-primary focus:outline-none"
                   >
                     <option value="6">6 articles</option>
                     <option value="12">12 articles</option>
@@ -673,7 +669,7 @@ export function BoutiqueClient() {
                       }
                     }}
                     placeholder="Rechercher des produits, catégories, marques..."
-                    className="w-full rounded-xl border border-ink/15 bg-paper py-2.5 pl-10 pr-4 text-sm text-ink placeholder:text-ink/40 focus:border-[#0875B9] focus:outline-none"
+                    className="w-full rounded-xl border border-ink/15 bg-paper py-2.5 pl-10 pr-4 text-sm text-ink placeholder:text-ink/40 focus:border-primary focus:outline-none"
                   />
                 </div>
 
@@ -684,7 +680,7 @@ export function BoutiqueClient() {
                     setSearchQuery(searchInput);
                     setCurrentPage(1);
                   }}
-                  className="rounded-xl bg-[#0875B9] px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#065f9a]"
+                  className="rounded-xl bg-primary px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-primary-hover"
                 >
                   Rechercher
                 </button>
@@ -709,7 +705,7 @@ export function BoutiqueClient() {
                       aria-label="Affichage en grille"
                       className={`grid h-8 w-8 place-items-center rounded-md transition-colors ${
                         viewMode === "grid"
-                          ? "bg-[#0875B9] text-white"
+                          ? "bg-primary text-white"
                           : "text-ink/60 hover:text-ink"
                       }`}
                     >
@@ -733,7 +729,7 @@ export function BoutiqueClient() {
                       aria-label="Affichage en liste"
                       className={`grid h-8 w-8 place-items-center rounded-md transition-colors ${
                         viewMode === "list"
-                          ? "bg-[#0875B9] text-white"
+                          ? "bg-primary text-white"
                           : "text-ink/60 hover:text-ink"
                       }`}
                     >
@@ -756,7 +752,7 @@ export function BoutiqueClient() {
                 </span>
 
                 {selectedCategory && (
-                  <span className="inline-flex items-center gap-1.5 rounded-lg bg-[#0875B9]/10 px-2.5 py-1 text-xs font-medium text-[#0875B9]">
+                  <span className="inline-flex items-center gap-1.5 rounded-lg bg-primary/10 px-2.5 py-1 text-xs font-medium text-primary">
                     Catégorie : {selectedCategory}
                     <button
                       type="button"
@@ -769,7 +765,7 @@ export function BoutiqueClient() {
                 )}
 
                 {selectedSub && (
-                  <span className="inline-flex items-center gap-1.5 rounded-lg bg-[#0875B9]/10 px-2.5 py-1 text-xs font-medium text-[#0875B9]">
+                  <span className="inline-flex items-center gap-1.5 rounded-lg bg-primary/10 px-2.5 py-1 text-xs font-medium text-primary">
                     Sous-catégorie : {selectedSub}
                     <button
                       type="button"
@@ -782,7 +778,7 @@ export function BoutiqueClient() {
                 )}
 
                 {maxPrice < 4000 && (
-                  <span className="inline-flex items-center gap-1.5 rounded-lg bg-[#0875B9]/10 px-2.5 py-1 text-xs font-medium text-[#0875B9]">
+                  <span className="inline-flex items-center gap-1.5 rounded-lg bg-primary/10 px-2.5 py-1 text-xs font-medium text-primary">
                     ≤ {maxPrice.toLocaleString("fr-FR")} €
                     <button
                       type="button"
@@ -801,7 +797,7 @@ export function BoutiqueClient() {
                 {selectedColors.map((color) => (
                   <span
                     key={color}
-                    className="inline-flex items-center gap-1.5 rounded-lg bg-[#0875B9]/10 px-2.5 py-1 text-xs font-medium text-[#0875B9]">
+                    className="inline-flex items-center gap-1.5 rounded-lg bg-primary/10 px-2.5 py-1 text-xs font-medium text-primary">
                     Couleur : {color}
                     <button
                       type="button"
@@ -818,7 +814,7 @@ export function BoutiqueClient() {
                 {selectedBrands.map((brand) => (
                   <span
                     key={brand}
-                    className="inline-flex items-center gap-1.5 rounded-lg bg-[#0875B9]/10 px-2.5 py-1 text-xs font-medium text-[#0875B9]">
+                    className="inline-flex items-center gap-1.5 rounded-lg bg-primary/10 px-2.5 py-1 text-xs font-medium text-primary">
                     {brand}
                     <button
                       type="button"
@@ -833,7 +829,7 @@ export function BoutiqueClient() {
                 ))}
 
                 {searchQuery && (
-                  <span className="inline-flex items-center gap-1.5 rounded-lg bg-[#0875B9]/10 px-2.5 py-1 text-xs font-medium text-[#0875B9]">
+                  <span className="inline-flex items-center gap-1.5 rounded-lg bg-primary/10 px-2.5 py-1 text-xs font-medium text-primary">
                     « {searchQuery} »
                     <button
                       type="button"
@@ -851,7 +847,7 @@ export function BoutiqueClient() {
                 <button
                   type="button"
                   onClick={resetAllFilters}
-                  className="ml-auto text-xs font-semibold text-ink/50 hover:text-[#0875B9] underline"
+                  className="ml-auto text-xs font-semibold text-ink/50 hover:text-primary underline"
                 >
                   Tout réinitialiser
                 </button>
@@ -903,7 +899,7 @@ export function BoutiqueClient() {
                       </p>
 
                       {/* Titre */}
-                      <h3 className="mt-1 text-base font-bold leading-snug text-ink group-hover:text-[#CF4318] transition-colors">
+                      <h3 className="mt-1 text-base font-bold leading-snug text-ink group-hover:text-primary transition-colors">
                         <Link href={`/boutique/produit?id=${p.id}`}>{p.name}</Link>
                       </h3>
 
@@ -930,7 +926,7 @@ export function BoutiqueClient() {
                         <button
                           type="button"
                           onClick={() => handleAddToCart(p)}
-                          className="w-full rounded-xl bg-[#CF4318] py-3 text-sm font-semibold text-white transition-colors hover:bg-[#B03815] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#CF4318]"
+                          className="w-full rounded-xl bg-primary py-3 text-sm font-semibold text-white transition-colors hover:bg-primary-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
                         >
                           Ajouter au panier
                         </button>
@@ -969,7 +965,7 @@ export function BoutiqueClient() {
                         </div>
                       </div>
 
-                      <h3 className="mt-1 text-lg font-bold text-ink group-hover:text-[#CF4318]">
+                      <h3 className="mt-1 text-lg font-bold text-ink group-hover:text-primary">
                         <Link href={`/boutique/produit?id=${p.id}`}>{p.name}</Link>
                       </h3>
                       <p className="mt-2 text-xs leading-relaxed text-ink/70">
@@ -993,7 +989,7 @@ export function BoutiqueClient() {
                         <button
                           type="button"
                           onClick={() => handleAddToCart(p)}
-                          className="w-full rounded-xl bg-[#CF4318] py-3 text-sm font-semibold text-white transition-colors hover:bg-[#B03815] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#CF4318]"
+                          className="w-full rounded-xl bg-primary py-3 text-sm font-semibold text-white transition-colors hover:bg-primary-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
                         >
                           Ajouter au panier
                         </button>
@@ -1029,7 +1025,7 @@ export function BoutiqueClient() {
                       aria-current={p === currentPage ? "page" : undefined}
                       className={`grid h-8 w-8 place-items-center rounded-lg text-xs font-semibold transition-colors ${
                         p === currentPage
-                          ? "bg-[#CF4318] text-white"
+                          ? "bg-primary text-white"
                           : "border border-ink/15 text-ink/70 hover:border-ink hover:text-ink"
                       }`}
                     >

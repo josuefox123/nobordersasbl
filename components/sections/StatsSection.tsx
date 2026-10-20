@@ -7,9 +7,9 @@ const STATS = [
     value: "+120",
     label: "Produits disponibles",
     description: "Vélos, accessoires et équipements sélectionnés pour chaque type de cycliste.",
-    bg: "#EFF6FF",       // bleu très clair
-    iconBg: "#0875B9",
-    accent: "#0875B9",
+    bg: "#E8F8F5",       // vert primaire très clair
+    iconBg: "#26B997",
+    accent: "#26B997",
   },
   {
     icon: UserIcon,

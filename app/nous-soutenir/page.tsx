@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import { site } from "@/lib/content";
-import { ArrowUpRight, CopyIcon, HeartIcon, SparkIcon } from "@/components/ui/Icons";
+import { ArrowUpRight, HeartIcon, SparkIcon } from "@/components/ui/Icons";
+import { PageHeader } from "@/components/ui/PageHeader";
 
 export const metadata: Metadata = {
   title: "Nous Soutenir",
@@ -12,20 +12,16 @@ export const metadata: Metadata = {
 
 export default function SoutienPage() {
   return (
-    <div className="pt-28 sm:pt-36">
-      <section className="bg-paper py-16 sm:py-24 border-b border-ink/5">
-        <div className="container">
-          <div className="max-w-3xl">
-            <span className="eyebrow">Engagement Solidaire</span>
-            <h1 className="mt-4 text-display-lg font-extrabold tracking-tight text-ink">
-              Nous soutenir
-            </h1>
-            <p className="mt-6 text-lg sm:text-xl text-ink/75 leading-relaxed">
-              Toute contribution, financière, matérielle ou humaine, nous permet de poursuivre notre travail et de faire évoluer notre ASBL en organisant de nouvelles activités inclusives.
-            </p>
-          </div>
-        </div>
-      </section>
+    <div className="mt-[84px] lg:mt-[188px]">
+      {/* ── Breadcrumb & En-tête ── */}
+      <PageHeader
+        crumbs={[
+          { label: "Accueil", href: "/" },
+          { label: "Nous soutenir" },
+        ]}
+        title="Nous soutenir"
+        description="Toute contribution, financière, matérielle ou humaine, nous permet de poursuivre notre travail et de faire évoluer notre ASBL en organisant de nouvelles activités inclusives."
+      />
 
       <section className="py-20 sm:py-28 bg-white">
         <div className="container">
@@ -34,11 +30,11 @@ export default function SoutienPage() {
             <div className="lg:col-span-7 space-y-8">
               <div className="rounded-3xl border border-ink/10 bg-paper p-8 sm:p-12 shadow-sm">
                 <div className="flex items-center gap-3">
-                  <div className="grid h-12 w-12 place-items-center rounded-2xl bg-flame text-white shadow-md">
+                  <div className="grid h-12 w-12 place-items-center rounded-2xl bg-primary text-white shadow-md">
                     <HeartIcon size={24} />
                   </div>
                   <div>
-                    <span className="text-xs font-bold uppercase tracking-wider text-flame-deep">
+                    <span className="text-xs font-bold uppercase tracking-wider text-primary">
                       Virement bancaire direct
                     </span>
                     <h2 className="text-2xl font-bold text-ink">Faire un don financier</h2>
@@ -61,7 +57,7 @@ export default function SoutienPage() {
                     <span className="text-xs uppercase font-bold text-ink/50 tracking-wider">
                       Numéro de compte (IBAN)
                     </span>
-                    <p className="font-mono font-bold text-flame-deep text-lg sm:text-xl select-all">
+                    <p className="font-mono font-bold text-primary text-lg sm:text-xl select-all">
                       {site.iban}
                     </p>
                   </div>
@@ -112,7 +108,7 @@ export default function SoutienPage() {
 
               {/* Bénévolat */}
               <div className="rounded-3xl border border-ink/10 bg-ink text-white p-8 shadow-sm">
-                <div className="grid h-10 w-10 place-items-center rounded-xl bg-white/10 text-sun mb-4">
+                <div className="grid h-10 w-10 place-items-center rounded-xl bg-white/10 text-primary mb-4">
                   <SparkIcon size={20} />
                 </div>
                 <h3 className="text-xl font-bold">Donner de votre temps</h3>

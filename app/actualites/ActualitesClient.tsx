@@ -47,7 +47,7 @@ export function ActualitesClient() {
             {paginated.map((item) => (
               <article
                 key={item.slug}
-                className="group flex h-full flex-col overflow-hidden rounded-3xl border border-ink/10 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
+                className="group flex h-full flex-col overflow-hidden rounded-3xl border border-ink/10 bg-white shadow-sm transition-all duration-200 hover:border-primary hover:shadow-md"
               >
                 {/* Image */}
                 <div className="relative aspect-[16/10] w-full overflow-hidden bg-ink/5">
@@ -55,7 +55,7 @@ export function ActualitesClient() {
                     src={item.image}
                     alt={item.title}
                     fill
-                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                    className="object-cover"
                     sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
                   />
                 </div>
@@ -73,7 +73,7 @@ export function ActualitesClient() {
                   <div className="mt-auto flex w-full justify-center pt-6">
                     <Link
                       href={`/actualites/${item.slug}`}
-                      className="inline-flex items-center gap-2 rounded-lg bg-[#0875B9] px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#065f9a] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0875B9]"
+                      className="inline-flex items-center gap-2 rounded-lg bg-primary px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-primary-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
                     >
                       En savoir plus <ArrowRight size={15} />
                     </Link>
@@ -93,7 +93,7 @@ export function ActualitesClient() {
                 onClick={() => goTo(page - 1)}
                 disabled={page === 1}
                 aria-label="Page précédente"
-                className="flex h-10 w-10 items-center justify-center rounded-lg border border-ink/15 text-ink/60 transition-colors hover:border-[#0875B9] hover:text-[#0875B9] disabled:cursor-not-allowed disabled:opacity-30"
+                className="flex h-10 w-10 items-center justify-center rounded-lg border border-ink/15 text-ink/60 transition-colors hover:border-primary hover:text-primary disabled:cursor-not-allowed disabled:opacity-30"
               >
                 <ChevronDownIcon size={16} className="rotate-90" />
               </button>
@@ -106,10 +106,10 @@ export function ActualitesClient() {
                   onClick={() => goTo(p)}
                   aria-current={p === page ? "page" : undefined}
                   aria-label={`Page ${p}`}
-                  className={`flex h-10 w-10 items-center justify-center rounded-lg text-sm font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0875B9] ${
+                  className={`flex h-10 w-10 items-center justify-center rounded-lg text-sm font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary ${
                     p === page
-                      ? "bg-[#0875B9] text-white"
-                      : "border border-ink/15 text-ink/60 hover:border-[#0875B9] hover:text-[#0875B9]"
+                      ? "bg-primary text-white"
+                      : "border border-ink/15 text-ink/60 hover:border-primary hover:text-primary"
                   }`}
                 >
                   {p}
@@ -122,7 +122,7 @@ export function ActualitesClient() {
                 onClick={() => goTo(page + 1)}
                 disabled={page === totalPages}
                 aria-label="Page suivante"
-                className="flex h-10 w-10 items-center justify-center rounded-lg border border-ink/15 text-ink/60 transition-colors hover:border-[#0875B9] hover:text-[#0875B9] disabled:cursor-not-allowed disabled:opacity-30"
+                className="flex h-10 w-10 items-center justify-center rounded-lg border border-ink/15 text-ink/60 transition-colors hover:border-primary hover:text-primary disabled:cursor-not-allowed disabled:opacity-30"
               >
                 <ChevronDownIcon size={16} className="-rotate-90" />
               </button>

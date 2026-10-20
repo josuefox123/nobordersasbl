@@ -16,7 +16,7 @@ const config: Config = {
         flame: { DEFAULT: "#E2501F", deep: "#CF4318", soft: "#FBE3D9" },
         sun: "#F2B33D",
         leaf: "#1F6F5C",
-        primary: { DEFAULT: "#0875B9", hover: "#065f9a", soft: "#EBF5FB" },
+        primary: { DEFAULT: "#26B997", hover: "#1FA887", soft: "#E8F8F5" },
       },
       fontFamily: {
         sans: ["var(--font-montserrat)", "system-ui", "sans-serif"],
@@ -66,7 +66,7 @@ const config: Config = {
     themes: [
       {
         noborders: {
-          primary: "#0875B9",
+          primary: "#26B997",
           "primary-content": "#FFFFFF",
           secondary: "#0B0B0C",
           "secondary-content": "#FFFFFF",

@@ -34,13 +34,13 @@ export function ProductSearchSection() {
         />
       </div>
 
-      {/* ── Overlay dégradé bleu + flou ── */}
+      {/* ── Overlay dégradé vert + flou ── */}
       <div
         aria-hidden="true"
         className="absolute inset-0 backdrop-blur-sm"
         style={{
           background:
-            "linear-gradient(135deg, rgba(8,117,185,0.92) 0%, rgba(5,80,130,0.96) 100%)",
+            "linear-gradient(135deg, rgba(38,185,151,0.92) 0%, rgba(20,110,90,0.96) 100%)",
         }}
       />
 

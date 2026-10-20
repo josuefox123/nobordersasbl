@@ -71,9 +71,9 @@ export function Header() {
       />
 
       <header className="fixed inset-x-0 top-0 z-[60]">
-        {/* ── HeaderTop : barre bleue ── */}
+        {/* ── HeaderTop : barre verte ── */}
         <div
-          className="relative bg-[#0875B9] text-white transition-[height] duration-500"
+          className="relative bg-primary text-white transition-[height] duration-500"
           style={{ height: compact ? "64px" : "84px" }}
         >
           <div className="container flex h-full items-center gap-4">
@@ -265,8 +265,8 @@ function MobileMenu({
             exit={reduce ? { opacity: 0 } : { x: "-100%" }}
             transition={{ duration: 0.35, ease: EASE }}
           >
-            {/* ── En-tête bleu ── */}
-            <div className="flex items-center justify-between bg-[#0875B9] px-5 py-4">
+            {/* ── En-tête vert ── */}
+            <div className="flex items-center justify-between bg-primary px-5 py-4">
               <Link
                 href="/"
                 onClick={onClose}
@@ -297,7 +297,7 @@ function MobileMenu({
               <Link
                 href="/boutique"
                 onClick={onClose}
-                className="flex items-center gap-3 rounded-lg bg-[#0875B9] px-4 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#065f9a]"
+                className="flex items-center gap-3 rounded-lg bg-primary px-4 py-3 text-sm font-semibold text-white transition-colors hover:bg-primary-hover"
               >
                 <StoreIcon size={18} />
                 Boutique
@@ -342,14 +342,14 @@ function MobileMenu({
                         aria-current={active ? "page" : undefined}
                         className={`flex items-center justify-between px-5 py-3.5 text-[0.95rem] font-medium transition-all ${
                           active
-                            ? "border-l-4 border-[#0875B9] bg-[#0875B9]/10 font-semibold text-[#0875B9]"
-                            : "text-ink hover:bg-paper hover:text-[#0875B9]"
+                            ? "border-l-4 border-primary bg-primary/10 font-semibold text-primary"
+                            : "text-ink hover:bg-paper hover:text-primary"
                         }`}
                       >
                         {item.label}
                         <ArrowRight
                           size={16}
-                          className={active ? "text-[#0875B9]" : "text-ink/30"}
+                          className={active ? "text-primary" : "text-ink/30"}
                         />
                       </Link>
                     </li>

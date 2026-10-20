@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { site } from "@/lib/content";
+import { PageHeader } from "@/components/ui/PageHeader";
 
 export const metadata: Metadata = {
   title: "Politique de confidentialité | No Borders ASBL",
@@ -10,24 +10,16 @@ export const metadata: Metadata = {
 
 export default function PolitiqueConfidentialitePage() {
   return (
-    <div className="pt-28 sm:pt-36">
-      {/* ── En-tête de page ── */}
-      <section className="bg-paper py-16 sm:py-24 border-b border-ink/5">
-        <div className="container">
-          <div className="max-w-3xl">
-            <span className="eyebrow">Protection des données · RGPD</span>
-            <h1 className="mt-4 text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-ink">
-              Politique de confidentialité
-            </h1>
-            <p className="mt-5 text-base sm:text-lg text-ink/75 leading-relaxed">
-              Chez <strong className="text-ink">No Borders ASBL</strong>, la protection de votre vie privée et de vos données personnelles est au cœur de nos engagements associatifs. Cette politique vous informe en toute transparence sur la façon dont nous recueillons, utilisons et protégeons vos données.
-            </p>
-            <p className="mt-3 text-xs text-ink/50">
-              Dernière mise à jour : 16 octobre 2026
-            </p>
-          </div>
-        </div>
-      </section>
+    <div className="mt-[84px] lg:mt-[188px]">
+      {/* ── Breadcrumb & En-tête ── */}
+      <PageHeader
+        crumbs={[
+          { label: "Accueil", href: "/" },
+          { label: "Politique de confidentialité" },
+        ]}
+        title="Politique de confidentialité"
+        description="Chez No Borders ASBL, la protection de votre vie privée et de vos données personnelles est au cœur de nos engagements associatifs."
+      />
 
       {/* ── Contenu légal détaillé ── */}
       <section className="py-16 sm:py-24 bg-white">
@@ -45,7 +37,7 @@ export default function PolitiqueConfidentialitePage() {
                 <p><strong className="text-ink">No Borders ASBL</strong></p>
                 <p>Numéro d&apos;entreprise (BCE) : <strong className="text-ink">{site.company}</strong></p>
                 <p>Adresse du siège : <span className="text-ink">{site.address.street}, {site.address.zip} {site.address.city}, {site.address.country}</span></p>
-                <p>Courriel officiel : <a href={`mailto:${site.email}`} className="text-[#0875B9] font-medium underline hover:text-[#065f9a]">{site.email}</a></p>
+                <p>Courriel officiel : <a href={`mailto:${site.email}`} className="text-primary font-medium underline hover:text-primary-hover">{site.email}</a></p>
                 <p>Téléphone : <a href={site.phoneHref} className="text-ink font-medium">{site.phone}</a></p>
               </div>
             </div>
@@ -89,28 +81,28 @@ export default function PolitiqueConfidentialitePage() {
                   <p className="mt-1 text-xs sm:text-sm text-ink/70">
                     Organisation des sorties vélo, matchs interculturels et ateliers d&apos;artisanat.
                   </p>
-                  <span className="inline-block mt-3 text-[11px] font-semibold text-[#0875B9]">Base : Consentement / Contrat</span>
+                  <span className="inline-block mt-3 text-[11px] font-semibold text-primary">Base : Consentement / Contrat</span>
                 </div>
                 <div className="rounded-xl border border-ink/10 p-4 bg-paper/60">
                   <h3 className="font-bold text-ink text-sm sm:text-base">Commandes & Boutique solidaire</h3>
                   <p className="mt-1 text-xs sm:text-sm text-ink/70">
                     Traitement, fabrication, expédition des commandes et gestion du service après-vente.
                   </p>
-                  <span className="inline-block mt-3 text-[11px] font-semibold text-[#0875B9]">Base : Exécution du contrat</span>
+                  <span className="inline-block mt-3 text-[11px] font-semibold text-primary">Base : Exécution du contrat</span>
                 </div>
                 <div className="rounded-xl border border-ink/10 p-4 bg-paper/60">
                   <h3 className="font-bold text-ink text-sm sm:text-base">Communications & Informations</h3>
                   <p className="mt-1 text-xs sm:text-sm text-ink/70">
                     Envoi d&apos;actualités sur les projets de l&apos;ASBL (avec possibilité de désinscription en 1 clic).
                   </p>
-                  <span className="inline-block mt-3 text-[11px] font-semibold text-[#0875B9]">Base : Consentement</span>
+                  <span className="inline-block mt-3 text-[11px] font-semibold text-primary">Base : Consentement</span>
                 </div>
                 <div className="rounded-xl border border-ink/10 p-4 bg-paper/60">
                   <h3 className="font-bold text-ink text-sm sm:text-base">Obligations légales et comptables</h3>
                   <p className="mt-1 text-xs sm:text-sm text-ink/70">
                     Respect de la législation belge régissant les ASBL et la tenue de la comptabilité.
                   </p>
-                  <span className="inline-block mt-3 text-[11px] font-semibold text-[#0875B9]">Base : Obligation légale</span>
+                  <span className="inline-block mt-3 text-[11px] font-semibold text-primary">Base : Obligation légale</span>
                 </div>
               </div>
             </div>
@@ -171,7 +163,7 @@ export default function PolitiqueConfidentialitePage() {
               </div>
               <p className="mt-4">
                 Pour exercer l&apos;un de ces droits, contactez-nous directement par e-mail à :{" "}
-                <a href={`mailto:${site.email}`} className="text-[#0875B9] font-bold underline hover:text-[#065f9a]">
+                <a href={`mailto:${site.email}`} className="text-primary font-bold underline hover:text-primary-hover">
                   {site.email}
                 </a>. Nous vous répondrons dans un délai maximal d&apos;un mois.
               </p>
@@ -187,26 +179,10 @@ export default function PolitiqueConfidentialitePage() {
               </p>
               <p className="mt-2 text-xs sm:text-sm text-ink/70">
                 Autorité de protection des données · Rue de la Presse 35, 1000 Bruxelles · Site web :{" "}
-                <a href="https://www.autoriteprotectiondonnees.be" target="_blank" rel="noopener noreferrer" className="text-[#0875B9] underline">
+                <a href="https://www.autoriteprotectiondonnees.be" target="_blank" rel="noopener noreferrer" className="text-primary underline hover:text-primary-hover">
                   www.autoriteprotectiondonnees.be
                 </a>
               </p>
-            </div>
-
-            {/* Boutons de navigation */}
-            <div className="pt-8 border-t border-ink/10 flex flex-wrap items-center justify-between gap-4">
-              <Link
-                href="/login"
-                className="inline-flex items-center gap-2 rounded-xl bg-[#0875B9] px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#065f9a]"
-              >
-                ← Retour à la connexion
-              </Link>
-              <Link
-                href="/"
-                className="text-sm font-medium text-ink/70 hover:text-ink underline transition-colors"
-              >
-                Retour à l&apos;accueil
-              </Link>
             </div>
           </div>
         </div>

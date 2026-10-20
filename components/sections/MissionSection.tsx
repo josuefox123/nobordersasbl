@@ -84,14 +84,14 @@ export function MissionSection() {
                 {values.map((val, idx) => (
                   <Reveal key={val.title} delay={0.1 + idx * 0.1}>
                     <div className="flex gap-5">
-                      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#0875B9] text-sm font-extrabold text-white">
+                      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary text-sm font-extrabold text-white">
                         {String(idx + 1).padStart(2, "0")}
                       </div>
                       <div>
                         <h4 className="text-lg font-bold text-ink">{val.title}</h4>
                         <p className="mt-1.5 text-sm leading-relaxed text-ink/70">{val.text}</p>
                         {"cite" in val && val.cite && (
-                          <span className="mt-2 block text-xs font-bold uppercase tracking-wider text-[#0875B9]">
+                          <span className="mt-2 block text-xs font-bold uppercase tracking-wider text-primary">
                             — {val.cite}
                           </span>
                         )}

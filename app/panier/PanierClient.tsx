@@ -127,7 +127,7 @@ export function PanierClient() {
           role="status"
           className="fixed bottom-6 right-6 z-[100] flex items-center gap-3 rounded-xl bg-ink px-5 py-3.5 text-sm font-semibold text-white shadow-2xl animate-fade-in"
         >
-          <span className="grid h-6 w-6 place-items-center rounded-full bg-[#0875B9]/10 text-[#0875B9]">
+          <span className="grid h-6 w-6 place-items-center rounded-full bg-primary/10 text-primary">
             <CheckIcon size={14} />
           </span>
           {notice}
@@ -150,7 +150,7 @@ export function PanierClient() {
         <div className="container">
           {items.length === 0 ? (
             <div className="rounded-2xl border border-dashed border-ink/15 p-12 text-center sm:p-16">
-              <div className="mx-auto grid h-16 w-16 place-items-center rounded-full bg-[#0875B9]/10 text-[#0875B9]">
+              <div className="mx-auto grid h-16 w-16 place-items-center rounded-full bg-primary/10 text-primary">
                 <ShoppingBagIcon size={32} />
               </div>
               <h2 className="mt-4 text-xl font-bold text-ink sm:text-2xl">Votre panier est vide</h2>
@@ -159,7 +159,7 @@ export function PanierClient() {
               </p>
               <Link
                 href="/boutique"
-                className="mt-6 inline-flex items-center gap-2 rounded-xl bg-[#0875B9] px-6 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-[#065f9a]"
+                className="mt-6 inline-flex items-center gap-2 rounded-xl bg-primary px-6 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-primary-hover"
               >
                 Découvrir la boutique →
               </Link>
@@ -202,7 +202,7 @@ export function PanierClient() {
                           <div>
                             <Link
                               href="/boutique/produit"
-                              className="text-sm font-bold text-ink transition-colors hover:text-[#0875B9] sm:text-base"
+                              className="text-sm font-bold text-ink transition-colors hover:text-primary sm:text-base"
                             >
                               {item.name}
                             </Link>
@@ -278,7 +278,7 @@ export function PanierClient() {
                 <div className="mt-6 flex flex-wrap items-center justify-between gap-4">
                   <Link
                     href="/boutique"
-                    className="inline-flex items-center gap-2 text-sm font-semibold text-ink/75 transition-colors hover:text-[#0875B9]"
+                    className="inline-flex items-center gap-2 text-sm font-semibold text-ink/75 transition-colors hover:text-primary"
                   >
                     <span>←</span> Continuer mes achats
                   </Link>
@@ -304,7 +304,7 @@ export function PanierClient() {
                   {/* Titre & badge compteur */}
                   <div className="flex items-center justify-between border-b border-ink/10 pb-5">
                     <h2 className="text-lg font-bold text-ink">Récapitulatif</h2>
-                    <span className="rounded-full bg-[#0875B9]/10 px-3 py-1 text-xs font-bold text-[#0875B9]">
+                    <span className="rounded-full bg-primary/10 px-3 py-1 text-xs font-bold text-primary">
                       {totalItemsCount} article{totalItemsCount > 1 ? "s" : ""}
                     </span>
                   </div>
@@ -324,7 +324,7 @@ export function PanierClient() {
                       />
                       <button
                         type="submit"
-                        className="rounded-xl bg-[#0875B9] px-4 py-2.5 text-xs font-bold text-white transition-colors hover:bg-[#065f9a]"
+                        className="rounded-xl bg-primary px-4 py-2.5 text-xs font-bold text-white transition-colors hover:bg-primary-hover"
                       >
                         Appliquer
                       </button>
@@ -358,7 +358,7 @@ export function PanierClient() {
                               name="shipping"
                               checked={shippingMethod === "standard"}
                               onChange={() => setShippingMethod("standard")}
-                              className="accent-[#0875B9]"
+                              className="accent-primary"
                             />
                             <span className="font-medium text-ink">Standard (3–5 jours)</span>
                           </div>
@@ -372,7 +372,7 @@ export function PanierClient() {
                               name="shipping"
                               checked={shippingMethod === "priority"}
                               onChange={() => setShippingMethod("priority")}
-                              className="accent-[#0875B9]"
+                              className="accent-primary"
                             />
                             <span className="font-medium text-ink">Prioritaire (24–48h)</span>
                           </div>
@@ -386,7 +386,7 @@ export function PanierClient() {
                               name="shipping"
                               checked={shippingMethod === "free"}
                               onChange={() => setShippingMethod("free")}
-                              className="accent-[#0875B9]"
+                              className="accent-primary"
                             />
                             <span className="font-medium text-ink">Retrait en atelier (Mons)</span>
                           </div>
@@ -420,14 +420,14 @@ export function PanierClient() {
                     </div>
                   </div>
 
-                  {/* Bouton passer la commande */}
-                  <button
-                    type="button"
-                    onClick={() => notify("Redirection vers la passerelle de paiement sécurisée...")}
-                    className="mt-6 flex w-full items-center justify-center gap-2 rounded-xl bg-[#0875B9] py-3.5 text-sm font-bold text-white transition-colors hover:bg-[#065f9a] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0875B9]"
+                  {/* Bouton valider la commande */}
+                  <Link
+                    href="/checkout"
+                    id="btn-valider-commande"
+                    className="mt-6 flex w-full items-center justify-center gap-2 rounded-xl bg-primary py-3.5 text-sm font-bold text-white transition-colors hover:bg-primary-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary shadow-xs"
                   >
-                    Passer la commande →
-                  </button>
+                    Valider la commande →
+                  </Link>
 
                   {/* Paiements acceptés */}
                   <div className="mt-6 text-center border-t border-ink/5 pt-4">

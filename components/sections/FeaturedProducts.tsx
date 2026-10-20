@@ -200,7 +200,7 @@ export function FeaturedProducts() {
             type="button"
             onClick={handlePrev}
             aria-label="Produit précédent"
-            className="hidden sm:flex absolute -left-5 top-1/2 -translate-y-1/2 z-10 h-12 w-12 items-center justify-center rounded-full bg-white border border-ink/10 text-ink shadow-lg transition-all hover:bg-[#0875B9] hover:text-white hover:border-[#0875B9] hover:scale-105"
+            className="hidden sm:flex absolute -left-5 top-1/2 -translate-y-1/2 z-10 h-12 w-12 items-center justify-center rounded-full bg-white border border-ink/10 text-ink shadow-lg transition-all hover:bg-primary hover:text-white hover:border-primary hover:scale-105"
           >
             <ChevronLeftIcon size={20} />
           </button>
@@ -236,7 +236,7 @@ export function FeaturedProducts() {
                     <p className="text-[11px] font-bold uppercase tracking-wider text-ink/50">
                       {p.category}
                     </p>
-                    <h3 className="mt-1 text-base font-bold leading-snug text-ink transition-colors group-hover:text-[#0875B9]">
+                    <h3 className="mt-1 text-base font-bold leading-snug text-ink transition-colors group-hover:text-primary">
                       <Link href={p.href}>{p.name}</Link>
                     </h3>
                     <div className="mt-2 flex items-center gap-1.5 text-xs text-ink/50">
@@ -256,8 +256,7 @@ export function FeaturedProducts() {
                     <div className="mt-auto pt-5">
                       <Link
                         href={p.href}
-                        className="flex w-full items-center justify-center gap-2 rounded-xl py-3 text-sm font-semibold text-white transition-opacity hover:opacity-90"
-                        style={{ backgroundColor: "#0875B9" }}
+                        className="flex w-full items-center justify-center gap-2 rounded-xl bg-primary py-3 text-sm font-semibold text-white transition-colors hover:bg-primary-hover"
                       >
                         Ajouter au panier <ArrowRight size={15} />
                       </Link>
@@ -273,7 +272,7 @@ export function FeaturedProducts() {
             type="button"
             onClick={handleNext}
             aria-label="Produit suivant"
-            className="hidden sm:flex absolute -right-5 top-1/2 -translate-y-1/2 z-10 h-12 w-12 items-center justify-center rounded-full bg-white border border-ink/10 text-ink shadow-lg transition-all hover:bg-[#0875B9] hover:text-white hover:border-[#0875B9] hover:scale-105"
+            className="hidden sm:flex absolute -right-5 top-1/2 -translate-y-1/2 z-10 h-12 w-12 items-center justify-center rounded-full bg-white border border-ink/10 text-ink shadow-lg transition-all hover:bg-primary hover:text-white hover:border-primary hover:scale-105"
           >
             <ChevronRightIcon size={20} />
           </button>
@@ -285,7 +284,7 @@ export function FeaturedProducts() {
             type="button"
             onClick={handlePrev}
             aria-label="Produit précédent"
-            className="flex sm:hidden h-10 w-10 items-center justify-center rounded-full border border-ink/15 text-ink/70 transition-colors hover:border-[#0875B9] hover:text-[#0875B9]"
+            className="flex sm:hidden h-10 w-10 items-center justify-center rounded-full border border-ink/15 text-ink/70 transition-colors hover:border-primary hover:text-primary"
           >
             <ChevronLeftIcon size={18} />
           </button>
@@ -300,7 +299,7 @@ export function FeaturedProducts() {
                 aria-current={i === activeDot ? "true" : undefined}
                 className={`rounded-full transition-all duration-300 ${
                   i === activeDot
-                    ? "h-2.5 w-7 bg-[#0875B9]"
+                    ? "h-2.5 w-7 bg-primary"
                     : "h-2.5 w-2.5 bg-ink/20 hover:bg-ink/40"
                 }`}
               />
@@ -311,7 +310,7 @@ export function FeaturedProducts() {
             type="button"
             onClick={handleNext}
             aria-label="Produit suivant"
-            className="flex sm:hidden h-10 w-10 items-center justify-center rounded-full border border-ink/15 text-ink/70 transition-colors hover:border-[#0875B9] hover:text-[#0875B9]"
+            className="flex sm:hidden h-10 w-10 items-center justify-center rounded-full border border-ink/15 text-ink/70 transition-colors hover:border-primary hover:text-primary"
           >
             <ChevronRightIcon size={18} />
           </button>
@@ -321,8 +320,7 @@ export function FeaturedProducts() {
           <div className="mt-12 flex justify-center">
             <Link
               href="/boutique"
-              className="inline-flex items-center gap-2 rounded-xl px-8 py-3.5 text-sm font-semibold text-white transition-opacity hover:opacity-90"
-              style={{ backgroundColor: "#0875B9" }}
+              className="inline-flex items-center gap-2 rounded-xl bg-primary px-8 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-primary-hover"
             >
               Voir tout le catalogue <ArrowRight size={16} />
             </Link>

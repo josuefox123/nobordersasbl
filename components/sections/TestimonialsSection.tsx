@@ -94,12 +94,12 @@ export function TestimonialsSection() {
               className="w-full shrink-0 snap-start px-3 sm:w-1/2 lg:w-1/3"
             >
               <div
-                className="flex h-full cursor-pointer flex-col justify-between rounded-3xl border border-ink/10 bg-paper p-7 transition-all duration-500 hover:border-[#0875B9]/40 hover:shadow-lg"
+                className="flex h-full cursor-pointer flex-col justify-between rounded-3xl border border-ink/10 bg-paper p-7 transition-all duration-500 hover:border-primary/40 hover:shadow-lg"
                 onClick={() => setSelected(t)}
               >
                 {/* Citation */}
                 <div>
-                  <QuoteIcon size={28} className="mb-4 text-[#0875B9]" />
+                  <QuoteIcon size={28} className="mb-4 text-primary" />
 
                   {/* ── Étoiles ── */}
                   <div className="mb-3 flex items-center gap-0.5">

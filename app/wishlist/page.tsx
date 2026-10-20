@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import { WishlistClient } from "./WishlistClient";
 
 export const metadata: Metadata = {
@@ -8,5 +9,10 @@ export const metadata: Metadata = {
 };
 
 export default function WishlistPage() {
-  return <WishlistClient />;
+  return (
+    <Suspense fallback={null}>
+      <WishlistClient />
+    </Suspense>
+  );
 }
+
