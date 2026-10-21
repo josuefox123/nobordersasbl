@@ -145,7 +145,7 @@ export function TestimonialsSection() {
             type="button"
             onClick={() => goTo((activeDot - 1 + total) % total)}
             aria-label="Témoignage précédent"
-            className="flex h-9 w-9 items-center justify-center rounded-full border border-ink/15 text-ink/50 transition-colors hover:border-ink hover:text-ink"
+            className="flex h-9 w-9 items-center justify-center rounded-full border border-primary/30 text-primary transition-all duration-200 hover:border-primary hover:bg-primary hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95"
           >
             <ChevronDownIcon size={16} className="rotate-90" />
           </button>
@@ -159,10 +159,10 @@ export function TestimonialsSection() {
                 onClick={() => goTo(i)}
                 aria-label={`Témoignage ${i + 1}`}
                 aria-current={i === activeDot ? "true" : undefined}
-                className={`rounded-full transition-all duration-300 ${
+                className={`rounded-full transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 ${
                   i === activeDot
-                    ? "h-2.5 w-7 bg-ink"
-                    : "h-2.5 w-2.5 bg-ink/20 hover:bg-ink/40"
+                    ? "h-2.5 w-7 bg-primary"
+                    : "h-2.5 w-2.5 bg-primary/25 hover:bg-primary/50"
                 }`}
               />
             ))}
@@ -173,7 +173,7 @@ export function TestimonialsSection() {
             type="button"
             onClick={() => goTo((activeDot + 1) % total)}
             aria-label="Témoignage suivant"
-            className="flex h-9 w-9 items-center justify-center rounded-full border border-ink/15 text-ink/50 transition-colors hover:border-ink hover:text-ink"
+            className="flex h-9 w-9 items-center justify-center rounded-full border border-primary/30 text-primary transition-all duration-200 hover:border-primary hover:bg-primary hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:scale-95"
           >
             <ChevronDownIcon size={16} className="-rotate-90" />
           </button>
