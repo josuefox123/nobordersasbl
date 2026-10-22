@@ -89,10 +89,10 @@ export function Hero() {
 
       {/* ── Contenu texte & boutons ── */}
       <div className="container relative z-10 py-5 sm:py-6">
-        <div className="max-w-2xl space-y-3 sm:space-y-3.5">
+        <div className="max-w-2xl lg:max-w-4xl space-y-3 sm:space-y-4 lg:space-y-6">
 
           {/* Titre */}
-          <h1 className="text-2xl font-extrabold leading-[1.15] tracking-tight text-white sm:text-3xl md:text-4xl lg:text-[2.5rem]">
+          <h1 className="text-2xl font-extrabold leading-[1.15] tracking-tight text-white sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl">
             Découvrez l&apos;Excellence du{" "}
             <span className="relative inline-block text-white">
               Sport
@@ -102,7 +102,7 @@ export function Hero() {
           </h1>
 
           {/* Description */}
-          <p className="max-w-xl text-sm leading-relaxed text-white/85 sm:text-base">
+          <p className="max-w-xl lg:max-w-2xl text-sm leading-relaxed text-white/85 sm:text-base lg:text-lg xl:text-xl">
             No Borders ASBL allie engagement social et passion du cyclisme.
             Participez à nos activités sportives inclusives et découvrez notre
             boutique solidaire de vélos haut de gamme.

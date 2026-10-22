@@ -29,6 +29,7 @@ export const navigation = [
   { label: "À propos", href: "/a-propos" },
   { label: "Notre projet", href: "/notre-projet" },
   { label: "Nos activités", href: "/nos-activites" },
+  { label: "Boutique", href: "/boutique" },
   { label: "Actualités", href: "/actualites" },
   { label: "Presse", href: "/presse" },
   { label: "Nous contacter", href: "/nous-contacter" },

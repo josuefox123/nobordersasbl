@@ -19,7 +19,6 @@ import {
   CloseIcon,
   MenuIcon,
   SearchIcon,
-  StoreIcon,
 } from "@/components/ui/Icons";
 import { LoginDropdown } from "@/components/ui/LoginDropdown";
 import { LanguageSwitcher } from "@/components/ui/LanguageSwitcher";
@@ -27,7 +26,6 @@ import { LocationButton } from "@/components/ui/LocationButton";
 import { WishlistButton } from "@/components/ui/WishlistButton";
 import { CartButton } from "@/components/ui/CartButton";
 import { SearchBar } from "@/components/ui/SearchBar";
-import { NavButton } from "@/components/ui/NavButtons";
 import { AnnouncementBar } from "@/components/ui/AnnouncementBar";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
@@ -124,16 +122,16 @@ export function Header() {
           </div>
         </div>
 
-        {/* ── Nav desktop ── */}
+        {/* ── Nav desktop (HeaderMiddle centré) ── */}
         <nav
           aria-label="Navigation principale"
           className={`hidden border-b border-ink/5 bg-white/95 backdrop-blur transition-shadow duration-500 lg:block ${
             compact ? "shadow-[0_12px_30px_-18px_rgba(0,0,0,0.35)]" : ""
           }`}
         >
-          <div className="container flex h-14 items-center">
-            {/* Menus alignés avec le logo */}
-            <ul className="flex items-center gap-1 -ml-3">
+          <div className="container flex h-14 items-center justify-center">
+            {/* Menus centrés */}
+            <ul className="flex items-center gap-1">
               {navigation.map((item) => (
                 <li key={item.href}>
                   <Link
@@ -146,13 +144,6 @@ export function Header() {
                 </li>
               ))}
             </ul>
-            <div className="ml-auto flex items-center gap-2">
-              <NavButton
-                href="/boutique"
-                label="Boutique"
-                icon={<StoreIcon size={16} />}
-              />
-            </div>
           </div>
         </nav>
 
@@ -292,17 +283,6 @@ function MobileMenu({
               </button>
             </div>
 
-            {/* ── Bouton Boutique ── */}
-            <div className="border-b border-ink/8 px-4 py-4">
-              <Link
-                href="/boutique"
-                onClick={onClose}
-                className="flex items-center gap-3 rounded-lg bg-primary px-4 py-3 text-sm font-semibold text-white transition-colors hover:bg-primary-hover"
-              >
-                <StoreIcon size={18} />
-                Boutique
-              </Link>
-            </div>
 
             {/* ── Barre de recherche ── */}
             <form

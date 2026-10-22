@@ -185,13 +185,13 @@ export function ActivitiesSection() {
         </Reveal>
 
         {/* ── Carrousel 3 par 3 (Desktop: 3, Tablette: 2, Mobile: 1) ── */}
-        <div className="relative">
+        <div className="relative sm:px-14 lg:px-16">
           {/* Flèche gauche desktop */}
           <button
             type="button"
             onClick={handlePrev}
             aria-label="Catégorie précédente"
-            className="hidden sm:flex absolute -left-5 top-1/2 -translate-y-1/2 z-10 h-12 w-12 items-center justify-center rounded-full bg-white border border-ink/10 text-ink shadow-lg transition-all hover:bg-primary hover:text-white hover:border-primary hover:scale-105"
+            className="hidden sm:flex absolute left-0 top-1/2 -translate-y-1/2 z-10 h-12 w-12 items-center justify-center rounded-full bg-white border border-ink/10 text-ink shadow-lg transition-all hover:bg-primary hover:text-white hover:border-primary hover:scale-105"
           >
             <ChevronLeftIcon size={20} />
           </button>
@@ -201,7 +201,7 @@ export function ActivitiesSection() {
             ref={scrollRef}
             onTouchStart={handleTouchStart}
             onTouchEnd={handleTouchEnd}
-            className="flex snap-x snap-mandatory overflow-x-hidden scroll-smooth py-3 -mx-3 px-3 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+            className="flex snap-x snap-mandatory overflow-x-hidden scroll-smooth py-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
           >
             {loopItems.map((cat, i) => (
               <div
@@ -210,14 +210,14 @@ export function ActivitiesSection() {
               >
                 <Link
                   href={cat.href}
-                  className="group flex h-full flex-col overflow-hidden rounded-3xl border border-ink/10 bg-white shadow-sm transition-all duration-500 hover:-translate-y-1.5 hover:shadow-xl"
+                  className="group flex h-full flex-col overflow-hidden rounded-3xl border border-ink/10 bg-white shadow-sm transition-shadow duration-300 hover:shadow-md"
                 >
                   <div className="relative aspect-[4/3] w-full overflow-hidden bg-ink/5">
                     <Image
                       src={cat.image}
                       alt={cat.title}
                       fill
-                      className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                      className="object-cover"
                       sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                     />
                   </div>
@@ -244,14 +244,14 @@ export function ActivitiesSection() {
             type="button"
             onClick={handleNext}
             aria-label="Catégorie suivante"
-            className="hidden sm:flex absolute -right-5 top-1/2 -translate-y-1/2 z-10 h-12 w-12 items-center justify-center rounded-full bg-white border border-ink/10 text-ink shadow-lg transition-all hover:bg-primary hover:text-white hover:border-primary hover:scale-105"
+            className="hidden sm:flex absolute right-0 top-1/2 -translate-y-1/2 z-10 h-12 w-12 items-center justify-center rounded-full bg-white border border-ink/10 text-ink shadow-lg transition-all hover:bg-primary hover:text-white hover:border-primary hover:scale-105"
           >
             <ChevronRightIcon size={20} />
           </button>
         </div>
 
         {/* ── Dots + flèches mobiles ── */}
-        <div className="mt-8 flex items-center justify-center gap-4">
+        <div className="mt-10 sm:mt-12 flex items-center justify-center gap-4">
           <button
             type="button"
             onClick={handlePrev}
