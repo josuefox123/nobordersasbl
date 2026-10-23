@@ -19,6 +19,7 @@ import {
   CloseIcon,
   MenuIcon,
   SearchIcon,
+  ShoppingBagIcon,
 } from "@/components/ui/Icons";
 import { LoginDropdown } from "@/components/ui/LoginDropdown";
 import { LanguageSwitcher } from "@/components/ui/LanguageSwitcher";
@@ -132,17 +133,33 @@ export function Header() {
           <div className="container flex h-14 items-center justify-center">
             {/* Menus centrés */}
             <ul className="flex items-center gap-1">
-              {navigation.map((item) => (
-                <li key={item.href}>
-                  <Link
-                    href={item.href}
-                    aria-current={isActive(item.href) ? "page" : undefined}
-                    className={`nav-menu-link ${isActive(item.href) ? "active" : ""}`}
-                  >
-                    {item.label}
-                  </Link>
-                </li>
-              ))}
+              {navigation
+                .filter((item) => item.href !== "/boutique")
+                .map((item) => (
+                  <li key={item.href}>
+                    <Link
+                      href={item.href}
+                      aria-current={isActive(item.href) ? "page" : undefined}
+                      className={`nav-menu-link ${isActive(item.href) ? "active" : ""}`}
+                    >
+                      {item.label}
+                    </Link>
+                  </li>
+                ))}
+              <li className="ml-2">
+                <Link
+                  href="/boutique"
+                  aria-current={isActive("/boutique") ? "page" : undefined}
+                  className={`flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-semibold transition-all shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60 ${
+                    isActive("/boutique")
+                      ? "bg-primary-hover text-white ring-2 ring-primary/40 shadow-inner"
+                      : "bg-primary text-white hover:bg-primary-hover hover:shadow"
+                  }`}
+                >
+                  <ShoppingBagIcon size={16} />
+                  <span>Boutique</span>
+                </Link>
+              </li>
             </ul>
           </div>
         </nav>
@@ -220,7 +237,7 @@ function MobileMenu({
   }, [open, onKey]);
 
   const links = [
-    ...navigation,
+    ...navigation.filter((item) => item.href !== "/boutique"),
     { label: "Nous soutenir", href: "/nous-soutenir" },
   ];
 
@@ -336,6 +353,18 @@ function MobileMenu({
                   );
                 })}
               </ul>
+
+              {/* Bouton Boutique mobile */}
+              <div className="p-4">
+                <Link
+                  href="/boutique"
+                  onClick={onClose}
+                  className="flex w-full items-center justify-center gap-2 rounded-xl bg-primary px-4 py-3 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-primary-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60"
+                >
+                  <ShoppingBagIcon size={18} />
+                  <span>Boutique</span>
+                </Link>
+              </div>
             </nav>
           </motion.div>
         </div>
