@@ -1,11 +1,13 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useState, useEffect, type FormEvent, Suspense } from "react";
+import { useSearchParams } from "next/navigation";
 import { site } from "@/lib/content";
 import { MailIcon, PhoneIcon, PinIcon, CheckIcon, ArrowRight, SparkIcon } from "@/components/ui/Icons";
 import { PageHeader } from "@/components/ui/PageHeader";
 
-export default function ContactPage() {
+function ContactContent() {
+  const searchParams = useSearchParams();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -13,6 +15,18 @@ export default function ContactPage() {
     message: "",
   });
   const [submitted, setSubmitted] = useState(false);
+
+  useEffect(() => {
+    const s = searchParams.get("sujet");
+    const p = searchParams.get("produit");
+    if (s || p) {
+      setFormData((prev) => ({
+        ...prev,
+        subject: s ? s : prev.subject,
+        message: p ? `Bonjour, je souhaite réserver / prendre rendez-vous pour le produit : ${p}.` : prev.message,
+      }));
+    }
+  }, [searchParams]);
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
@@ -185,6 +199,7 @@ export default function ContactPage() {
                       onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
                       className="w-full rounded-lg border border-ink/15 bg-paper px-4 py-3.5 text-sm text-ink focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
                     >
+                      <option value="reservation">Réservation d&apos;un produit / Rendez-vous</option>
                       <option value="benevolat">Rejoindre l&apos;équipe / Bénévolat</option>
                       <option value="partenariat">Proposer un partenariat</option>
                       <option value="don">Informations sur les dons</option>
@@ -221,5 +236,13 @@ export default function ContactPage() {
         </div>
       </section>
     </div>
+  );
+}
+
+export default function ContactPage() {
+  return (
+    <Suspense fallback={<div className="container py-24 text-center text-ink/60">Chargement...</div>}>
+      <ContactContent />
+    </Suspense>
   );
 }

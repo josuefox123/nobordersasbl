@@ -93,17 +93,26 @@ export function Header() {
             {/* Logo */}
             <Link
               href="/"
-              className="hidden items-center gap-3 lg:flex shrink-0"
+              className="hidden flex-col justify-center lg:flex shrink-0"
               aria-label="No Borders ASBL — accueil"
             >
-              <Image
-                src="/images/logo/logoFichier 2logo_blanc.png"
-                alt="No Borders ASBL"
-                width={192}
-                height={64}
-                className="h-14 w-auto object-contain"
-                priority
-              />
+              <div className="inline-flex flex-col">
+                <Image
+                  src="/images/logo/logoFichier 2logo_blanc.png"
+                  alt="No Borders ASBL"
+                  width={192}
+                  height={64}
+                  className={`${compact ? "h-10" : "h-12"} w-auto object-contain transition-all duration-300`}
+                  priority
+                />
+                <span
+                  className={`block font-medium text-white pl-[48%] -mt-1 select-none whitespace-nowrap ${
+                    compact ? "text-[6.5px] tracking-tight" : "text-[7.5px] tracking-normal"
+                  }`}
+                >
+                  d&apos;ici et d&apos;ailleurs
+                </span>
+              </div>
             </Link>
 
             {/* Actions droite */}
@@ -279,16 +288,21 @@ function MobileMenu({
                 href="/"
                 onClick={onClose}
                 aria-label="No Borders ASBL — accueil"
-                className="flex items-center"
+                className="flex flex-col"
               >
-                <Image
-                  src="/images/logo/logoFichier 2logo_blanc.png"
-                  alt="No Borders ASBL"
-                  width={192}
-                  height={64}
-                  className="h-10 w-auto object-contain"
-                  priority
-                />
+                <div className="inline-flex flex-col">
+                  <Image
+                    src="/images/logo/logoFichier 2logo_blanc.png"
+                    alt="No Borders ASBL"
+                    width={192}
+                    height={64}
+                    className="h-9 w-auto object-contain"
+                    priority
+                  />
+                  <span className="block text-[6.5px] font-medium tracking-tight text-white pl-[48%] -mt-0.5 select-none whitespace-nowrap">
+                    d&apos;ici et d&apos;ailleurs
+                  </span>
+                </div>
               </Link>
               <button
                 type="button"

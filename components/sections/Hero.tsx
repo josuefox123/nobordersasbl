@@ -8,19 +8,59 @@ import { ArrowRight } from "@/components/ui/Icons";
 const SLIDES = [
   {
     src: "/images/hero-groupe.jpg",
-    alt: "No Borders ASBL — membres réunis pour une activité interculturelle",
-  },
-  {
-    src: "/images/organisations-sportives.jpg",
-    alt: "No Borders ASBL — activités sportives inclusives",
-  },
-  {
-    src: "/images/bxl-tour.jpg",
-    alt: "No Borders ASBL — tour à vélo à Bruxelles",
+    alt: "No Borders ASBL – membres réunis pour une activité interculturelle",
+    title: (
+      <>
+        L&apos;inclusion pour le{" "}
+        <span className="relative inline-block text-white">
+          sport
+          <span className="absolute -bottom-1 left-0 h-1.5 w-full rounded-full bg-primary" />
+        </span>{" "}
+        et la culture
+      </>
+    ),
   },
   {
     src: "/images/lancement-myboo.jpg",
-    alt: "No Borders ASBL — lancement des vélos en bambou My Boo",
+    alt: "No Borders ASBL – lancement des vélos en bambou My Boo",
+    title: (
+      <>
+        Développer les{" "}
+        <span className="relative inline-block text-white">
+          échanges
+          <span className="absolute -bottom-1 left-0 h-1.5 w-full rounded-full bg-primary" />
+        </span>{" "}
+        économiques et sociaux entre le Nord et le Sud
+      </>
+    ),
+  },
+  {
+    src: "/images/organisations-sportives.jpg",
+    alt: "No Borders ASBL – activités sportives inclusives",
+    title: (
+      <>
+        L&apos;inclusion pour le{" "}
+        <span className="relative inline-block text-white">
+          sport
+          <span className="absolute -bottom-1 left-0 h-1.5 w-full rounded-full bg-primary" />
+        </span>{" "}
+        et la culture
+      </>
+    ),
+  },
+  {
+    src: "/images/bxl-tour.jpg",
+    alt: "No Borders ASBL – tour à vélo à Bruxelles",
+    title: (
+      <>
+        Développer les{" "}
+        <span className="relative inline-block text-white">
+          échanges
+          <span className="absolute -bottom-1 left-0 h-1.5 w-full rounded-full bg-primary" />
+        </span>{" "}
+        économiques et sociaux entre le Nord et le Sud
+      </>
+    ),
   },
 ];
 
@@ -92,13 +132,8 @@ export function Hero() {
         <div className="max-w-2xl lg:max-w-4xl space-y-3 sm:space-y-4 lg:space-y-6">
 
           {/* Titre */}
-          <h1 className="text-2xl font-extrabold leading-[1.15] tracking-tight text-white sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl">
-            Découvrez l&apos;Excellence du{" "}
-            <span className="relative inline-block text-white">
-              Sport
-              <span className="absolute -bottom-1 left-0 h-1.5 w-full rounded-full bg-primary" />
-            </span>{" "}
-            et de la Mobilité
+          <h1 className="text-2xl font-extrabold leading-[1.18] tracking-tight text-white sm:text-3xl md:text-4xl lg:text-5xl xl:text-[3.25rem] transition-opacity duration-500">
+            {SLIDES[current].title}
           </h1>
 
           {/* Description */}

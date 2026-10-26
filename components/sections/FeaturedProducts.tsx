@@ -217,7 +217,7 @@ export function FeaturedProducts() {
                 key={`${p.name}-${i}`}
                 className="w-full shrink-0 snap-start px-3 sm:w-1/2 lg:w-1/4"
               >
-                <article className="group flex h-full flex-col overflow-hidden rounded-2xl border border-ink/10 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-ink/30 hover:shadow-lg">
+                <article className="group flex h-full flex-col overflow-hidden rounded-2xl border border-ink/10 bg-white shadow-sm transition-all duration-300 hover:border-ink/30 hover:shadow-lg">
                   <Link
                     href={p.href}
                     aria-label={`Voir ${p.name}`}
@@ -253,12 +253,18 @@ export function FeaturedProducts() {
                         </span>
                       )}
                     </div>
-                    <div className="mt-auto pt-5">
+                    <div className="mt-auto pt-5 grid grid-cols-2 gap-2">
                       <Link
                         href={p.href}
-                        className="flex w-full items-center justify-center gap-2 rounded-xl bg-primary py-3 text-sm font-semibold text-white transition-colors hover:bg-primary-hover"
+                        className="flex items-center justify-center gap-1.5 rounded-xl bg-primary py-2.5 px-2 text-xs sm:text-sm font-semibold text-white transition-colors hover:bg-primary-hover text-center"
                       >
-                        Ajouter au panier <ArrowRight size={15} />
+                        Panier <ArrowRight size={14} />
+                      </Link>
+                      <Link
+                        href={`/nous-contacter?sujet=reservation&produit=${encodeURIComponent(p.name)}`}
+                        className="flex items-center justify-center gap-1.5 rounded-xl border border-primary/30 py-2.5 px-2 text-xs sm:text-sm font-semibold text-primary transition-colors hover:bg-primary/10 hover:border-primary text-center"
+                      >
+                        Réserver
                       </Link>
                     </div>
                   </div>

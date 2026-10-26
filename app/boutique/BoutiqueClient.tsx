@@ -878,7 +878,7 @@ export function BoutiqueClient() {
                 {paginatedProducts.map((p) => (
                   <article
                     key={p.id}
-                    className="group flex flex-col overflow-hidden rounded-2xl border border-ink/10 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-ink/30 hover:shadow-lg"
+                    className="group flex flex-col overflow-hidden rounded-2xl border border-ink/10 bg-white shadow-sm transition-all duration-300 hover:border-ink/30 hover:shadow-lg"
                   >
                     {/* Image du produit */}
                     <Link href={`/boutique/produit?id=${p.id}`} aria-label={`Voir ${p.name}`} className="relative block aspect-[4/3] w-full overflow-hidden bg-ink/5">
@@ -921,15 +921,21 @@ export function BoutiqueClient() {
                         )}
                       </div>
 
-                      {/* Bouton centré en bas, pleine largeur */}
-                      <div className="mt-auto pt-5">
+                      {/* Boutons Panier + Réserver */}
+                      <div className="mt-auto pt-5 grid grid-cols-2 gap-2">
                         <button
                           type="button"
                           onClick={() => handleAddToCart(p)}
-                          className="w-full rounded-xl bg-primary py-3 text-sm font-semibold text-white transition-colors hover:bg-primary-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+                          className="rounded-xl bg-primary py-2.5 px-2 text-xs sm:text-sm font-semibold text-white transition-colors hover:bg-primary-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary text-center"
                         >
-                          Ajouter au panier
+                          Panier
                         </button>
+                        <Link
+                          href={`/nous-contacter?sujet=reservation&produit=${encodeURIComponent(p.name)}`}
+                          className="flex items-center justify-center rounded-xl border border-primary/30 py-2.5 px-2 text-xs sm:text-sm font-semibold text-primary transition-colors hover:bg-primary/10 hover:border-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary text-center"
+                        >
+                          Réserver
+                        </Link>
                       </div>
                     </div>
                   </article>
@@ -984,15 +990,21 @@ export function BoutiqueClient() {
                         )}
                       </div>
 
-                      {/* Bouton centré en bas, pleine largeur */}
-                      <div className="mt-auto pt-5">
+                      {/* Boutons Panier + Réserver */}
+                      <div className="mt-auto pt-5 flex items-center gap-3">
                         <button
                           type="button"
                           onClick={() => handleAddToCart(p)}
-                          className="w-full rounded-xl bg-primary py-3 text-sm font-semibold text-white transition-colors hover:bg-primary-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+                          className="rounded-xl bg-primary py-2.5 px-5 text-sm font-semibold text-white transition-colors hover:bg-primary-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
                         >
                           Ajouter au panier
                         </button>
+                        <Link
+                          href={`/nous-contacter?sujet=reservation&produit=${encodeURIComponent(p.name)}`}
+                          className="flex items-center justify-center rounded-xl border border-primary/30 py-2.5 px-5 text-sm font-semibold text-primary transition-colors hover:bg-primary/10 hover:border-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+                        >
+                          Réserver
+                        </Link>
                       </div>
                     </div>
                   </article>

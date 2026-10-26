@@ -271,7 +271,8 @@ export const supporters: Partner[] = [
     logo: "/images/s-wallonie.jpg",
     href: "https://www.wallonie.be/fr/acteurs-et-institutions/federation-wallonie-bruxelles",
   },
-  { name: "CIMB", logo: "/images/s-cimb.jpg", href: "https://www.cimb.be" },
+  { name: "CRI MB-Wapi", logo: "/images/logo-cri-mp-wapi-2026.png", href: "https://www.cri-mbwapi.be" },
+  { name: "Ville de Mons", logo: "/images/logo-ville-de-mons.svg", href: "https://www.mons.be" },
 ];
 
 /** Galerie de moments partagés (photos issues du site officiel). */

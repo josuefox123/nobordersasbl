@@ -2,7 +2,9 @@ import Image from "next/image";
 import { partners, supporters } from "@/lib/content";
 import { Reveal } from "@/components/ui/Reveal";
 
-const allPartners = [...partners, ...supporters];
+const allPartners = [...partners, ...supporters].filter(
+  (p) => p.name !== "BMW" && p.name !== "EcoBirdy"
+);
 // Répété pour garantir une boucle infinie continue et fluide
 const marqueeList = [...allPartners, ...allPartners];
 

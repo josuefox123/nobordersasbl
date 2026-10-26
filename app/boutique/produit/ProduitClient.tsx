@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useEffect, useMemo, useState, type ReactNode } from "react";
 import { useSearchParams } from "next/navigation";
 import { productCategories, productColors, products } from "@/lib/content";
-import { CheckIcon, HeartIcon, ShoppingBagIcon } from "@/components/ui/Icons";
+import { CalendarIcon, CheckIcon, HeartIcon, ShoppingBagIcon } from "@/components/ui/Icons";
 import { PageHeader } from "@/components/ui/PageHeader";
 
 const highlights: { title: string; text: string; icon: ReactNode }[] = [
@@ -327,8 +327,8 @@ export function ProduitClient() {
                 </div>
               </div>
 
-              {/* Quantité + panier + favoris */}
-              <div className="mt-6 flex items-stretch gap-3">
+              {/* Quantité + panier + réserver + favoris */}
+              <div className="mt-6 flex flex-wrap sm:flex-nowrap items-stretch gap-3">
                 <div className="flex items-center rounded-xl border border-ink/15">
                   <button type="button" onClick={() => setQty((q) => Math.max(1, q - 1))} aria-label="Diminuer la quantité" className="h-11 w-10 text-lg text-ink/60 hover:text-ink">−</button>
                   <span className="w-8 text-center text-sm font-bold text-ink" aria-live="polite">{qty}</span>
@@ -338,10 +338,17 @@ export function ProduitClient() {
                   type="button"
                   id="produit-ajouter-panier"
                   onClick={() => notify(`${qty} × ${product.name} ajouté au panier !`)}
-                  className="flex flex-1 items-center justify-center gap-2 rounded-xl bg-primary/10 px-4 text-sm font-bold text-primary transition-colors hover:bg-primary hover:text-white"
+                  className="flex flex-1 items-center justify-center gap-2 rounded-xl bg-primary/10 px-4 py-3 text-sm font-bold text-primary transition-colors hover:bg-primary hover:text-white"
                 >
                   <ShoppingBagIcon size={17} /> Ajouter au panier
                 </button>
+                <Link
+                  href={`/nous-contacter?sujet=reservation&produit=${encodeURIComponent(product.name)}`}
+                  id="produit-reserver"
+                  className="flex items-center justify-center gap-2 rounded-xl border border-primary/30 px-4 py-3 text-sm font-bold text-primary transition-colors hover:bg-primary/10 hover:border-primary"
+                >
+                  <CalendarIcon size={17} /> Réserver
+                </Link>
                 <button
                   type="button"
                   onClick={() => setLiked((v) => !v)}
@@ -533,7 +540,7 @@ export function ProduitClient() {
             {similarProducts.map((p) => (
               <article
                 key={p.id}
-                className="group flex flex-col overflow-hidden rounded-2xl border border-ink/10 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-ink/30 hover:shadow-lg"
+                className="group flex flex-col overflow-hidden rounded-2xl border border-ink/10 bg-white shadow-sm transition-all duration-300 hover:border-ink/30 hover:shadow-lg"
               >
                 {/* Image */}
                 <Link
@@ -581,14 +588,20 @@ export function ProduitClient() {
                     )}
                   </div>
 
-                  <div className="mt-auto pt-5">
+                  <div className="mt-auto pt-5 grid grid-cols-2 gap-2">
                     <button
                       type="button"
                       onClick={() => notify(`« ${p.name} » ajouté au panier !`)}
-                      className="w-full rounded-xl bg-primary py-2.5 px-4 text-xs font-bold text-white transition-colors hover:bg-primary-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+                      className="rounded-xl bg-primary py-2.5 px-2 text-xs font-bold text-white transition-colors hover:bg-primary-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary text-center"
                     >
-                      Ajouter au panier
+                      Panier
                     </button>
+                    <Link
+                      href={`/nous-contacter?sujet=reservation&produit=${encodeURIComponent(p.name)}`}
+                      className="flex items-center justify-center rounded-xl border border-primary/30 py-2.5 px-2 text-xs font-bold text-primary transition-colors hover:bg-primary/10 hover:border-primary text-center"
+                    >
+                      Réserver
+                    </Link>
                   </div>
                 </div>
               </article>
