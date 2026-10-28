@@ -96,7 +96,7 @@ export function Header() {
               className="hidden flex-col justify-center lg:flex shrink-0"
               aria-label="No Borders ASBL — accueil"
             >
-              <div className="inline-flex flex-col">
+            <div className="inline-flex flex-col items-end">
                 <Image
                   src="/images/logo/logoFichier 2logo_blanc.png"
                   alt="No Borders ASBL"
@@ -106,11 +106,11 @@ export function Header() {
                   priority
                 />
                 <span
-                  className={`block font-medium text-white pl-[48%] -mt-1 select-none whitespace-nowrap ${
-                    compact ? "text-[6.5px] tracking-tight" : "text-[7.5px] tracking-normal"
+                  className={`block font-medium text-white -mt-1 select-none whitespace-nowrap ${
+                    compact ? "text-[8px] tracking-tight" : "text-[9.5px] tracking-normal"
                   }`}
                 >
-                  d&apos;ici et d&apos;ailleurs
+                  D&apos;ici et D&apos;ailleurs
                 </span>
               </div>
             </Link>
@@ -290,7 +290,7 @@ function MobileMenu({
                 aria-label="No Borders ASBL — accueil"
                 className="flex flex-col"
               >
-                <div className="inline-flex flex-col">
+                <div className="inline-flex flex-col items-end">
                   <Image
                     src="/images/logo/logoFichier 2logo_blanc.png"
                     alt="No Borders ASBL"
@@ -299,8 +299,8 @@ function MobileMenu({
                     className="h-9 w-auto object-contain"
                     priority
                   />
-                  <span className="block text-[6.5px] font-medium tracking-tight text-white pl-[48%] -mt-0.5 select-none whitespace-nowrap">
-                    d&apos;ici et d&apos;ailleurs
+                  <span className="block text-[8px] font-medium tracking-tight text-white -mt-0.5 select-none whitespace-nowrap">
+                    D&apos;ici et D&apos;ailleurs
                   </span>
                 </div>
               </Link>

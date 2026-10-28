@@ -19,6 +19,7 @@ const SLIDES = [
         et la culture
       </>
     ),
+    description: "Favoriser le vivre-ensemble à travers des projets sportifs et culturels accessibles à tous, renforçant les liens sociaux et l'intégration.",
   },
   {
     src: "/images/lancement-myboo.jpg",
@@ -33,6 +34,7 @@ const SLIDES = [
         économiques et sociaux entre le Nord et le Sud
       </>
     ),
+    description: "Soutenir le développement durable et solidaire en créant des ponts économiques concrets, comme notre partenariat exclusif avec les vélos en bambou My Boo.",
   },
   {
     src: "/images/organisations-sportives.jpg",
@@ -47,6 +49,7 @@ const SLIDES = [
         et la culture
       </>
     ),
+    description: "Participez à nos initiatives sportives inclusives qui brisent les barrières et promeuvent la diversité culturelle au sein de notre communauté.",
   },
   {
     src: "/images/bxl-tour.jpg",
@@ -61,6 +64,7 @@ const SLIDES = [
         économiques et sociaux entre le Nord et le Sud
       </>
     ),
+    description: "Un engagement fort pour une économie circulaire et équitable, favorisant l'autonomie des partenaires du Sud grâce à la mobilité durable.",
   },
 ];
 
@@ -137,10 +141,8 @@ export function Hero() {
           </h1>
 
           {/* Description */}
-          <p className="max-w-xl lg:max-w-2xl text-sm leading-relaxed text-white/85 sm:text-base lg:text-lg xl:text-xl">
-            No Borders ASBL allie engagement social et passion du cyclisme.
-            Participez à nos activités sportives inclusives et découvrez notre
-            boutique solidaire de vélos haut de gamme.
+          <p className="max-w-xl lg:max-w-2xl text-sm leading-relaxed text-white/85 sm:text-base lg:text-lg xl:text-xl transition-opacity duration-500">
+            {SLIDES[current].description}
           </p>
 
           {/* Boutons d'action */}
